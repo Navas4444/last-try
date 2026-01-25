@@ -20,6 +20,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         /* Main container */
@@ -58,14 +59,24 @@
             color: orange;
         }
 
-        /* Video responsive */
-        .my-video {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
+        /* YouTube embed responsive */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
             margin: 30px auto;
-            display: block;
             border-radius: 12px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
         /* Points: centered block + left-aligned text */
@@ -73,8 +84,8 @@
             list-style: none;
             padding: 0;
             margin: 20px auto;
-            max-width: 720px;   /* width of the block */
-            text-align: left;   /* text inside left-aligned */
+            max-width: 720px;
+            text-align: left;
         }
 
         .custom-point li {
@@ -126,11 +137,13 @@
             be played using virtual machines or emulators.
         </p>
 
-        <!-- Video: replace with your stable MP4 link -->
-        <video class="my-video" controls playsinline preload="metadata">
-            <source src="https://d3rshtj5w2m4qx.cloudfront.net/77ywe%2Ffile%2F932b70b4ae7a835b0361eef1d46c762c_2f2fafcd65b82c8a5678ce924d51aa9c.mp4?response-content-disposition=inline%3Bfilename%3D%22932b70b4ae7a835b0361eef1d46c762c_2f2fafcd65b82c8a5678ce924d51aa9c.mp4%22%3B&response-content-type=video%2Fmp4&Expires=1769353245&Signature=AnZN3O25RZXU70uv76f1yOI-Kg-D7FkbKY3xmmKypf39-5bi7vzNd2-xUyBVj-q08doOYBg3UqiGcctEbis3Eh6x3n1Y6u2oD1Cqtac-SDLERw6uS64anPpSZP37TOYFoIC0uM8Rwt50NDx0jGkO9p5gdqkSarFZE5W~ZOUyjAtsEc4FdlCPBxLV2Ty85HufCf5yNUeW4uqTKdKU-N161TPiA3Kix1cULos~bJfWQDSUjSA6oZSNr1e4cn-tFm5~glRYrO8RwoK~IoVpsVXw9fB2U-31TfRSLHMv~jvMeTZja3cvl39V2-S5SdIhTlHskqsttnD8p8RwYwempaaS9A__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <!-- YouTube Video Embed -->
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/WQEFYOBmgKw" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
 
         <h3 class="mod-title">Mod Info</h3>
 
@@ -160,4 +173,3 @@
     </div>
 </body>
 </html>
-
