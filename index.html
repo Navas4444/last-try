@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- IMPORTANT for mobile -->
+    <!-- Mobile fix -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Navas's Official</title>
 
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
 
     <style>
@@ -20,12 +21,11 @@
         body {
             background-image: url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg');
             background-size: cover;
-            background-repeat: no-repeat;
             background-position: center;
-            /* REMOVED fixed (bad on mobile) */
+            background-repeat: no-repeat;
         }
 
-        /* Common container */
+        /* Main container */
         .container {
             max-width: 900px;
             margin: auto;
@@ -44,15 +44,13 @@
 
         h4 {
             font-size: clamp(16px, 4vw, 22px);
+            color: blue;
         }
 
         p {
             font-size: clamp(14px, 4vw, 18px);
             line-height: 1.6;
-        }
-
-        .basic-info {
-            color: blue;
+            color: black;
         }
 
         .mod-title {
@@ -63,36 +61,35 @@
             color: orange;
         }
 
-        /* Video responsive */
+        /* Responsive video */
         .my-video {
             width: 100%;
             max-width: 600px;
             height: auto;
-            display: block;
             margin: 30px auto;
+            display: block;
             border-radius: 12px;
         }
 
-        /* Points centered */
+        /* Points: centered block + left text */
         .custom-point {
             list-style: none;
             padding: 0;
             margin: 20px auto;
-            max-width: 700px;
-            text-align: center;
+            max-width: 720px;
+            text-align: left;
         }
 
         .custom-point li {
-            display: inline-block;
-            text-align: left;
-            margin-bottom: 12px;
             font-size: clamp(14px, 4vw, 18px);
             color: green;
+            margin-bottom: 12px;
         }
 
         .custom-point li::before {
             content: "✔ ";
             color: darkgreen;
+            font-weight: bold;
         }
 
         /* Telegram button */
@@ -122,35 +119,37 @@
     <div class="container">
 
         <h1>Welcome to my official website</h1>
-        <h4 class="basic-info">Shadow Fight 2 Modder</h4>
+        <h4>Shadow Fight 2 Modder</h4>
 
         <h3><u>INTRODUCTION</u></h3>
 
         <p>
-            This mod is basically everyone's dream mod. This mod has A-Z contents
-            from 2015-2025. Unfortunately it was 1.9.21 (32-bit), and modern Android
-            doesn't support 32-bit apps. You can still play using virtual machines
-            or emulators.
+            This mod is basically everyone's dream mod. It contains A-Z content
+            from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit),
+            and modern Android devices don’t support 32-bit apps. Still, it can
+            be played using virtual machines or emulators.
         </p>
 
-        <video class="my-video" controls>
-            <source src="https://d3rshtj5w2m4qx.cloudfront.net/77ywe%2Ffile%2F932b70b4ae7a835b0361eef1d46c762c_2f2fafcd65b82c8a5678ce924d51aa9c.mp4" type="video/mp4">
+        <!-- Video -->
+        <video class="my-video" controls playsinline preload="metadata">
+            <source src="YOUR_DIRECT_MP4_LINK.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
 
         <h3 class="mod-title">Mod Info</h3>
 
         <ul class="custom-point">
-            <li>Crashless gameplay (shop, map, battle fixed)</li>
+            <li>Crashless gameplay (shop, map, battle end fixed)</li>
             <li>Main server & private server equipments</li>
-            <li>2015-25 raid battles + custom battles</li>
+            <li>2015–25 raid battles + custom unique battles</li>
             <li>Remastered special edition locations</li>
-            <li>Full offline raid system re-work</li>
+            <li>Full offline raid system re-worked</li>
             <li>All mythical sets & perks available</li>
-            <li>Private Telegram updates</li>
+            <li>Private Telegram channel for updates</li>
             <li>~86 raid battles available</li>
-            <li>Raid spheres & potions as perks</li>
+            <li>Raid spheres, potions & horns usable as perks</li>
             <li>High-level optimization</li>
-            <li>Trusted paid user proofs</li>
+            <li>Trusted paid users available for proof</li>
             <li>Zone switcher enabled</li>
         </ul>
 
@@ -158,10 +157,10 @@
         <p>Only 30$</p>
 
         <div class="btn-container">
-            <a href="https://t.me/ShadowFight2Hunter" class="tg-btn">Contact</a>
+            <a href="https://t.me/ShadowFight2Hunter" class="tg-btn">Contact on Telegram</a>
         </div>
 
-        <p>Contact me on Telegram</p>
+        <p>Contact me via Telegram</p>
 
     </div>
 </body>
