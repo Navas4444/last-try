@@ -194,8 +194,27 @@
 
         <p>Contact me via Telegram</p>
     </div>
+    <script>
+window.addEventListener("load", () => {
+    const glow = document.getElementById("glowSwipe");
+
+    requestAnimationFrame(() => {
+        glow.style.transition =
+            "transform 900ms cubic-bezier(.2,.8,.2,1), opacity 600ms ease";
+
+        glow.style.opacity = "1";
+        glow.style.transform = "translateY(0)";
+    });
+
+    setTimeout(() => {
+        glow.style.opacity = "0";
+        glow.style.transform = "translateY(-100%)";
+    }, 700);
+});
+    </script>
 </body>
 </html>
+
 
 
 
