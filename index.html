@@ -1,184 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="google7d10e54214dcda0b">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Navas's Official ,mod discription and preview">
-<meta name="robots" content="index, follow">
-<title>Navas's Official SF2 Dream Mod</title>
+    <meta name="google-site-verification" content="google7d10e54214dcda0b">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Navas's Official ,mod discription and preview">
+    <meta name="robots" content="index, follow">
+    <title>Navas's Official SF2 Dream Mod</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
 
-<style>
-    /* Glow Swipe Overlay */
-    #glowSwipe {
-        position: fixed;
-        inset: 0;
-        background: linear-gradient(
-            180deg,
-            rgba(138,43,226,0.45),
-            rgba(0,140,255,0.45),
-            rgba(0,0,0,0)
-        );
-        filter: blur(40px);
-        z-index: 9999;
-        transform: translate3d(0, 100%, 0);
-        opacity: 0;
-        pointer-events: none;
-        will-change: transform, opacity;
-    }
+    <style>
+        #glowSwipe {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(138,43,226,0.45),
+                rgba(0,140,255,0.45),
+                rgba(0,0,0,0)
+            );
+            filter: blur(40px);
+            z-index: 9999;
+            transform: translate3d(0, 100%, 0);
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
 
-    html, body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-    }
-
-    body {
-        background-image: url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: scroll; /* change fixed → scroll for smooth animation */
-        font-family: 'Carter One', cursive;
-    }
-
-    /* Main container */
-    .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 20px;
-        text-align: center;
-    }
-
-    h1 { font-size: clamp(26px, 6vw, 48px); }
-    h3 { font-size: clamp(18px, 4.5vw, 26px); }
-    h4 { font-size: clamp(16px, 4vw, 22px); color: blue; }
-    p { font-size: clamp(14px, 4vw, 18px); line-height: 1.6; color: black; }
-
-    .mod-title { color: green; }
-    .contact-info { color: orange; }
-
-    /* YouTube embed responsive */
-    .video-container {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-        max-width: 100%;
-        margin: 30px auto;
-        border-radius: 12px;
-    }
-    .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
-
-    /* Points */
-    .custom-point {
-        list-style: none;
-        padding: 0;
-        margin: 20px auto;
-        max-width: 720px;
-        text-align: left;
-    }
-    .custom-point li {
-        font-size: clamp(14px, 4vw, 18px);
-        color: green;
-        margin-bottom: 12px;
-    }
-    .custom-point li::before {
-        content: "✔ ";
-        color: darkgreen;
-        font-weight: bold;
-    }
-
-    /* Telegram button */
-    .btn-container { text-align: center; margin-top: 30px; }
-    .tg-btn {
-        display: inline-block;
-        padding: 12px 22px;
-        background-color: #0088cc;
-        color: white;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: clamp(14px, 4vw, 18px);
-    }
-    .tg-btn:hover {
-        background-color: #00a2e8;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-</style>
-</head>
-
-<body>
-    <!-- Glow Swipe -->
-    <div id="glowSwipe"></div>
-
-    <!-- Main content -->
-    <div class="container">
-        <h1>Welcome to my official website</h1>
-        <h4>Shadow Fight 2 Modder</h4>
-
-        <h3><u>INTRODUCTION</u></h3>
-        <p>This mod is basically everyone's dream mod. It contains A-Z content from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don’t support 32-bit apps. Still, it can be played using virtual machines or emulators.</p>
-
-        <!-- YouTube Video Embed -->
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/WQEFYOBmgKw" allowfullscreen></iframe>
-        </div>
-
-        <h3 class="mod-title">Mod Info</h3>
-        <ul class="custom-point">
-            <li>Crashless gameplay (shop, map, battle end fixed)</li>
-            <li>Main server & private server equipments</li>
-            <li>2015–25 raid battles + custom unique battles</li>
-            <li>Remastered special edition locations</li>
-            <li>Full offline raid system re-worked</li>
-            <li>All mythical sets & perks available</li>
-            <li>Private Telegram channel for updates</li>
-            <li>~86 raid battles available</li>
-            <li>Raid spheres, potions & horns usable as perks</li>
-            <li>High-level optimization</li>
-            <li>Trusted paid users available for proof</li>
-            <li>Zone switcher enabled</li>
-        </ul>
-
-        <h3 class="contact-info">Contact Info</h3>
-        <p>Only 30$</p>
-
-        <div class="btn-container">
-            <a href="https://t.me/ShadowFight2Hunter" class="tg-btn">Contact on Telegram</a>
-        </div>
-    </div>
-
-    <!-- Glow animation script -->
-    <script>
-    window.addEventListener("load", () => {
-        const glow = document.getElementById("glowSwipe");
-
-        glow.style.transition =
-            "transform 800ms cubic-bezier(.22,.61,.36,1), opacity 500ms ease";
-
-        requestAnimationFrame(() => {
-            glow.style.opacity = "1";
-            glow.style.transform = "translate3d(0,0,0)";
-        });
-
-        setTimeout(() => {
-            glow.style.opacity = "0";
-            glow.style.transform = "translate3d(0,-100%,0)";
-        }, 600);
-    });
-    </script>
-</body>
-</html>
         body {
             background-image: url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg');
             background-size: cover;
@@ -196,44 +51,22 @@
             font-family: 'Carter One', cursive;
         }
 
-        h1 {
-            font-size: clamp(26px, 6vw, 48px);
-        }
+        h1 { font-size: clamp(26px, 6vw, 48px); }
+        h3 { font-size: clamp(18px, 4.5vw, 26px); }
+        h4 { font-size: clamp(16px, 4vw, 22px); color: blue; }
+        p { font-size: clamp(14px, 4vw, 18px); line-height: 1.6; color: black; }
+        .mod-title { color: green; }
+        .contact-info { color: orange; }
 
-        h3 {
-            font-size: clamp(18px, 4.5vw, 26px);
-        }
-
-        h4 {
-            font-size: clamp(16px, 4vw, 22px);
-            color: blue;
-        }
-
-        p {
-            font-size: clamp(14px, 4vw, 18px);
-            line-height: 1.6;
-            color: black;
-        }
-
-        .mod-title {
-            color: green;
-        }
-
-        .contact-info {
-            color: orange;
-        }
-
-        /* YouTube embed responsive */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
             margin: 30px auto;
             border-radius: 12px;
         }
-
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -243,7 +76,6 @@
             border: 0;
         }
 
-        /* Points: centered block + left-aligned text */
         .custom-point {
             list-style: none;
             padding: 0;
@@ -251,25 +83,21 @@
             max-width: 720px;
             text-align: left;
         }
-
         .custom-point li {
             font-size: clamp(14px, 4vw, 18px);
             color: green;
             margin-bottom: 12px;
         }
-
         .custom-point li::before {
             content: "✔ ";
             color: darkgreen;
             font-weight: bold;
         }
 
-        /* Telegram button */
         .btn-container {
             text-align: center;
             margin-top: 30px;
         }
-
         .tg-btn {
             display: inline-block;
             padding: 12px 22px;
@@ -279,7 +107,6 @@
             border-radius: 10px;
             font-size: clamp(14px, 4vw, 18px);
         }
-
         .tg-btn:hover {
             background-color: #00a2e8;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -289,18 +116,13 @@
 
 <body>
     <!-- Glow Swipe Overlay -->
-<body>
-
     <div id="glowSwipe"></div>
 
-    <div class="container">
-        <!-- your content -->
     <div class="container">
         <h1>Welcome to my official website</h1>
         <h4>Shadow Fight 2 Modder</h4>
 
         <h3><u>INTRODUCTION</u></h3>
-
         <p>
             This mod is basically everyone's dream mod. It contains A-Z content
             from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit),
@@ -308,7 +130,6 @@
             be played using virtual machines or emulators.
         </p>
 
-        <!-- YouTube Video Embed -->
         <div class="video-container">
             <iframe src="https://www.youtube.com/embed/WQEFYOBmgKw" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -317,7 +138,6 @@
         </div>
 
         <h3 class="mod-title">Mod Info</h3>
-
         <ul class="custom-point">
             <li>Crashless gameplay (shop, map, battle end fixed)</li>
             <li>Main server & private server equipments</li>
@@ -339,39 +159,32 @@
         <div class="btn-container">
             <a href="https://t.me/ShadowFight2Hunter" class="tg-btn">Contact on Telegram</a>
         </div>
-
         <p>Contact me via Telegram</p>
     </div>
+
+    <!-- Merged Scripts -->
     <script>
-window.addEventListener("load", () => {
     const glow = document.getElementById("glowSwipe");
 
-    glow.style.transition =
-        "transform 800ms cubic-bezier(.22,.61,.36,1), opacity 500ms ease";
-
-    requestAnimationFrame(() => {
-        glow.style.opacity = "1";
-        glow.style.transform = "translate3d(0,0,0)";
+    // --- Page load swipe animation ---
+    window.addEventListener("load", () => {
+        glow.style.transition = "transform 800ms cubic-bezier(.22,.61,.36,1), opacity 500ms ease";
+        requestAnimationFrame(() => {
+            glow.style.opacity = "1";
+            glow.style.transform = "translate3d(0,0,0)";
+        });
+        setTimeout(() => {
+            glow.style.opacity = "0.6"; // keep subtle glow after load
+        }, 600);
     });
 
-    setTimeout(() => {
-        glow.style.opacity = "0";
-        glow.style.transform = "translate3d(0,-100%,0)";
-    }, 600);
-});
-        </script>
+    // --- Glow reacts to scroll ---
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const maxTranslate = -50; // max upward movement
+        const percent = Math.min(scrollY / 600, 1); // 0-1 over 600px scroll
+        glow.style.transform = `translate3d(0, ${percent * maxTranslate}px, 0)`;
+    });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
