@@ -126,44 +126,45 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;              /* wide streak */
-    height: 50px;            /* thick glow */
-    background: linear-gradient(to top, rgba(255,119,255,0.9), rgba(255,119,255,0.3));
+    width: 60%;               /* wide streak */
+    height: 60px;             /* thick glow */
+    background: linear-gradient(to top, rgba(255,119,255,1), rgba(255,119,255,0.5));
     border-radius: 50px;
     filter: blur(25px);
-    opacity: 0;
+    opacity: 1;
     pointer-events: none;
   }
-
-  /* Active animation class */
-  .animate {
-    animation: swipeUp 3s forwards; /* slower animation */
-  }
-
-  @keyframes swipeUp {
-    0% {
-      bottom: 0;
-      opacity: 0.9;
-    }
-    20% {
-      opacity: 1;
-    }
-    100% {
-      bottom: 25%;  /* move up 25% of screen */
-      opacity: 0;
-      }
 </style>
 
 </head>  <body>  
     
-    <div class="glow-swipe"></div>
-    <script>
-  // Trigger animation once after page load
+    <div class="glow-swipe" id="glow"></div>
+
+<script>
+  // Animate the glow streak manually with JS
   window.addEventListener('load', () => {
     const glow = document.getElementById('glow');
-    glow.classList.add('animate');
+    let start = null;
+    const duration = 3000; // 3 seconds
+    const startBottom = 0;
+    const endBottom = window.innerHeight * 0.25; // 25% of screen
+
+    function animate(timestamp) {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const fraction = Math.min(progress / duration, 1);
+      glow.style.bottom = startBottom + fraction * endBottom + 'px';
+      glow.style.opacity = 1 - fraction; // fade out
+      if (fraction < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        glow.remove(); // remove after animation
+      }
+    }
+
+    requestAnimationFrame(animate);
   });
-    </script>
+</script>
     <div class="container">  
         <h1>Welcome to my official website</h1>  
         <h4>Shadow Fight 2 Modder</h4>  <h3><u>INTRODUCTION</u></h3>  
@@ -212,6 +213,7 @@
 
 </body>  
 </html>
+
 
 
 
