@@ -120,39 +120,28 @@
         background-color: #00a2e8;  
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
     }  
-    /* Glow overlay */
-  .glow {
+    /* Glow bar */
+  .glow-swipe {
     position: absolute;
-    bottom: -50%; /* start off screen */
-    width: 200%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(255,119,255,0.5) 0%, rgba(255,0,255,0) 80%);
-    transform: rotate(45deg);
-    animation: glowRise 3s ease-in-out infinite;
-    pointer-events: none; /* so it doesn't block clicks */
+    bottom: -50px; /* start below screen */
+    width: 8px;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(255,119,255,0) 0%, #ff77ff 50%, rgba(255,119,255,0) 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ff77ff, 0 0 40px #ff77ff;
+    animation: swipeUp 1.2s forwards;
   }
 
-  @keyframes glowRise {
-    0% {
-      bottom: -50%;
-      opacity: 0;
-      transform: rotate(45deg) scale(0.8);
-    }
-    50% {
-      bottom: 50%;
-      opacity: 0.7;
-      transform: rotate(45deg) scale(1);
-    }
-    100% {
-      bottom: 120%;
-      opacity: 0;
-      transform: rotate(45deg) scale(1.2);
-    }
+  /* Swipe up animation */
+  @keyframes swipeUp {
+    0% { bottom: -50px; opacity: 0; }
+    30% { opacity: 1; }
+    100% { bottom: 70%; opacity: 0; }
 </style>
 
 </head>  <body>  
     
-    <div class="glow"></div>
+    <div class="glow-swipe"></div>
     <div class="container">  
         <h1>Welcome to my official website</h1>  
         <h4>Shadow Fight 2 Modder</h4>  <h3><u>INTRODUCTION</u></h3>  
@@ -201,6 +190,7 @@
 
 </body>  
 </html>
+
 
 
 
