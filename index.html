@@ -120,9 +120,57 @@
         background-color: #00a2e8;  
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
     }  
+    /* Container for swipe-up */
+  .swipe-up {
+    position: relative;
+    margin-bottom: 50px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  /* The glowing arrow */
+  .swipe-up::after {
+    content: '↑';
+    display: block;
+    font-size: 2.5rem;
+    color: #ff77ff; /* violet-pink */
+    text-shadow:
+      0 0 5px #ff77ff,
+      0 0 10px #ff77ff,
+      0 0 20px #ff77ff;
+    animation: swipeUpGlow 2s infinite;
+  }
+
+  /* Optional text */
+  .swipe-up span {
+    display: block;
+    margin-top: 10px;
+    color: #ff77ff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px #ff77ff;
+    animation: fadeText 2s infinite;
+  }
+
+  /* Arrow animation */
+  @keyframes swipeUpGlow {
+    0% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(-15px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.7; }
+  }
+
+  /* Text fade animation */
+  @keyframes fadeText {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+            }
 </style>
 
 </head>  <body>  
+    <div class="swipe-up">
+  <span>Swipe Up</span>
+    </div>
     <div class="container">  
         <h1>Welcome to my official website</h1>  
         <h4>Shadow Fight 2 Modder</h4>  <h3><u>INTRODUCTION</u></h3>  
@@ -171,6 +219,7 @@
 
 </body>  
 </html>
+
 
 
 
