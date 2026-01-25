@@ -122,17 +122,18 @@
     }  
     /* Glow streak */
   .glow-swipe {
-    position: absolute;
+    position: fixed;          /* fixed so it appears above everything */
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;               /* wide streak */
-    height: 60px;             /* thick glow */
-    background: linear-gradient(to top, rgba(255,119,255,1), rgba(255,119,255,0.5));
+    width: 70%;               /* wider streak */
+    height: 150px;            /* thick glow */
+    background: linear-gradient(to top, rgba(255,119,255,1), rgba(255,119,255,0.3));
     border-radius: 50px;
-    filter: blur(25px);
+    filter: blur(30px);
     opacity: 1;
     pointer-events: none;
+    z-index: 9999;            /* above everything */
   }
 </style>
 
@@ -140,14 +141,16 @@
     
     <div class="glow-swipe" id="glow"></div>
 
+<div class="glow-swipe" id="glow"></div>
+
 <script>
-  // Animate the glow streak manually with JS
+  // Animate glow streak quickly (~1s) from bottom to 25% height
   window.addEventListener('load', () => {
     const glow = document.getElementById('glow');
     let start = null;
-    const duration = 3000; // 3 seconds
+    const duration = 1000; // 1 second
     const startBottom = 0;
-    const endBottom = window.innerHeight * 0.25; // 25% of screen
+    const endBottom = window.innerHeight * 0.25; // 25% of screen height
 
     function animate(timestamp) {
       if (!start) start = timestamp;
@@ -213,6 +216,7 @@
 
 </body>  
 </html>
+
 
 
 
