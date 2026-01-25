@@ -120,23 +120,32 @@
         background-color: #00a2e8;  
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
     }  
-    /* Glow bar */
+    /* Glow swipe effect */
   .glow-swipe {
     position: absolute;
-    bottom: -50px; /* start below screen */
-    width: 8px;
-    height: 80px;
-    background: linear-gradient(180deg, rgba(255,119,255,0) 0%, #ff77ff 50%, rgba(255,119,255,0) 100%);
+    bottom: -100px; /* start below screen */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px; /* width of glow streak */
+    height: 5px;   /* thickness */
+    background: linear-gradient(90deg, rgba(255,119,255,0) 0%, #ff77ff 50%, rgba(255,119,255,0) 100%);
     border-radius: 10px;
-    box-shadow: 0 0 20px #ff77ff, 0 0 40px #ff77ff;
-    animation: swipeUp 1.2s forwards;
+    box-shadow: 0 0 20px #ff77ff, 0 0 40px #ff77ff, 0 0 60px #ff77ff;
+    animation: swipeUp 1s forwards;
   }
 
-  /* Swipe up animation */
   @keyframes swipeUp {
-    0% { bottom: -50px; opacity: 0; }
-    30% { opacity: 1; }
-    100% { bottom: 70%; opacity: 0; }
+    0% {
+      bottom: -100px;
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      bottom: 70%;
+      opacity: 0;
+    }
 </style>
 
 </head>  <body>  
@@ -190,6 +199,7 @@
 
 </body>  
 </html>
+
 
 
 
