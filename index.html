@@ -298,10 +298,6 @@ window.addEventListener("load", () => {
 </head>
 
 <body>
-    <!-- Glow Swipe Overlay -->
-    <div id="glowSwipe"></div>
-
-    <div class="container">
         <h1>Welcome to my official website</h1>
         <h4>Shadow Fight 2 Modder</h4>
 
@@ -344,33 +340,9 @@ window.addEventListener("load", () => {
         </div>
         <p>Contact me via Telegram</p>
     </div>
-
-    <!-- Merged Scripts -->
-    <script>
-    const glow = document.getElementById("glowSwipe");
-
-    // --- Page load swipe animation ---
-    window.addEventListener("load", () => {
-        glow.style.transition = "transform 800ms cubic-bezier(.22,.61,.36,1), opacity 500ms ease";
-        requestAnimationFrame(() => {
-            glow.style.opacity = "1";
-            glow.style.transform = "translate3d(0,0,0)";
-        });
-        setTimeout(() => {
-            glow.style.opacity = "0.6"; // keep subtle glow after load
-        }, 600);
-    });
-
-    // --- Glow reacts to scroll ---
-    window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY;
-        const maxTranslate = -50; // max upward movement
-        const percent = Math.min(scrollY / 600, 1); // 0-1 over 600px scroll
-        glow.style.transform = `translate3d(0, ${percent * maxTranslate}px, 0)`;
-    });
-    </script>
 </body>
 </html>
+
 
 
 
