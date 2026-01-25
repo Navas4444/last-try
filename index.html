@@ -121,29 +121,31 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
     }  
     /* Glow swipe effect */
+  .g/* Glow swipe container */
   .glow-swipe {
     position: absolute;
-    bottom: -100px; /* start below screen */
+    bottom: -200px;      /* start offscreen */
     left: 50%;
     transform: translateX(-50%);
-    width: 150px; /* width of glow streak */
-    height: 5px;   /* thickness */
-    background: linear-gradient(90deg, rgba(255,119,255,0) 0%, #ff77ff 50%, rgba(255,119,255,0) 100%);
-    border-radius: 10px;
-    box-shadow: 0 0 20px #ff77ff, 0 0 40px #ff77ff, 0 0 60px #ff77ff;
-    animation: swipeUp 1s forwards;
+    width: 80%;          /* covers most of screen width */
+    height: 150px;       /* taller streak */
+    background: linear-gradient(to top, rgba(255,119,255,0.4), rgba(255,119,255,0.8), rgba(255,119,255,0.4));
+    border-radius: 50px;  /* rounded edges for smoothness */
+    filter: blur(12px);   /* glow effect */
+    opacity: 0;
+    animation: swipeUp 1.5s forwards;
   }
 
   @keyframes swipeUp {
     0% {
-      bottom: -100px;
+      bottom: -200px;
       opacity: 0;
     }
-    20% {
+    10% {
       opacity: 1;
     }
     100% {
-      bottom: 70%;
+      bottom: 60%;
       opacity: 0;
     }
 </style>
@@ -199,6 +201,7 @@
 
 </body>  
 </html>
+
 
 
 
