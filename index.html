@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+
+    <!-- IMPORTANT for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Navas's Official</title>
+
     <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+
     <style>
         html, body {
-            height: 100%;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
 
         body {
@@ -16,111 +22,147 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            background-attachment: fixed;
+            /* REMOVED fixed (bad on mobile) */
         }
 
-        .title-text {
+        /* Common container */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
             text-align: center;
-            font-family: 'Carter One';
+            font-family: 'Carter One', cursive;
         }
+
+        h1 {
+            font-size: clamp(26px, 6vw, 48px);
+        }
+
+        h3 {
+            font-size: clamp(18px, 4.5vw, 26px);
+        }
+
+        h4 {
+            font-size: clamp(16px, 4vw, 22px);
+        }
+
+        p {
+            font-size: clamp(14px, 4vw, 18px);
+            line-height: 1.6;
+        }
+
         .basic-info {
-            text-align: center;
-            font-family: 'Carter One';
-            color:blue;
-            margin-top: -20px;
+            color: blue;
         }
-        .introduction0 {
-            text-align: center;
-            font-family: 'Carter One';
-            color:black;
-            margin-top: 0px;
-        }
-        .introduction1 {
-            text-align: center;
-            font-family: 'Carter One';
-            color:black;
-            margin-top: 0px;
-        }
+
         .mod-title {
-            text-align: center;
-            font-family: 'Carter One';
-            color:green;
-            margin-top: 0px;
+            color: green;
         }
+
         .contact-info {
-            text-align: center;
-            font-family: 'Carter One';
-            color:orange;
-            margin-top: 0px;
+            color: orange;
         }
-        .mod-brief {
-            text-align: center;
-            font-family: 'Carter One';
-            color:black;
-            margin-top: 0px;
-        }
-        .custom-point {
-            font-family: 'Carter One';
-            color:green;
-            margin-top: 0px;
-            margin-left: 50px;
-}
-         .my-video {
-            width: 400px;
+
+        /* Video responsive */
+        .my-video {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
             display: block;
-            margin: 50px auto;
+            margin: 30px auto;
+            border-radius: 12px;
         }
+
+        /* Points centered */
+        .custom-point {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .custom-point li {
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 12px;
+            font-size: clamp(14px, 4vw, 18px);
+            color: green;
+        }
+
+        .custom-point li::before {
+            content: "✔ ";
+            color: darkgreen;
+        }
+
+        /* Telegram button */
         .btn-container {
-    text-align: center; /* THIS centers the inline-block button */
-    margin-top: 40px;
-}
+            text-align: center;
+            margin-top: 30px;
+        }
 
-.tg-btn {
-    display: inline-block;      /* width fits text */
-    padding: 12px 24px;
-    background-color: #0088cc;
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 18px;
-}
+        .tg-btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: clamp(14px, 4vw, 18px);
+        }
 
-.tg-btn:hover {
-    background-color: #00a2e8;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
+        .tg-btn:hover {
+            background-color: #00a2e8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
+
 <body>
-    <h1 class="title-text">Welcome to my official website</h1>
-    <h4 class="basic-info">Shadow Fight 2 Modder</h4>
-    <u><h3 class="introduction0">INTRODUCTION</h3></u>
-    <p class="introduction1">This mod is basically everyone's dream mod. Why means this mod have A-Z contents whatever Nekki updated from 2015-2025. Unfortunatly it was 1.9.21 so it was 32 bit game, modern android's don't support 32 bit applications, but there are few ways to play this mod by using virtual machines or emulators.</p>
-<video class="my-video" controls>
-        <source src="https://d3rshtj5w2m4qx.cloudfront.net/77ywe%2Ffile%2F932b70b4ae7a835b0361eef1d46c762c_2f2fafcd65b82c8a5678ce924d51aa9c.mp4?response-content-disposition=inline%3Bfilename%3D%22932b70b4ae7a835b0361eef1d46c762c_2f2fafcd65b82c8a5678ce924d51aa9c.mp4%22%3B&response-content-type=video%2Fmp4&Expires=1769353245&Signature=AnZN3O25RZXU70uv76f1yOI-Kg-D7FkbKY3xmmKypf39-5bi7vzNd2-xUyBVj-q08doOYBg3UqiGcctEbis3Eh6x3n1Y6u2oD1Cqtac-SDLERw6uS64anPpSZP37TOYFoIC0uM8Rwt50NDx0jGkO9p5gdqkSarFZE5W~ZOUyjAtsEc4FdlCPBxLV2Ty85HufCf5yNUeW4uqTKdKU-N161TPiA3Kix1cULos~bJfWQDSUjSA6oZSNr1e4cn-tFm5~glRYrO8RwoK~IoVpsVXw9fB2U-31TfRSLHMv~jvMeTZja3cvl39V2-S5SdIhTlHskqsttnD8p8RwYwempaaS9A__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ" type="video/mp4">
-    </video>
-<h3 class="mod-title">Mod Info</h3>
-<ul class="custom-point">
-    <li>Crash less ( From shop to map and battle end crash fixed permanently )</li>
-<li>Main server and Private server equipments</li>
-<li>From 2015-25 all Raid battle + custom unique battles</li>
-<li>Remastered locations from special edition included</li>
-<li>Full Raid system offline re-work ( Raid joining information, Raid Preview, shield Preview )</li>
-<li>All mythical sets and mythical Perks available ( main server + private server )</li>
-<li>Frequently bugs and new update will be released in private telegram channel</li>
-<li>Now approximately in my guess atleast 86 Raid battles are there</li>
-<li>Raid spheres, portions, horns available as Perks also portion can be equipped in map also</li>
-<li>Optimization will be very high than ever in SF2 history</li>
-<li>Many trusted paid users are there for proofs</li>
-<li>Zone switcher ( moving to any Zone will be easy )</li>
-</ul>
-<h3 class="contact-info">Contact Info</h3>
-<p class="introduction1">Only 30$</p>
-<div class="btn-container">
-    <a href="https://t.me/@ShadowFight2Hunter" class="tg-btn">Contact</a>
-</div>
-<p class="introduction1">Contact me in telegram</p>
+    <div class="container">
+
+        <h1>Welcome to my official website</h1>
+        <h4 class="basic-info">Shadow Fight 2 Modder</h4>
+
+        <h3><u>INTRODUCTION</u></h3>
+
+        <p>
+            This mod is basically everyone's dream mod. This mod has A-Z contents
+            from 2015-2025. Unfortunately it was 1.9.21 (32-bit), and modern Android
+            doesn't support 32-bit apps. You can still play using virtual machines
+            or emulators.
+        </p>
+
+        <video class="my-video" controls>
+            <source src="https://d3rshtj5w2m4qx.cloudfront.net/77ywe%2Ffile%2F932b70b4ae7a835b0361eef1d46c762c_2f2fafcd65b82c8a5678ce924d51aa9c.mp4" type="video/mp4">
+        </video>
+
+        <h3 class="mod-title">Mod Info</h3>
+
+        <ul class="custom-point">
+            <li>Crashless gameplay (shop, map, battle fixed)</li>
+            <li>Main server & private server equipments</li>
+            <li>2015-25 raid battles + custom battles</li>
+            <li>Remastered special edition locations</li>
+            <li>Full offline raid system re-work</li>
+            <li>All mythical sets & perks available</li>
+            <li>Private Telegram updates</li>
+            <li>~86 raid battles available</li>
+            <li>Raid spheres & potions as perks</li>
+            <li>High-level optimization</li>
+            <li>Trusted paid user proofs</li>
+            <li>Zone switcher enabled</li>
+        </ul>
+
+        <h3 class="contact-info">Contact Info</h3>
+        <p>Only 30$</p>
+
+        <div class="btn-container">
+            <a href="https://t.me/ShadowFight2Hunter" class="tg-btn">Contact</a>
+        </div>
+
+        <p>Contact me on Telegram</p>
+
+    </div>
 </body>
 </html>
-
