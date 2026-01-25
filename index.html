@@ -122,19 +122,34 @@
     }  
     /* Glow streak */
   .glow-swipe {
-    position: fixed;          /* fixed so it appears above everything */
+    position: fixed; 
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
-    width: 70%;               /* wider streak */
-    height: 150px;            /* thick glow */
-    background: linear-gradient(to top, rgba(255,119,255,1), rgba(255,119,255,0.3));
+    transform: translateX(-50%) translateY(0);
+    width: 80%;                /* wide streak */
+    height: 25vh;              /* 25% of screen height */
+    background: linear-gradient(to top, rgba(255,119,255,0.9), rgba(255,119,255,0.2));
     border-radius: 50px;
-    filter: blur(30px);
+    filter: blur(40px);
     opacity: 1;
     pointer-events: none;
-    z-index: 9999;            /* above everything */
+    z-index: 9999;             /* above all content */
   }
+
+  /* Animate using CSS class */
+  .animate {
+    animation: swipeUp 1.2s forwards;
+  }
+
+  @keyframes swipeUp {
+    0% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) translateY(-25vh); /* move up 25% of viewport */
+      opacity: 0;
+    }
 </style>
 
 </head>  <body>  
@@ -144,28 +159,10 @@
 <div class="glow-swipe" id="glow"></div>
 
 <script>
-  // Animate glow streak quickly (~1s) from bottom to 25% height
+  // Trigger the animation once on page load
   window.addEventListener('load', () => {
     const glow = document.getElementById('glow');
-    let start = null;
-    const duration = 1000; // 1 second
-    const startBottom = 0;
-    const endBottom = window.innerHeight * 0.25; // 25% of screen height
-
-    function animate(timestamp) {
-      if (!start) start = timestamp;
-      const progress = timestamp - start;
-      const fraction = Math.min(progress / duration, 1);
-      glow.style.bottom = startBottom + fraction * endBottom + 'px';
-      glow.style.opacity = 1 - fraction; // fade out
-      if (fraction < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        glow.remove(); // remove after animation
-      }
-    }
-
-    requestAnimationFrame(animate);
+    glow.classList.add('animate');
   });
 </script>
     <div class="container">  
@@ -216,6 +213,7 @@
 
 </body>  
 </html>
+
 
 
 
