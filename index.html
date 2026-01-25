@@ -123,16 +123,21 @@
     /* Glow streak */
   .glow-swipe {
     position: absolute;
-    bottom: 0;             /* start at bottom */
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;            /* wide streak */
-    height: 20px;          /* thick enough to see */
-    background: linear-gradient(to top, rgba(255,119,255,0.8), rgba(255,119,255,0.2));
+    width: 70%;             /* wide streak */
+    height: 20px;           /* thick enough */
+    background: linear-gradient(to top, rgba(255,119,255,0.9), rgba(255,119,255,0.2));
     border-radius: 50px;
-    filter: blur(20px);    /* strong glow */
+    filter: blur(25px);
     opacity: 0;
-    animation: swipeUp 1.2s forwards;
+    pointer-events: none;
+  }
+
+  /* Active animation class */
+  .animate {
+    animation: swipeUp 1.5s forwards;
   }
 
   @keyframes swipeUp {
@@ -147,12 +152,19 @@
     100% {
       bottom: 80%;
       opacity: 0;
-      }
+    }
 </style>
 
 </head>  <body>  
     
     <div class="glow-swipe"></div>
+    <script>
+  // Trigger animation after page load
+  window.addEventListener('load', () => {
+    const glow = document.getElementById('glow');
+    glow.classList.add('animate');
+  });
+    </script>
     <div class="container">  
         <h1>Welcome to my official website</h1>  
         <h4>Shadow Fight 2 Modder</h4>  <h3><u>INTRODUCTION</u></h3>  
@@ -201,6 +213,7 @@
 
 </body>  
 </html>
+
 
 
 
