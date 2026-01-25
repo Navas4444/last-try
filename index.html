@@ -126,9 +126,9 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 70%;             /* wide streak */
-    height: 20px;           /* thick enough */
-    background: linear-gradient(to top, rgba(255,119,255,0.9), rgba(255,119,255,0.2));
+    width: 60%;              /* wide streak */
+    height: 50px;            /* thick glow */
+    background: linear-gradient(to top, rgba(255,119,255,0.9), rgba(255,119,255,0.3));
     border-radius: 50px;
     filter: blur(25px);
     opacity: 0;
@@ -137,29 +137,28 @@
 
   /* Active animation class */
   .animate {
-    animation: swipeUp 1.5s forwards;
+    animation: swipeUp 3s forwards; /* slower animation */
   }
 
   @keyframes swipeUp {
     0% {
       bottom: 0;
-      opacity: 1;
+      opacity: 0.9;
     }
-    50% {
-      bottom: 50%;
+    20% {
       opacity: 1;
     }
     100% {
-      bottom: 80%;
+      bottom: 25%;  /* move up 25% of screen */
       opacity: 0;
-    }
+      }
 </style>
 
 </head>  <body>  
     
     <div class="glow-swipe"></div>
     <script>
-  // Trigger animation after page load
+  // Trigger animation once after page load
   window.addEventListener('load', () => {
     const glow = document.getElementById('glow');
     glow.classList.add('animate');
@@ -213,6 +212,7 @@
 
 </body>  
 </html>
+
 
 
 
