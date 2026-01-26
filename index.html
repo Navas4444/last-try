@@ -108,7 +108,7 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 /* ===== CAKE GRID ===== */
 .cake-wrapper{margin:40px auto}
-.cake-glass{background:rgba(255,255,255,.45);border-radius:26px;padding:14px} 
+.cake-glass{background:rgba(255,255,255,.45);border-radius:26px;padding:14px}
 .square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .piece{border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
 .piece img{width:100%;height:100%;object-fit:cover}
@@ -133,40 +133,42 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 .close-btn:active{transform:scale(.85)}
 
 /* ===== CUSTOM INTERACTIVE IMAGE BELOW WELCOME ===== */
-.custom-img-container{
-  background:rgba(255,255,255,.55);
-  border-radius:24px;
-  padding:12px;
-  margin:20px auto;
-  max-width:900px;
-  box-shadow:0 14px 40px rgba(0,0,0,.28);
+.custom-img-wrapper{
   display:flex;
-  align-items:center;       /* centers vertically */
-  justify-content:center;   /* centers horizontally */
+  justify-content:center;       /* horizontal centering */
+  margin:20px auto;
 }
 .custom-img-inner{
-  width:100%;
-  max-width:880px;          /* optional, keeps some padding inside */
+  display:inline-block;         /* wrapper adapts exactly to image size */
+  background:rgba(255,255,255,.55);
+  border-radius:24px;
+  padding:10px;
+  box-shadow:0 14px 40px rgba(0,0,0,.28);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
 .custom-img-inner img{
-  width:100%;
+  display:block;
+  max-width:100%;
+  height:auto;
   border-radius:20px;
   cursor:pointer;
-  transition:.3s cubic-bezier(.34,1.56,.64,1);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
 .custom-img-inner img:hover{transform:scale(1.05)}
-.custom-img-inner img:active{transform:scale(.95)}
+.custom-img-inner img:active{transform:scale(0.95)}
+
 </style>
 </head>
 <body>
 
+<!-- ===== STARTUP GLOW ===== -->
 <div id="glowSwipe"></div>
 
+<!-- ===== PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
-  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon"
-       onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
+  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon" onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
 </div>
 
 <div class="container">
@@ -176,10 +178,13 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 <h4>Shadow Fight 2 Modder</h4>
 </div>
 
-<!-- ===== CUSTOM INTERACTIVE IMAGE ===== -->
-<div class="custom-img-container">
-  <img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg" alt="Custom Image"
-       onclick="alert('You clicked the custom image!');">
+<!-- ===== CUSTOM IMAGE BELOW WELCOME ===== -->
+<div class="custom-img-wrapper">
+  <div class="custom-img-inner">
+    <img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg" 
+         alt="Custom Image"
+         onclick="alert('You clicked the custom image!');">
+  </div>
 </div>
 
 <div class="glass">
@@ -255,4 +260,3 @@ function closeOverlay(e){
 
 </body>
 </html>
-
