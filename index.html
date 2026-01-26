@@ -168,40 +168,44 @@ GLOW SWIPE ANIMATION
 ===================== */
 #glowSwipe {
   position: fixed;
-  bottom: -50%; /* start off-screen bottom */
+  bottom: -50%;        /* start from bottom off-screen */
   left: 50%;
-  transform: translateX(-50%) rotate(-25deg);
-  width: 140vw;  /* wider for dramatic effect */
-  height: 50vh;  /* taller glow */
-  background: linear-gradient(90deg, rgba(198,85,255,0.4), rgba(255,128,203,0.4), rgba(198,85,255,0.4));
-  filter: blur(60px);
-  z-index: 9999999;
+  transform: translateX(-50%) rotate(-20deg);
+  width: 150vw;        /* cover most width */
+  height: 50vh;        /* covers bottom to top */
+  background: linear-gradient(120deg, rgba(198,85,255,0.25), rgba(255,128,203,0.25), rgba(198,85,255,0.25));
+  z-index: 999999;
   pointer-events: none;
-  animation: swipeUpGem 2.2s ease-out 0.3s forwards;
+
+  /* real-time blur behind content */
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+
+  border-radius: 40px;
+  animation: swipeUpGem 2.5s ease-out forwards;
 }
 
-/* Real-time glow effect using a pseudo element */
+/* subtle flicker/glow for real-time effect */
 #glowSwipe::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(255,0,255,0.3), rgba(255,128,203,0.3));
-  filter: blur(90px);
+  background: linear-gradient(120deg, rgba(255,0,255,0.15), rgba(255,128,203,0.15));
+  backdrop-filter: blur(50px);
   opacity: 0.6;
   animation: flicker 0.3s infinite alternate;
 }
 
 @keyframes swipeUpGem {
   0% { bottom: -50%; opacity: 0; }
-  15% { opacity: 1; }
+  10% { opacity: 1; }
   100% { bottom: 110%; opacity: 0; }
 }
 
-/* Flicker / real-time glow */
 @keyframes flicker {
-  0% { filter: blur(70px); opacity: 0.5; }
-  50% { filter: blur(100px); opacity: 0.8; }
-  100% { filter: blur(80px); opacity: 0.6; }
+  0% { filter: blur(40px); opacity: 0.4; }
+  50% { filter: blur(60px); opacity: 0.8; }
+  100% { filter: blur(50px); opacity: 0.6; }
 }
 </style>
 </head>
@@ -283,5 +287,6 @@ be played using virtual machines or emulators.</p>
 </div>
 </body>
 </html>
+
 
 
