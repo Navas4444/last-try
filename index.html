@@ -1,174 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="google-site-verification" content="google7d10e54214dcda0b">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SF2 Dream Mod</title>
+<meta name="description" content="Navas's Official ,mod discription and preview">
+<meta name="robots" content="index, follow">
+<title>Navas's Official SF2 Dream Mod</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
 
 <style>
-/* =====================
-GLOBAL RESET
-===================== */
-* {
-  box-sizing: border-box;
+* { -webkit-tap-highlight-color: transparent; }
+html, body {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  background-image: url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 90px 20px 20px;
+  text-align: center;
   font-family: 'Carter One', cursive;
 }
 
-/* =====================
-BACKGROUND
-===================== */
-body {
-  min-height: 100vh;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.65)),
-    url("https://images.unsplash.com/photo-1519681393784-d120267933ba");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: #000;
-  display: flex;
-  justify-content: center;
-}
+h1 { font-size: clamp(26px, 6vw, 48px); }
+h3 { font-size: clamp(18px, 4.5vw, 26px); }
+h4 { font-size: clamp(16px, 4vw, 22px); color: blue; }
+p { font-size: clamp(14px, 4vw, 18px); line-height: 1.6; color: black; }
+.mod-title { color: green; }
+.contact-info { color: orange; }
 
 /* =====================
-MAIN WRAPPER
+GLASS TEXT BACKGROUND
 ===================== */
-.main {
-  width: 100%;
-  max-width: 900px;
-  padding: 20px;
-}
-
-/* =====================
-GLASS CARD
-===================== */
-.glass-box {
-  background: rgba(255, 255, 255, 0.5); /* 50% white */
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  border-radius: 20px;
-  padding: 22px;
+.glass-section {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 18px;
+  padding: 18px 16px;
   margin: 22px auto;
-
-  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-  text-align: center;
-
-  animation: rise 0.8s ease forwards;
-  opacity: 0;
+  max-width: 760px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
 }
 
-/* =====================
-ANIMATION
-===================== */
-@keyframes rise {
-  from {
-    transform: translateY(80px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* Video */
+.video-section { margin: 30px auto; }
+.video-shell {
+  max-width: 840px;
+  margin: auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.intro-video {
+  width: 100%;
+  background: black;
+  border-radius: inherit;
 }
 
-/* =====================
-TEXT
-===================== */
-h1 { font-size: 30px; margin-bottom: 8px; }
-h3 { margin-bottom: 12px; }
-p  { font-size: 14px; line-height: 1.6; }
-
-ul {
+/* Points */
+.custom-point {
   list-style: none;
   padding: 0;
+  text-align: left;
+}
+.custom-point li {
+  font-size: clamp(14px, 4vw, 18px);
+  color: green;
+  margin-bottom: 12px;
+}
+.custom-point li::before {
+  content: "✔ ";
+  color: darkgreen;
+  font-weight: bold;
 }
 
-ul li {
-  margin: 8px 0;
-}
-
-/* =====================
-BUTTONS
-===================== */
-.button {
+/* Buttons */
+.btn-container { margin-top: 30px; }
+.tg-btn, .yt-btn {
   display: inline-block;
-  margin-top: 14px;
   padding: 12px 22px;
-  border-radius: 999px;
-  background: rgba(0, 136, 255, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #fff;
+  color: white;
   text-decoration: none;
-  transition: transform 0.2s ease, background 0.2s ease;
+  border-radius: 10px;
+  font-size: clamp(14px, 4vw, 18px);
+  margin: 6px 0;
+}
+.tg-btn { background: #0088cc; }
+.yt-btn { background: linear-gradient(135deg, #ff0000, #ff4d4d); }
+
+/* Pill Bar */
+.pill-bar {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  width: min(92vw, 520px);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(16px);
+  border-radius: 999px;
+}
+.pill-icon { width: 40px; height: 40px; }
+.pill-text {
+  flex: 1;
+  text-align: center;
+  font-family: 'Carter One';
 }
 
-.button:hover {
-  transform: scale(1.06);
-  background: rgba(0, 136, 255, 0.4);
+/* Cake Grid */
+.cake-wrapper { display: flex; justify-content: center; margin: 30px 0; }
+.square-cake {
+  width: min(90vw, 320px);
+  aspect-ratio: 1/1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
 }
+.piece {
+  border-radius: 18px;
+  overflow: hidden;
+}
+.piece img { width: 100%; height: 100%; object-fit: cover; }
+input { display: none; }
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+input:checked + label + .overlay { display: flex; }
 
-/* =====================
-MOBILE
-===================== */
-@media (max-width: 600px) {
-  h1 { font-size: 24px; }
-  .glass-box {
-    padding: 16px;
-    border-radius: 16px;
-  }
+/* Glow swipe */
+#glowSwipe {
+  position: fixed;
+  bottom: -40%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-25deg);
+  width: 120vw;
+  height: 40vh;
+  background: linear-gradient(90deg, rgba(198,85,255,0.6), rgba(255,128,203,0.6));
+  filter: blur(50px);
+  z-index: 9999999;
+  pointer-events: none;
+  animation: swipeUp 1s ease-out forwards;
+}
+@keyframes swipeUp {
+  from { bottom: -40%; opacity: 0; }
+  to { bottom: 110%; opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="main">
+<div id="glowSwipe"></div>
 
-  <!-- INTRO -->
-  <div class="glass-box">
-    <h1>SF2 Dream Mod</h1>
-    <h3>Official Website</h3>
-  </div>
-
-  <!-- INTRODUCTION -->
-  <div class="glass-box">
-    <h3><u>INTRODUCTION</u></h3>
-    <p>
-      This mod is everyone’s dream mod, containing A–Z content from 2015–2025.
-      Based on version 1.9.21 (32-bit). Can be played using emulators or
-      virtual environments.
-    </p>
-  </div>
-
-  <!-- MOD INFO -->
-  <div class="glass-box">
-    <h3>Mod Info</h3>
-    <ul>
-      <li>✔ Crashless gameplay</li>
-      <li>✔ Main & Private servers</li>
-      <li>✔ Offline raid system</li>
-      <li>✔ 86+ raid battles</li>
-      <li>✔ All mythical sets</li>
-      <li>✔ Heavy optimization</li>
-      <li>✔ Zone switcher</li>
-    </ul>
-  </div>
-
-  <!-- CONTACT -->
-  <div class="glass-box">
-    <h3>Contact</h3>
-    <p>Price: $30</p>
-    <a class="button" href="#">Telegram</a>
-  </div>
-
+<div class="pill-bar">
+  <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
+  <span class="pill-text">Navas's Official</span>
+  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon">
 </div>
 
+<div class="container">
+
+<div class="glass-section">
+  <h1>Welcome to my official website</h1>
+  <h4>Shadow Fight 2 Modder</h4>
+</div>
+
+<div class="glass-section">
+  <h3><u>INTRODUCTION</u></h3>
+  <p>
+    This mod is basically everyone's dream mod. It contains A-Z content
+    from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit).
+  </p>
+</div>
+
+<div class="video-section">
+  <div class="video-shell">
+    <video class="intro-video" controls>
+      <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v2.mp4">
+    </video>
+  </div>
+</div>
+
+<div class="glass-section">
+  <h3 class="mod-title">Mod Info</h3>
+  <ul class="custom-point">
+    <li>Crashless gameplay</li>
+    <li>Main & private server</li>
+    <li>2015–25 raid battles</li>
+    <li>Offline raid system</li>
+    <li>All mythical sets</li>
+  </ul>
+</div>
+
+<div class="glass-section">
+  <h3 class="contact-info">Contact Info</h3>
+  <p>Only 30$</p>
+</div>
+
+<div class="btn-container">
+  <a href="https://t.me/ShadowFight2Hunter" class="tg-btn">Contact on Telegram</a><br>
+  <a href="https://youtube.com/@cbtpartition-wm3vf" class="yt-btn">Subscribe</a>
+</div>
+
+</div>
 </body>
 </html>
