@@ -246,11 +246,101 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 </div>
 
 <div class="container">
-<!-- content same as previous -->
+
+<!-- ===== CONTENT ===== -->
+<div class="glass">
+<h1>Welcome to my official website</h1>
+<h4>Shadow Fight 2 Modder</h4>
 </div>
 
-<!-- overlay, dark/light pill, scripts same as previous -->
+<div class="custom-img-wrapper">
+  <div class="custom-img-inner">
+    <img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg" 
+         alt="Custom Image"
+         onclick="alert('You clicked the custom image!');">
+  </div>
+</div>
+
+<div class="glass">
+<h3><u>INTRODUCTION</u></h3>
+<p>This mod is basically everyone's dream mod. It contains A-Z content from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don’t support 32-bit apps.</p>
+</div>
+
+<div class="glass video-shell">
+<video class="intro-video" controls>
+<source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v2.mp4">
+</video>
+</div>
+
+<div class="glass">
+<h3 class="mod-title">Mod Info</h3>
+<ul class="custom-point">
+<li>Crashless gameplay (shop, map, battle end fixed)</li>
+<li>Main server & private server equipments</li>
+<li>2015–25 raid battles + custom unique battles</li>
+<li>Remastered special edition locations</li>
+<li>Full offline raid system re-worked</li>
+<li>All mythical sets & perks available</li>
+<li>Private Telegram channel for updates</li>
+<li>~86 raid battles available</li>
+<li>Raid spheres, potions & horns usable as perks</li>
+<li>High-level optimization</li>
+<li>Trusted paid users available for proof</li>
+<li>Zone switcher enabled</li>
+</ul>
+</div>
+
+<div class="cake-wrapper">
+<div class="cake-glass">
+<div class="square-cake">
+
+<div class="piece" onclick="openOverlay('https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
+<div class="piece" onclick="openOverlay('https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
+<div class="piece" onclick="openOverlay('https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
+<div class="piece" onclick="openOverlay('https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
+
+</div>
+</div>
+</div>
+
+<div class="glass">
+<h3 class="contact-info">Contact Info</h3>
+<p>Only 30$</p>
+<a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
+<a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
+</div>
+
+</div>
+
+<!-- ===== OVERLAY ===== -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <span class="close-btn">×</span>
+  <img id="overlay-img" src="">
+</div>
+
+<!-- ===== DARK/LIGHT MODE PILL ===== -->
+<div class="mode-pill" id="modePill">
+  <div class="mode-wrapper">
+    <div class="mode-capsule"></div>
+    <div class="mode-icon" data-mode="light">☀️</div>
+    <div class="mode-icon" data-mode="dark">🌙</div>
+  </div>
+</div>
+
 <script>
+function openOverlay(src){
+  const overlay=document.getElementById('overlay');
+  const img=document.getElementById('overlay-img');
+  img.src=src;
+  overlay.style.display='flex';
+}
+function closeOverlay(e){
+  if(e.target.id==='overlay' || e.target.classList.contains('close-btn')){
+    document.getElementById('overlay').style.display='none';
+  }
+}
+
+// ===== DARK/LIGHT MODE =====
 const modePill = document.getElementById('modePill');
 const capsule = modePill.querySelector('.mode-capsule');
 const icons = modePill.querySelectorAll('.mode-icon');
@@ -261,6 +351,9 @@ icons.forEach(icon=>{
     const mode = icon.dataset.mode;
     darkOverlay.style.opacity = (mode==='dark'? '1':'0');
     capsule.style.left = (mode==='dark'?'50%':'0');
+    // bounce animation
+    modePill.style.transform='translateX(-50%) scale(0.95)';
+    setTimeout(()=>modePill.style.transform='translateX(-50%)',200);
   });
 });
 </script>
