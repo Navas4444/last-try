@@ -1,219 +1,479 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Navas's Official SF2 Dream Mod</title>
-<link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
-
-<style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Navas's Official SF2 Dream Mod</title><link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet"><style>
+  
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}
-html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;overflow-x:hidden}
+  
+html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;overflow-x:hidden;transition:background 0.5s}
+  
 
+  
 /* ===== BACKGROUND WRAPPER ===== */
+  
 #bgWrapper{
-  position:fixed;
-  inset:0;
-  z-index:-1;
+  
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
+  
   background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
-  transition:background .5s;
+  
+  transition:background 0.5s;
+  
 }
+  
+
+  
+/* ===== DARK MODE BACKGROUND ===== */
+  
 body.dark #bgWrapper{
-  background:
-    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
-    url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
+  
+  background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
+  
 }
+  
 
-/* ===== STARTUP GLOW ===== */
+  
+/* ===== STARTUP GLOW SWIPE ===== */
+  
 #glowSwipe{
+  
   position:fixed;
+  
   bottom:-40%;
+  
   left:50%;
+  
   transform:translateX(-50%) rotate(-25deg);
+  
   width:120vw;
+  
   height:40vh;
-  background:linear-gradient(90deg,rgba(198,85,255,.6),rgba(255,128,203,.6));
+  
+  background:linear-gradient(90deg, rgba(198,85,255,0.6), rgba(255,128,203,0.6));
+  
   filter:blur(50px);
+  
+  z-index:999999;
+  
   pointer-events:none;
-  z-index:999999;
-  animation:swipeUp 1s ease-out .2s forwards;
+  
+  animation:swipeUp 1s ease-out 0.2s forwards;
+  
 }
+  
 @keyframes swipeUp{
-  from{bottom:-40%;opacity:0}
+  
+  0%{bottom:-40%;opacity:0}
+  
   15%{opacity:1}
-  to{bottom:110%;opacity:0}
+  
+  100%{bottom:110%;opacity:0}
+  
 }
+  
 
-/* ===== TOP PILL ===== */
+  
+/* ===== PILL BAR ===== */
+  
 .pill-bar{
+  
   position:fixed;
+  
   top:12px;
+  
   left:50%;
+  
   transform:translateX(-50%);
+  
   width:min(92vw,720px);
+  
   height:56px;
+  
   display:flex;
+  
   align-items:center;
-  padding:0 18px;
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(26px);
-  border-radius:999px;
-  box-shadow:0 18px 40px rgba(0,0,0,.35);
-  z-index:99999;
-}
-.pill-icon{width:42px;height:42px;cursor:pointer;transition:.25s}
-.pill-icon:hover{transform:scale(1.2)}
-.pill-icon:active{transform:scale(.85)}
-.pill-text{flex:1;text-align:center}
-
-/* ===== CONTENT ===== */
-.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
-.glass{
-  background:rgba(255,255,255,.55);
-  border-radius:24px;
-  padding:18px;
-  margin:20px auto;
-  box-shadow:0 14px 40px rgba(0,0,0,.28);
-}
-.custom-img-wrapper{display:flex;justify-content:center;margin:20px}
-.custom-img-inner{
-  background:rgba(255,255,255,.55);
-  padding:10px;
-  border-radius:24px;
-}
-.custom-img-inner img{max-width:100%;border-radius:20px}
-
-/* ===== GALLERY ===== */
-.square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.piece{border-radius:20px;overflow:hidden;cursor:pointer}
-.piece img{width:100%;height:100%;object-fit:cover}
-
-/* ===== OVERLAY ===== */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(40px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999999;
-}
-.overlay img{max-width:90vw;max-height:80vh;border-radius:26px}
-.close-btn{
-  position:fixed;
-  top:18px;
-  right:18px;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:rgba(255,255,255,.35);
-  font-size:32px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-/* ===== BOTTOM MODE PILL (FIXED) ===== */
-.mode-pill{
-  position:fixed;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-  width:120px;
-  height:42px;
-  padding:4px;
-  display:flex;
-  align-items:center;
+  
   justify-content:space-between;
-  background:rgba(255,255,255,.5);
-  backdrop-filter:blur(16px);
+  
+  padding:0 18px;
+  
+  background:rgba(255,255,255,.55);
+  
+  backdrop-filter:blur(26px);
+  
   border-radius:999px;
-  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+  
   z-index:99999;
-  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  
+  animation:slideDown .8s cubic-bezier(.34,1.56,.64,1);
+  
 }
+  
+@keyframes slideDown{
+  
+  from{transform:translate(-50%,-80px);opacity:0}
+  
+  to{transform:translate(-50%,0);opacity:1}
+  
+}
+  
+.pill-icon{width:42px;height:42px;object-fit:contain;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1)}
+  
+.pill-icon:hover{transform:scale(1.2)}
+  
+.pill-icon:active{transform:scale(.85)}
+  
+.pill-text{flex:1;text-align:center;font-size:16px;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  
 
-/* ✅ NEVER REMOVE translateX */
-.mode-pill:hover{
-  transform:translateX(-50%) scale(1.05);
-}
-.mode-pill.active{
-  transform:translateX(-50%) scale(0.95);
-}
+  
+/* ===== CONTAINER ===== */
+  
+.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
+  
 
-.mode-icon{
-  width:34px;
-  height:34px;
+  
+/* ===== GLASS SECTIONS ===== */
+  
+.glass{
+  
+  background:rgba(255,255,255,.55);
+  
+  border-radius:24px;
+  
+  padding:18px 16px;
+  
+  margin:20px auto;
+  
+  box-shadow:0 14px 40px rgba(0,0,0,.28);
+  
+  animation:floatUp .7s cubic-bezier(.34,1.56,.64,1);
+  
+}
+  
+@keyframes floatUp{
+  
+  from{transform:translateY(30px);opacity:0}
+  
+  to{transform:none;opacity:1}
+  
+}
+  
+
+  
+/* ===== TEXT ===== */
+  
+h1{font-size:clamp(26px,6vw,48px)}
+  
+h3{font-size:clamp(18px,4.5vw,26px)}
+  
+h4{font-size:clamp(16px,4vw,22px);color:blue}
+  
+p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
+  
+.mod-title{color:green}
+  
+.contact-info{color:orange}
+  
+
+  
+/* ===== VIDEO ===== */
+  
+.video-shell{border-radius:24px;overflow:hidden}
+  
+.intro-video{width:100%;display:block;border-radius:24px;transition:.3s cubic-bezier(.34,1.56,.64,1)}
+  
+.intro-video:hover{transform:scale(1.05)}
+  
+.intro-video:active{transform:scale(.94)}
+  
+
+  
+/* ===== LIST ===== */
+  
+.custom-point{max-width:720px;margin:auto;padding:0;text-align:left}
+  
+.custom-point li{list-style:none;margin:10px 0;color:green}
+  
+.custom-point li::before{content:"✔ ";color:darkgreen}
+  
+
+  
+/* ===== BUTTONS ===== */
+  
+.tg-btn,.yt-btn{display:inline-block;margin:10px 0;padding:14px 26px;color:#fff;text-decoration:none;border-radius:14px;transition:.25s cubic-bezier(.34,1.56,.64,1)}
+  
+.tg-btn{background:#0088cc}
+  
+.yt-btn{background:linear-gradient(135deg,#ff0000,#ff4d4d)}
+  
+.tg-btn:hover,.yt-btn:hover{transform:scale(1.1)}
+  
+.tg-btn:active,.yt-btn:active{transform:scale(.9)}
+  
+
+  
+/* ===== CAKE GRID ===== */
+  
+.cake-wrapper{margin:40px auto}
+  
+.cake-glass{background:rgba(255,255,255,.45);border-radius:26px;padding:14px}
+  
+.square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  
+.piece{border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+  
+.piece img{width:100%;height:100%;object-fit:cover}
+  
+.piece:hover{transform:scale(1.08)}
+  
+.piece:active{transform:scale(1.15)}
+  
+
+  
+/* ===== FULLSCREEN OVERLAY ===== */
+  
+.overlay{
+  
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  
+  background:rgba(0,0,0,.55);
+  
+  backdrop-filter:blur(40px);
+  
+  display:none;
+  
+  align-items:center;justify-content:center;
+  
+  z-index:999999;
+  
+  transition:opacity .3s ease;
+  
+}
+  
+.overlay img{max-width:90vw;max-height:80vh;border-radius:26px;box-shadow:0 30px 70px rgba(0,0,0,.6);animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);object-fit:contain}
+  
+@keyframes zoomIn{from{transform:scale(.7)}to{transform:scale(1)}}
+  
+.close-btn{position:fixed;top:18px;right:18px;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.35);color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;animation:pop .4s cubic-bezier(.34,1.56,.64,1);cursor:pointer}
+  
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+  
+.close-btn:hover{transform:scale(1.2)}
+  
+.close-btn:active{transform:scale(.85)}
+  
+
+  
+/* ===== CUSTOM IMAGE BELOW WELCOME ===== */
+  
+.custom-img-wrapper{
+  
   display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-  border-radius:999px;
+  
+  justify-content:center; 
+  
+  margin:20px auto;
+  
+}
+  
+.custom-img-inner{
+  
+  display:inline-block; 
+  
+  background:rgba(255,255,255,.55);
+  
+  border-radius:24px;
+  
+  padding:10px;
+  
+  box-shadow:0 14px 40px rgba(0,0,0,.28);
+  
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  
+}
+  
+.custom-img-inner img{
+  
+  display:block;
+  
+  max-width:100%;
+  
+  height:auto;
+  
+  border-radius:20px;
+  
   cursor:pointer;
-  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+  
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  
 }
-.mode-icon:hover{transform:scale(1.15)}
-.mode-icon:active{transform:scale(.85)}
+  
+.custom-img-inner img:hover{transform:scale(1.05)}
+  
+.custom-img-inner img:active{transform:scale(0.95)}
+  
 
-.mode-capsule{
-  position:absolute;
-  top:4px;
-  left:0;
-  width:50%;
-  height:34px;
-  background:rgba(0,0,0,.2);
-  border-radius:999px;
-  transition:left .5s cubic-bezier(.34,1.56,.64,1),background .5s;
-}
-body.dark .mode-capsule{
+  
+/* ===== BOTTOM DARK/LIGHT MODE PILL ===== */
+  
+.mode-pill{
+  
+  position:fixed;
+  
+  bottom:18px;
+  
   left:50%;
-  background:rgba(255,255,255,.2);
+  
+  transform:translateX(-50%);
+  
+  display:flex;
+  
+  align-items:center;
+  
+  justify-content:space-between;
+  
+  width:120px;
+  
+  height:42px;
+  
+  background:rgba(255,255,255,.5);
+  
+  backdrop-filter:blur(16px);
+  
+  border-radius:999px;
+  
+  padding:4px;
+  
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  
+  cursor:pointer;
+  
+  z-index:99999;
+  
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  
 }
-</style>
-</head>
+  
+.mode-pill.active{transform:translateX(-50%) scale(0.95);}
+  
+.mode-pill:hover{transform:scale(1.05);}
+  
+.mode-icon{
+  
+  width:34px;
+  
+  height:34px;
+  
+  display:flex;
+  
+  align-items:center;
+  
+  justify-content:center;
+  
+  border-radius:999px;
+  
+  font-size:18px;
+  
+  user-select:none;
+  
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+  
+}
+  
+.mode-icon:hover{transform:scale(1.15)}
+  
+.mode-icon:active{transform:scale(0.85);}
+  
+.mode-capsule{
+  
+  position:absolute;
+  
+  width:50%;
+  
+  height:34px;
+  
+  background:rgba(0,0,0,.2);
+  
+  border-radius:999px;
+  
+  top:4px;
+  
+  left:0;
+  
+  transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;
+  
+}
+  
+body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
+  
+</style></head><body><!-- ===== BACKGROUND WRAPPER ===== --><div id="bgWrapper"></div><div id="glowSwipe"></div><div class="pill-bar">  <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">  <div class="pill-text">Navas's Official</div>  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon" onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')"></div><div class="container"><div class="glass"><h1>Welcome to my official website</h1><h4>Shadow Fight 2 Modder</h4></div><div class="custom-img-wrapper">  <div class="custom-img-inner"><img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg" 
 
-<body>
-<div id="bgWrapper"></div>
-<div id="glowSwipe"></div>
+     alt="Custom Image"
 
-<div class="pill-bar">
-  <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
-  <div class="pill-text">Navas's Official</div>
-  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon"
-       onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
-</div>
+     onclick="alert('You clicked the custom image!');">
 
-<div class="container">
-  <div class="glass">
-    <h1>Welcome to my official website</h1>
-    <h4>Shadow Fight 2 Modder</h4>
-  </div>
+  </div></div><div class="glass"><h3><u>INTRODUCTION</u></h3><p>This mod is basically everyone's dream mod. It contains A-Z content from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don’t support 32-bit apps.</p></div><div class="glass video-shell"><video class="intro-video" controls><source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v2.mp4"></video></div><div class="glass"><h3 class="mod-title">Mod Info</h3><ul class="custom-point"><li>Crashless gameplay (shop, map, battle end fixed)</li><li>Main server & private server equipments</li><li>2015–25 raid battles + custom unique battles</li><li>Remastered special edition locations</li><li>Full offline raid system re-worked</li><li>All mythical sets & perks available</li><li>Private Telegram channel for updates</li><li>~86 raid battles available</li><li>Raid spheres, potions & horns usable as perks</li><li>High-level optimization</li><li>Trusted paid users available for proof</li><li>Zone switcher enabled</li></ul></div><div class="cake-wrapper"><div class="cake-glass"><div class="square-cake"><div class="piece" onclick="openOverlay('https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div><div class="piece" onclick="openOverlay('https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div><div class="piece" onclick="openOverlay('https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div><div class="piece" onclick="openOverlay('https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div></div></div></div><div class="glass"><h3 class="contact-info">Contact Info</h3><p>Only 30$</p><a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
 
-  <div class="custom-img-wrapper">
-    <div class="custom-img-inner">
-      <img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg">
-    </div>
-  </div>
-</div>
+<a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
 
-<div class="mode-pill" id="modePill">
-  <div class="mode-capsule"></div>
-  <div class="mode-icon" data-mode="light">☀️</div>
-  <div class="mode-icon" data-mode="dark">🌙</div>
-</div>
+</div></div><!-- ===== OVERLAY ===== --><div class="overlay" id="overlay" onclick="closeOverlay(event)"><span class="close-btn">×</span>
 
-<script>
-const pill=document.getElementById('modePill');
-const capsule=pill.querySelector('.mode-capsule');
-pill.querySelectorAll('.mode-icon').forEach(icon=>{
-  icon.onclick=()=>{
-    document.body.classList.toggle('dark',icon.dataset.mode==='dark');
-    pill.classList.add('active');
-    setTimeout(()=>pill.classList.remove('active'),180);
-  };
+  <img id="overlay-img" src=""></div><!-- ===== DARK/LIGHT MODE PILL ===== --><div class="mode-pill" id="modePill">  <div class="mode-capsule"></div>  <div class="mode-icon" data-mode="light">☀️</div>  <div class="mode-icon" data-mode="dark">🌙</div></div><script>
+  
+function openOverlay(src){
+  
+  const overlay=document.getElementById('overlay');
+  
+  const img=document.getElementById('overlay-img');
+  
+  img.src=src;
+  
+  overlay.style.display='flex';
+  
+}
+  
+function closeOverlay(e){
+  
+  if(e.target.id==='overlay' || e.target.classList.contains('close-btn')){
+  
+    document.getElementById('overlay').style.display='none';
+  
+  }
+  
+}
+  
+
+  
+// ===== DARK/LIGHT MODE =====
+  
+const modePill=document.getElementById('modePill');
+  
+const capsule=modePill.querySelector('.mode-capsule');
+  
+const icons=modePill.querySelectorAll('.mode-icon');
+  
+
+  
+icons.forEach(icon=>{
+  
+  icon.addEventListener('click',()=>{
+  
+    const mode = icon.dataset.mode;
+  
+    document.body.classList.toggle('dark', mode==='dark');
+  
+    // move capsule
+  
+    capsule.style.left=(mode==='dark'?'50%':'0');
+  
+    // bounce pill
+  
+    modePill.classList.add('active');
+  
+    setTimeout(()=>modePill.classList.remove('active'),200);
+  
+  });
+  
 });
-</script>
-</body>
-</html>
+  
+</script></body></html>
