@@ -5,16 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Navas's Official SF2 Dream Mod</title>
 <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0;min-height:100vh; font-family:'Carter One',cursive; overflow-x:hidden;}
+html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;overflow-x:hidden}
 
-/* ===== CUSTOM BACKGROUND ===== */
+/* ===== BACKGROUND ===== */
 body{
   background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover fixed no-repeat;
 }
 
-/* ===== PILL BAR ===== */
+/* ===== STARTUP GLOW SWIPE ===== */
+#glowSwipe{
+  position:fixed;
+  bottom:-40%;
+  left:50%;
+  transform:translateX(-50%) rotate(-25deg);
+  width:120vw;
+  height:40vh;
+  background:linear-gradient(90deg, rgba(198,85,255,0.6), rgba(255,128,203,0.6));
+  filter:blur(50px);
+  z-index:999999;
+  pointer-events:none;
+  animation:swipeUp 1s ease-out 0.2s forwards;
+}
+@keyframes swipeUp{
+  0%{bottom:-40%;opacity:0}
+  15%{opacity:1}
+  100%{bottom:110%;opacity:0}
+}
+
+/* ===== PILL BAR (TOP, WIDE) ===== */
 .pill-bar{
   position:fixed;
   top:12px;
@@ -37,13 +58,27 @@ body{
   from{transform:translate(-50%,-80px);opacity:0}
   to{transform:translate(-50%,0);opacity:1}
 }
-.pill-icon{width:42px;height:42px;object-fit:contain;cursor:pointer;transition:.25s;}
+.pill-icon{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  cursor:pointer;
+  transition:.25s cubic-bezier(.34,1.56,.64,1);
+}
 .pill-icon:hover{transform:scale(1.2)}
 .pill-icon:active{transform:scale(.85)}
-.pill-text{flex:1;text-align:center;font-size:16px;color:#000;}
+.pill-text{
+  flex:1;
+  text-align:center;
+  font-size:16px;
+  color:#000;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
 /* ===== CONTAINER ===== */
-.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center;}
+.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
 
 /* ===== GLASS SECTIONS ===== */
 .glass{
@@ -55,7 +90,12 @@ body{
   box-shadow:0 14px 40px rgba(0,0,0,.28);
   animation:floatUp .7s cubic-bezier(.34,1.56,.64,1);
 }
-@keyframes floatUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes floatUp{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:none;opacity:1}
+}
+
+/* ===== TEXT ===== */
 h1{font-size:clamp(26px,6vw,48px)}
 h3{font-size:clamp(18px,4.5vw,26px)}
 h4{font-size:clamp(16px,4vw,22px);color:blue}
@@ -64,18 +104,35 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 .contact-info{color:orange}
 
 /* ===== VIDEO ===== */
-.video-shell{border-radius:26px;overflow:hidden;margin-bottom:20px;}
-.intro-video{width:100%;display:block;border-radius:26px;transition:.3s cubic-bezier(.34,1.56,.64,1);}
+.video-shell{border-radius:24px;overflow:hidden}
+.intro-video{
+  width:100%;
+  display:block;
+  border-radius:24px;
+  transition:.3s cubic-bezier(.34,1.56,.64,1);
+}
 .intro-video:hover{transform:scale(1.05)}
 .intro-video:active{transform:scale(.94)}
 
-/* ===== LIST ===== */
+/* ===== MOD LIST ===== */
 .custom-point{max-width:720px;margin:auto;padding:0;text-align:left}
-.custom-point li{list-style:none;margin:10px 0;color:green}
+.custom-point li{
+  list-style:none;
+  margin:10px 0;
+  color:green;
+}
 .custom-point li::before{content:"✔ ";color:darkgreen}
 
 /* ===== BUTTONS ===== */
-.tg-btn,.yt-btn{display:inline-block;margin:10px 0;padding:14px 26px;color:#fff;text-decoration:none;border-radius:14px;transition:.25s;}
+.tg-btn,.yt-btn{
+  display:inline-block;
+  margin:10px 0;
+  padding:14px 26px;
+  color:#fff;
+  text-decoration:none;
+  border-radius:14px;
+  transition:.25s cubic-bezier(.34,1.56,.64,1);
+}
 .tg-btn{background:#0088cc}
 .yt-btn{background:linear-gradient(135deg,#ff0000,#ff4d4d)}
 .tg-btn:hover,.yt-btn:hover{transform:scale(1.1)}
@@ -83,36 +140,58 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 /* ===== CAKE GRID ===== */
 .cake-wrapper{margin:40px auto}
-.cake-glass{background:rgba(255,255,255,.45);backdrop-filter:blur(18px);border-radius:26px;padding:14px;}
-.square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.piece{border-radius:20px;overflow:hidden;cursor:pointer;transition:.3s;}
+.cake-glass{
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(18px);
+  border-radius:26px;
+  padding:14px;
+}
+.square-cake{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.piece{
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s cubic-bezier(.34,1.56,.64,1);
+}
 .piece img{width:100%;height:100%;object-fit:cover}
 .piece:hover{transform:scale(1.08)}
 .piece:active{transform:scale(1.15)}
+input{display:none}
 
 /* ===== FULLSCREEN BLUR OVERLAY ===== */
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.45);
+  background:rgba(0,0,0,.5);
   backdrop-filter:blur(40px);
+  -webkit-backdrop-filter:blur(40px);
   display:none;
   align-items:center;
   justify-content:center;
   z-index:999999;
-  flex-direction:column;
 }
 .overlay img{
   max-width:90vw;
-  max-height:90vh;
+  max-height:80vh;
   border-radius:26px;
   box-shadow:0 30px 70px rgba(0,0,0,.6);
   animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);
+  object-fit:contain;
 }
-@keyframes zoomIn{from{transform:scale(.7)}to{transform:scale(1)}}
+@keyframes zoomIn{
+  from{transform:scale(.7)}
+  to{transform:scale(1)}
+}
 
 /* ===== CLOSE BUTTON ===== */
 .close-btn{
+  position:fixed;
+  top:18px;
+  right:18px;
   width:58px;
   height:58px;
   border-radius:50%;
@@ -124,25 +203,32 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  margin-bottom:10px;
   animation:pop .4s cubic-bezier(.34,1.56,.64,1);
 }
-@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes pop{
+  from{transform:scale(0)}
+  to{transform:scale(1)}
+}
 .close-btn:hover{transform:scale(1.2)}
 .close-btn:active{transform:scale(.85)}
 </style>
 </head>
 <body>
 
-<!-- ===== PILL BAR ===== -->
+<!-- ===== STARTUP GLOW ===== -->
+<div id="glowSwipe"></div>
+
+<!-- ===== TOP PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
-  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon" onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
+  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon"
+       onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
 </div>
 
 <div class="container">
 
+<!-- ===== HEADER ===== -->
 <div class="glass">
 <h1>Welcome to my official website</h1>
 <h4>Shadow Fight 2 Modder</h4>
@@ -177,17 +263,32 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 </ul>
 </div>
 
+<!-- ===== CAKE GRID ===== -->
 <div class="cake-wrapper">
 <div class="cake-glass">
 <div class="square-cake">
-<img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
-<img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
-<img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
-<img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
+
+<input type="checkbox" id="i1">
+<label for="i1" class="piece"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></label>
+<div class="overlay"><label for="i1" class="close-btn">×</label><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
+
+<input type="checkbox" id="i2">
+<label for="i2" class="piece"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></label>
+<div class="overlay"><label for="i2" class="close-btn">×</label><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
+
+<input type="checkbox" id="i3">
+<label for="i3" class="piece"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></label>
+<div class="overlay"><label for="i3" class="close-btn">×</label><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
+
+<input type="checkbox" id="i4">
+<label for="i4" class="piece"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></label>
+<div class="overlay"><label for="i4" class="close-btn">×</label><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
+
 </div>
 </div>
 </div>
 
+<!-- ===== CONTACT ===== -->
 <div class="glass">
 <h3 class="contact-info">Contact Info</h3>
 <p>Only 30$</p>
@@ -196,22 +297,5 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 </div>
 
 </div>
-
-<!-- ===== GLOBAL OVERLAY ===== -->
-<div class="overlay" id="globalOverlay">
-  <div class="close-btn" onclick="closeOverlay()">×</div>
-  <img id="overlayImg" src="">
-</div>
-
-<script>
-function openOverlay(src){
-  document.getElementById('overlayImg').src = src;
-  document.getElementById('globalOverlay').style.display = 'flex';
-}
-function closeOverlay(){
-  document.getElementById('globalOverlay').style.display = 'none';
-  document.getElementById('overlayImg').src = '';
-}
-</script>
 </body>
 </html>
