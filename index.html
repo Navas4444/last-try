@@ -27,20 +27,25 @@ html,body{
 /* ===== BACKGROUND WRAPPER ===== */
 #bgWrapper{
   position:fixed;
-  inset:0;
+  top:0;
+  left:0;
+  width:100%;
+  height:100svh; /* 🔥 FIX for mobile fast scroll */
   z-index:-1;
   background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
   overflow:hidden;
 }
-
 /* smooth dark overlay */
 #bgWrapper::after{
   content:"";
-  position:absolute;
-  inset:0;
+  position:fixed; /* 🔥 FIX: not absolute */
+  top:0;
+  left:0;
+  width:100%;
+  height:100svh; /* 🔥 FULL viewport always */
   background:rgba(0,0,0,0.55);
   opacity:0;
-  transition:opacity 0.1s ease-in-out; /* 👈 ultra smooth */
+  transition:opacity 0.1s ease-in-out;
   pointer-events:none;
 }
 
@@ -459,4 +464,5 @@ document.querySelectorAll('.mode-icon').forEach(icon=>{
 
 </body>
 </html>
+
 
