@@ -140,16 +140,22 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   margin:20px auto;
   max-width:900px;
   box-shadow:0 14px 40px rgba(0,0,0,.28);
-  transition:.3s cubic-bezier(.34,1.56,.64,1);
+  display:flex;
+  align-items:center;       /* centers vertically */
+  justify-content:center;   /* centers horizontally */
 }
-.custom-img-container img{
+.custom-img-inner{
+  width:100%;
+  max-width:880px;          /* optional, keeps some padding inside */
+}
+.custom-img-inner img{
   width:100%;
   border-radius:20px;
   cursor:pointer;
   transition:.3s cubic-bezier(.34,1.56,.64,1);
 }
-.custom-img-container img:hover{transform:scale(1.05)}
-.custom-img-container img:active{transform:scale(.95)}
+.custom-img-inner img:hover{transform:scale(1.05)}
+.custom-img-inner img:active{transform:scale(.95)}
 </style>
 </head>
 <body>
@@ -249,3 +255,4 @@ function closeOverlay(e){
 
 </body>
 </html>
+
