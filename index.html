@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}
 html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;overflow-x:hidden}
 
 /* ===== BACKGROUND ===== */
@@ -35,7 +35,7 @@ body{
   100%{bottom:110%;opacity:0}
 }
 
-/* ===== PILL BAR (TOP, WIDE) ===== */
+/* ===== PILL BAR ===== */
 .pill-bar{
   position:fixed;
   top:12px;
@@ -58,29 +58,15 @@ body{
   from{transform:translate(-50%,-80px);opacity:0}
   to{transform:translate(-50%,0);opacity:1}
 }
-.pill-icon{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-  cursor:pointer;
-  transition:.25s cubic-bezier(.34,1.56,.64,1);
-}
+.pill-icon{width:42px;height:42px;object-fit:contain;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1)}
 .pill-icon:hover{transform:scale(1.2)}
 .pill-icon:active{transform:scale(.85)}
-.pill-text{
-  flex:1;
-  text-align:center;
-  font-size:16px;
-  color:#000;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+.pill-text{flex:1;text-align:center;font-size:16px;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ===== CONTAINER ===== */
 .container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
 
-/* ===== GLASS SECTIONS ===== */
+/* ===== GLASS ===== */
 .glass{
   background:rgba(255,255,255,.55);
   backdrop-filter:blur(20px);
@@ -105,34 +91,17 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 /* ===== VIDEO ===== */
 .video-shell{border-radius:24px;overflow:hidden}
-.intro-video{
-  width:100%;
-  display:block;
-  border-radius:24px;
-  transition:.3s cubic-bezier(.34,1.56,.64,1);
-}
+.intro-video{width:100%;display:block;border-radius:24px;transition:.3s cubic-bezier(.34,1.56,.64,1)}
 .intro-video:hover{transform:scale(1.05)}
 .intro-video:active{transform:scale(.94)}
 
-/* ===== MOD LIST ===== */
+/* ===== LIST ===== */
 .custom-point{max-width:720px;margin:auto;padding:0;text-align:left}
-.custom-point li{
-  list-style:none;
-  margin:10px 0;
-  color:green;
-}
+.custom-point li{list-style:none;margin:10px 0;color:green}
 .custom-point li::before{content:"✔ ";color:darkgreen}
 
 /* ===== BUTTONS ===== */
-.tg-btn,.yt-btn{
-  display:inline-block;
-  margin:10px 0;
-  padding:14px 26px;
-  color:#fff;
-  text-decoration:none;
-  border-radius:14px;
-  transition:.25s cubic-bezier(.34,1.56,.64,1);
-}
+.tg-btn,.yt-btn{display:inline-block;margin:10px 0;padding:14px 26px;color:#fff;text-decoration:none;border-radius:14px;transition:.25s cubic-bezier(.34,1.56,.64,1)}
 .tg-btn{background:#0088cc}
 .yt-btn{background:linear-gradient(135deg,#ff0000,#ff4d4d)}
 .tg-btn:hover,.yt-btn:hover{transform:scale(1.1)}
@@ -140,85 +109,35 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 /* ===== CAKE GRID ===== */
 .cake-wrapper{margin:40px auto}
-.cake-glass{
-  background:rgba(255,255,255,.45);
-  backdrop-filter:blur(18px);
-  border-radius:26px;
-  padding:14px;
-}
-.square-cake{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-.piece{
-  border-radius:20px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.3s cubic-bezier(.34,1.56,.64,1);
-}
+.cake-glass{background:rgba(255,255,255,.45);backdrop-filter:blur(18px);border-radius:26px;padding:14px}
+.square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.piece{border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
 .piece img{width:100%;height:100%;object-fit:cover}
 .piece:hover{transform:scale(1.08)}
 .piece:active{transform:scale(1.15)}
-input{display:none}
 
-/* ===== FULLSCREEN BLUR OVERLAY ===== */
+/* ===== FULLSCREEN OVERLAY ===== */
 .overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.55);
   backdrop-filter:blur(40px);
-  -webkit-backdrop-filter:blur(40px);
   display:none;
-  align-items:center;
-  justify-content:center;
+  align-items:center;justify-content:center;
   z-index:999999;
+  transition:opacity .3s ease;
 }
-.overlay img{
-  max-width:90vw;
-  max-height:80vh;
-  border-radius:26px;
-  box-shadow:0 30px 70px rgba(0,0,0,.6);
-  animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);
-  object-fit:contain;
-}
-@keyframes zoomIn{
-  from{transform:scale(.7)}
-  to{transform:scale(1)}
-}
-
-/* ===== CLOSE BUTTON ===== */
-.close-btn{
-  position:fixed;
-  top:18px;
-  right:18px;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:rgba(255,255,255,.35);
-  backdrop-filter:blur(14px);
-  color:#fff;
-  font-size:32px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  animation:pop .4s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes pop{
-  from{transform:scale(0)}
-  to{transform:scale(1)}
-}
+.overlay img{max-width:90vw;max-height:80vh;border-radius:26px;box-shadow:0 30px 70px rgba(0,0,0,.6);animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);object-fit:contain}
+@keyframes zoomIn{from{transform:scale(.7)}to{transform:scale(1)}}
+.close-btn{position:fixed;top:18px;right:18px;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.35);backdrop-filter:blur(14px);color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 .close-btn:hover{transform:scale(1.2)}
 .close-btn:active{transform:scale(.85)}
 </style>
 </head>
 <body>
 
-<!-- ===== STARTUP GLOW ===== -->
 <div id="glowSwipe"></div>
 
-<!-- ===== TOP PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
@@ -228,7 +147,6 @@ input{display:none}
 
 <div class="container">
 
-<!-- ===== HEADER ===== -->
 <div class="glass">
 <h1>Welcome to my official website</h1>
 <h4>Shadow Fight 2 Modder</h4>
@@ -263,32 +181,19 @@ input{display:none}
 </ul>
 </div>
 
-<!-- ===== CAKE GRID ===== -->
 <div class="cake-wrapper">
 <div class="cake-glass">
 <div class="square-cake">
 
-<input type="checkbox" id="i1">
-<label for="i1" class="piece"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i1" class="close-btn">×</label><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i2">
-<label for="i2" class="piece"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i2" class="close-btn">×</label><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i3">
-<label for="i3" class="piece"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i3" class="close-btn">×</label><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i4">
-<label for="i4" class="piece"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i4" class="close-btn">×</label><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
+<div class="piece" onclick="openOverlay('https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
+<div class="piece" onclick="openOverlay('https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
+<div class="piece" onclick="openOverlay('https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
+<div class="piece" onclick="openOverlay('https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
 
 </div>
 </div>
 </div>
 
-<!-- ===== CONTACT ===== -->
 <div class="glass">
 <h3 class="contact-info">Contact Info</h3>
 <p>Only 30$</p>
@@ -297,5 +202,26 @@ input{display:none}
 </div>
 
 </div>
+
+<!-- ===== OVERLAY ===== -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <span class="close-btn">×</span>
+  <img id="overlay-img" src="">
+</div>
+
+<script>
+function openOverlay(src){
+  const overlay=document.getElementById('overlay');
+  const img=document.getElementById('overlay-img');
+  img.src=src;
+  overlay.style.display='flex';
+}
+function closeOverlay(e){
+  if(e.target.id==='overlay' || e.target.classList.contains('close-btn')){
+    document.getElementById('overlay').style.display='none';
+  }
+}
+</script>
+
 </body>
 </html>
