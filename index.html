@@ -13,23 +13,16 @@ html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;o
 /* ===== BACKGROUND ===== */
 body{
   background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover fixed no-repeat;
-  position:relative;
-  z-index:0;
 }
 
 /* ===== DARK MODE OVERLAY ===== */
-#darkOverlay {
-  position:fixed;
-  top:0; left:0;
-  width:100vw; height:100vh;
+body.dark::before{
+  content:'';
+  position:fixed;top:0;left:0;width:100%;height:100%;
   background:rgba(0,0,0,0.5);
+  z-index:0; /* below content */
   pointer-events:none;
-  z-index:1;
-  opacity:0;
-  transition:opacity 0.5s ease;
-}
-body.dark #darkOverlay {
-  opacity:1;
+  transition:background 0.5s;
 }
 
 /* ===== STARTUP GLOW SWIPE ===== */
@@ -81,7 +74,7 @@ body.dark #darkOverlay {
 .pill-text{flex:1;text-align:center;font-size:16px;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ===== CONTAINER ===== */
-.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center;position:relative; z-index:2}
+.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
 
 /* ===== GLASS SECTIONS ===== */
 .glass{
@@ -154,8 +147,6 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   display:flex;
   justify-content:center; 
   margin:20px auto;
-  position:relative;
-  z-index:2;
 }
 .custom-img-inner{
   display:inline-block; 
@@ -182,9 +173,6 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   bottom:18px;
   left:50%;
   transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
   width:120px;
   height:42px;
   background:rgba(255,255,255,.5);
@@ -194,16 +182,10 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   box-shadow:0 6px 20px rgba(0,0,0,.35);
   cursor:pointer;
   z-index:99999;
-}
-.mode-pill:hover{transform:scale(1.05);}
-.mode-pill.bounce{animation:bounce .2s;}
-@keyframes bounce{
-  0%{transform:translateX(-50%) scale(1)}
-  50%{transform:translateX(-50%) scale(0.9)}
-  100%{transform:translateX(-50%) scale(1)}
+  display:flex;
+  align-items:center;
 }
 
-/* flex wrapper to center capsule */
 .mode-wrapper{
   position:relative;
   display:flex;
@@ -214,21 +196,19 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   padding:0 2px;
 }
 
-/* capsule */
 .mode-capsule{
   position:absolute;
-  width:50%;
-  height:34px;
-  background:rgba(0,0,0,.2);
-  border-radius:999px;
   top:4px;
   left:0;
+  width:50%;
+  height:34px;
+  border-radius:999px;
+  background:rgba(0,0,0,.2);
   transition:left .4s cubic-bezier(.34,1.56,.64,1), background .4s;
   z-index:0;
 }
 body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 
-/* icons */
 .mode-icon{
   width:34px;
   height:34px;
@@ -247,10 +227,10 @@ body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 </head>
 <body>
 
-<div id="darkOverlay"></div>
-
+<!-- ===== STARTUP GLOW ===== -->
 <div id="glowSwipe"></div>
 
+<!-- ===== PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
@@ -352,21 +332,24 @@ function closeOverlay(e){
 }
 
 // ===== DARK/LIGHT MODE =====
-const modePill=document.getElementById('modePill');
-const capsule=modePill.querySelector('.mode-capsule');
-const icons=modePill.querySelectorAll('.mode-icon');
+const modePill = document.getElementById('modePill');
+const capsule = modePill.querySelector('.mode-capsule');
+const icons = modePill.querySelectorAll('.mode-icon');
 
 icons.forEach(icon=>{
   icon.addEventListener('click',()=>{
     const mode = icon.dataset.mode;
     document.body.classList.toggle('dark', mode==='dark');
 
-    // capsule move smoothly
+    // move capsule
     capsule.style.left = (mode==='dark' ? '50%' : '0');
 
-    // bounce animation
-    modePill.classList.add('bounce');
-    setTimeout(()=>modePill.classList.remove('bounce'),200);
+    // small bounce animation for pill
+    modePill.animate([
+      { transform: 'translateX(-50%) scale(1)' },
+      { transform: 'translateX(-50%) scale(0.95)' },
+      { transform: 'translateX(-50%) scale(1)' }
+    ], { duration: 200 });
   });
 });
 </script>
