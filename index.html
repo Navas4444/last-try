@@ -167,44 +167,47 @@ input:checked + label + .overlay { display: flex; }
 GLOW SWIPE ANIMATION
 ===================== */
 #glowSwipe {
-#glowSwipe {
   position: fixed;
-  bottom: -40%;
+  bottom: -50%;           /* start off-screen */
   left: 50%;
   transform: translateX(-50%) rotate(-15deg);
-  width: 200vw;       /* extra wide for diagonal glow */
-  height: 30vh;       /* thin streak */
-  background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, rgba(255, 20, 147, 0.3) 50%, rgba(138, 43, 226, 0) 80%);
+  width: 300vw;           /* extra wide for diagonal */
+  height: 30vh;
+  background: rgba(138,43,226,0.3); /* violet base */
+  backdrop-filter: blur(50px);      /* REAL TIME BLUR */
+  -webkit-backdrop-filter: blur(50px); 
+  mix-blend-mode: screen;           /* glow effect */
+  border-radius: 50%;
   z-index: 999999;
   pointer-events: none;
-  filter: blur(60px);        /* heavy blur */
-  opacity: 0.5;
-  border-radius: 50%;         /* make glow rounded */
-  animation: glowSwipeUp 3s ease-out forwards;
+  animation: glowSwipeUp 4s ease-out forwards;
 }
 
-/* Flicker / subtle intensity change */
+/* Flicker for more glow variation */
 #glowSwipe::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(0, 191, 255, 0.25), rgba(255, 105, 180, 0.15));
+  background: rgba(255,20,147,0.2); /* pink overlay */
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border-radius: 50%;
-  filter: blur(50px);
   opacity: 0.7;
   animation: glowFlicker 0.4s infinite alternate;
 }
 
+/* Swipe animation */
 @keyframes glowSwipeUp {
-  0% { bottom: -40%; opacity: 0; }
-  10% { opacity: 1; }
+  0% { bottom: -50%; opacity: 0; }
+  10% { opacity: 0.8; }
   100% { bottom: 120%; opacity: 0; }
 }
 
+/* Flicker animation */
 @keyframes glowFlicker {
-  0% { opacity: 0.5; filter: blur(50px); }
-  50% { opacity: 0.8; filter: blur(70px); }
-  100% { opacity: 0.6; filter: blur(60px); }
+  0% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.6; }
 }
 </style>
 </head>
@@ -286,6 +289,7 @@ be played using virtual machines or emulators.</p>
 </div>
 </body>
 </html>
+
 
 
 
