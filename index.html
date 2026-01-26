@@ -190,8 +190,6 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   z-index:99999;
   transition:all .3s cubic-bezier(.34,1.56,.64,1);
 }
-.mode-pill.active{transform:translateX(-50%) scale(0.95);}
-.mode-pill:hover{transform:scale(1.05);}
 
 .mode-icon{
   width:34px;
@@ -215,23 +213,19 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   height:34px;
   background:rgba(0,0,0,.2);
   border-radius:999px;
-  transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;
   display:flex;
   align-items:center;
   justify-content:center;
+  transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;
 }
 body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 </style>
 </head>
 <body>
 
-<!-- ===== DARK OVERLAY BEHIND CONTENT ===== -->
 <div id="darkOverlay"></div>
-
-<!-- ===== STARTUP GLOW ===== -->
 <div id="glowSwipe"></div>
 
-<!-- ===== PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
@@ -285,12 +279,10 @@ body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 <div class="cake-wrapper">
 <div class="cake-glass">
 <div class="square-cake">
-
 <div class="piece" onclick="openOverlay('https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
 <div class="piece" onclick="openOverlay('https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
 <div class="piece" onclick="openOverlay('https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
 <div class="piece" onclick="openOverlay('https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg')"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
-
 </div>
 </div>
 </div>
@@ -304,13 +296,11 @@ body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 
 </div>
 
-<!-- ===== OVERLAY ===== -->
 <div class="overlay" id="overlay" onclick="closeOverlay(event)">
   <span class="close-btn">×</span>
   <img id="overlay-img" src="">
 </div>
 
-<!-- ===== DARK/LIGHT MODE PILL ===== -->
 <div class="mode-pill" id="modePill">
   <div class="mode-capsule"></div>
   <div class="mode-icon" data-mode="light">☀️</div>
@@ -335,19 +325,13 @@ const modePill=document.getElementById('modePill');
 const capsule=modePill.querySelector('.mode-capsule');
 const icons=modePill.querySelectorAll('.mode-icon');
 const darkOverlay=document.getElementById('darkOverlay');
-let mode='light';
 
 icons.forEach(icon=>{
   icon.addEventListener('click',()=>{
-    mode=icon.dataset.mode;
+    const mode=icon.dataset.mode;
     document.body.classList.toggle('dark', mode==='dark');
-    // capsule move
     capsule.style.left=(mode==='dark'?'50%':'0');
-    // overlay background
     darkOverlay.style.background=(mode==='dark'?'rgba(0,0,0,0.5)':'rgba(0,0,0,0)');
-    // bounce pill
-    modePill.classList.add('active');
-    setTimeout(()=>modePill.classList.remove('active'),200);
   });
 });
 </script>
