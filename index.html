@@ -10,23 +10,20 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}
 html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;overflow-x:hidden;transition:background 0.5s}
 
-/* ===== BACKGROUND WITH DARK OVERLAY ===== */
-#bgWrapper{
-  position:fixed;
-  top:0;left:0;width:100%;height:100%;
-  z-index:-1; /* behind all content */
-  overflow:hidden;
+/* ===== BACKGROUND ===== */
+body{
+  background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover fixed no-repeat;
+  position:relative;
 }
-#bgWrapper img{
-  width:100%;height:100%;object-fit:cover;
-}
+
+/* ===== DARK MODE OVERLAY DIV ===== */
 #darkOverlay{
   position:absolute;
   top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.5);
-  opacity:0;
-  transition:opacity 0.5s ease;
+  background:rgba(0,0,0,0);
+  z-index:0; /* behind content */
   pointer-events:none;
+  transition:background 0.5s;
 }
 
 /* ===== STARTUP GLOW SWIPE ===== */
@@ -78,7 +75,7 @@ html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;o
 .pill-text{flex:1;text-align:center;font-size:16px;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ===== CONTAINER ===== */
-.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center;position:relative;z-index:1}
+.container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
 
 /* ===== GLASS SECTIONS ===== */
 .glass{
@@ -88,6 +85,8 @@ html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;o
   margin:20px auto;
   box-shadow:0 14px 40px rgba(0,0,0,.28);
   animation:floatUp .7s cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+  z-index:1; /* above dark overlay */
 }
 @keyframes floatUp{
   from{transform:translateY(30px);opacity:0}
@@ -177,6 +176,9 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   bottom:18px;
   left:50%;
   transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   width:120px;
   height:42px;
   background:rgba(255,255,255,.5);
@@ -186,32 +188,10 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   box-shadow:0 6px 20px rgba(0,0,0,.35);
   cursor:pointer;
   z-index:99999;
-  display:flex;
-  align-items:center;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
 }
-
-.mode-wrapper{
-  position:relative;
-  display:flex;
-  width:100%;
-  height:100%;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 2px;
-}
-
-.mode-capsule{
-  position:absolute;
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
-  width:50%;
-  height:34px;
-  border-radius:999px;
-  background:rgba(0,0,0,.2);
-  transition:left .4s cubic-bezier(.34,1.56,.64,1), background .4s;
-  z-index:0;
-}
+.mode-pill.active{transform:translateX(-50%) scale(0.95);}
+.mode-pill:hover{transform:scale(1.05);}
 
 .mode-icon{
   width:34px;
@@ -222,23 +202,36 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   border-radius:999px;
   font-size:18px;
   user-select:none;
-  z-index:1;
   transition:all .25s cubic-bezier(.34,1.56,.64,1);
 }
 .mode-icon:hover{transform:scale(1.15)}
 .mode-icon:active{transform:scale(0.85);}
+
+.mode-capsule{
+  position:absolute;
+  top:4px;
+  left:0;
+  width:50%;
+  height:34px;
+  background:rgba(0,0,0,.2);
+  border-radius:999px;
+  transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 </style>
 </head>
 <body>
 
-<!-- ===== BACKGROUND WRAPPER ===== -->
-<div id="bgWrapper">
-  <img src="https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg" alt="background">
-  <div id="darkOverlay"></div>
-</div>
+<!-- ===== DARK OVERLAY BEHIND CONTENT ===== -->
+<div id="darkOverlay"></div>
 
+<!-- ===== STARTUP GLOW ===== -->
 <div id="glowSwipe"></div>
 
+<!-- ===== PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
@@ -247,7 +240,6 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 <div class="container">
 
-<!-- ===== CONTENT ===== -->
 <div class="glass">
 <h1>Welcome to my official website</h1>
 <h4>Shadow Fight 2 Modder</h4>
@@ -320,11 +312,9 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 <!-- ===== DARK/LIGHT MODE PILL ===== -->
 <div class="mode-pill" id="modePill">
-  <div class="mode-wrapper">
-    <div class="mode-capsule"></div>
-    <div class="mode-icon" data-mode="light">☀️</div>
-    <div class="mode-icon" data-mode="dark">🌙</div>
-  </div>
+  <div class="mode-capsule"></div>
+  <div class="mode-icon" data-mode="light">☀️</div>
+  <div class="mode-icon" data-mode="dark">🌙</div>
 </div>
 
 <script>
@@ -341,19 +331,23 @@ function closeOverlay(e){
 }
 
 // ===== DARK/LIGHT MODE =====
-const modePill = document.getElementById('modePill');
-const capsule = modePill.querySelector('.mode-capsule');
-const icons = modePill.querySelectorAll('.mode-icon');
-const darkOverlay = document.getElementById('darkOverlay');
+const modePill=document.getElementById('modePill');
+const capsule=modePill.querySelector('.mode-capsule');
+const icons=modePill.querySelectorAll('.mode-icon');
+const darkOverlay=document.getElementById('darkOverlay');
+let mode='light';
 
 icons.forEach(icon=>{
-  icon.addEventListener('click', ()=>{
-    const mode = icon.dataset.mode;
-    darkOverlay.style.opacity = (mode==='dark'? '1':'0');
-    capsule.style.left = (mode==='dark'?'50%':'0');
-    // bounce animation
-    modePill.style.transform='translateX(-50%) scale(0.95)';
-    setTimeout(()=>modePill.style.transform='translateX(-50%)',200);
+  icon.addEventListener('click',()=>{
+    mode=icon.dataset.mode;
+    document.body.classList.toggle('dark', mode==='dark');
+    // capsule move
+    capsule.style.left=(mode==='dark'?'50%':'0');
+    // overlay background
+    darkOverlay.style.background=(mode==='dark'?'rgba(0,0,0,0.5)':'rgba(0,0,0,0)');
+    // bounce pill
+    modePill.classList.add('active');
+    setTimeout(()=>modePill.classList.remove('active'),200);
   });
 });
 </script>
