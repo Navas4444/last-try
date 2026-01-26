@@ -89,7 +89,6 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 .piece img{width:100%;height:100%;object-fit:cover}
 .piece:hover{transform:scale(1.08)}
 .piece:active{transform:scale(1.15)}
-input{display:none}
 
 /* ===== FULLSCREEN BLUR OVERLAY ===== */
 .overlay{
@@ -101,8 +100,8 @@ input{display:none}
   align-items:center;
   justify-content:center;
   z-index:999999;
+  flex-direction:column;
 }
-input:checked + label + .overlay{display:flex}
 .overlay img{
   max-width:90vw;
   max-height:90vh;
@@ -114,9 +113,6 @@ input:checked + label + .overlay{display:flex}
 
 /* ===== CLOSE BUTTON ===== */
 .close-btn{
-  position:fixed;
-  top:18px;
-  right:18px;
   width:58px;
   height:58px;
   border-radius:50%;
@@ -128,6 +124,7 @@ input:checked + label + .overlay{display:flex}
   align-items:center;
   justify-content:center;
   cursor:pointer;
+  margin-bottom:10px;
   animation:pop .4s cubic-bezier(.34,1.56,.64,1);
 }
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
@@ -135,7 +132,6 @@ input:checked + label + .overlay{display:flex}
 .close-btn:active{transform:scale(.85)}
 </style>
 </head>
-
 <body>
 
 <!-- ===== PILL BAR ===== -->
@@ -184,23 +180,10 @@ input:checked + label + .overlay{display:flex}
 <div class="cake-wrapper">
 <div class="cake-glass">
 <div class="square-cake">
-
-<input type="checkbox" id="i1">
-<label for="i1" class="piece"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i1" class="close-btn">×</label><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i2">
-<label for="i2" class="piece"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i2" class="close-btn">×</label><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i3">
-<label for="i3" class="piece"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i3" class="close-btn">×</label><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i4">
-<label for="i4" class="piece"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i4" class="close-btn">×</label><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
-
+<img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
+<img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
+<img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
+<img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg" class="piece" onclick="openOverlay(this.src)">
 </div>
 </div>
 </div>
@@ -213,5 +196,22 @@ input:checked + label + .overlay{display:flex}
 </div>
 
 </div>
+
+<!-- ===== GLOBAL OVERLAY ===== -->
+<div class="overlay" id="globalOverlay">
+  <div class="close-btn" onclick="closeOverlay()">×</div>
+  <img id="overlayImg" src="">
+</div>
+
+<script>
+function openOverlay(src){
+  document.getElementById('overlayImg').src = src;
+  document.getElementById('globalOverlay').style.display = 'flex';
+}
+function closeOverlay(){
+  document.getElementById('globalOverlay').style.display = 'none';
+  document.getElementById('overlayImg').src = '';
+}
+</script>
 </body>
 </html>
