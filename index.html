@@ -63,31 +63,44 @@
         color: orange;  
     }  
 
-    /* YouTube embed responsive */  
-    .video-container {  
-    .video-wrapper {
+    /* Video container with curved edges */
+.video-wrapper {
   width: 100%;
-  max-width: 800px;
-  aspect-ratio: 16/9;
+  max-width: 840px;
+  margin: 30px auto;
   border-radius: 20px;
   overflow: hidden;
-  margin: 30px auto;
-  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+
+  /* smooth animation */
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease;
 }
 
-.video-wrapper iframe {
+/* Video fills container */
+.video-wrapper video {
   width: 100%;
-  height: 100%;
-  border: 0;
+  height: auto;
+  display: block;
+  border-radius: inherit; /* match container curve */
 }
 
+/* Hover bounce (desktop) */
 @media (hover: hover) {
   .video-wrapper:hover {
     transform: scale(1.03);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25);
   }
 }
+
+/* Press shrink (touch / click) */
 .video-wrapper:active {
   transform: scale(0.97);
+}
+
+/* Optional: remove mobile tap highlight */
+.video-wrapper,
+.video-wrapper video {
+  -webkit-tap-highlight-color: transparent;
 }
 
     /* Points: centered block + left-aligned text */  
@@ -343,7 +356,12 @@ input:checked + label + .overlay {
 
     <!-- YouTube Video Embed -->  
     <div class="video-wrapper">
-  <iframe src="https://www.youtube.com/embed/WQEFYOBmgKw?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
+  <video
+    class="intro-video"
+    src="https://filebin.net/5w34lp18ob0sh9y6/private_mod_intro_v2.mp4"
+    controls
+    playsinline
+  ></video>
     </div>
     <h3 class="mod-title">Mod Info</h3>  
 
@@ -422,6 +440,7 @@ input:checked + label + .overlay {
 
 </body>  
 </html>
+
 
 
 
