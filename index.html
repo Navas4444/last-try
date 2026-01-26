@@ -12,14 +12,15 @@ html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;o
 
 /* ===== BACKGROUND WRAPPER ===== */
 #bgWrapper{
-  position:fixed;inset:0;z-index:-2;
+  position:fixed;
+  inset:0;
+  z-index:-1;
   background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
+  transition:background .5s;
 }
-
-/* ===== DARK MODE BACKGROUND (BEHIND CONTENT) ===== */
 body.dark #bgWrapper{
   background:
-    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
     url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
 }
 
@@ -31,10 +32,10 @@ body.dark #bgWrapper{
   transform:translateX(-50%) rotate(-25deg);
   width:120vw;
   height:40vh;
-  background:linear-gradient(90deg, rgba(198,85,255,.6), rgba(255,128,203,.6));
+  background:linear-gradient(90deg,rgba(198,85,255,.6),rgba(255,128,203,.6));
   filter:blur(50px);
-  z-index:999999;
   pointer-events:none;
+  z-index:999999;
   animation:swipeUp 1s ease-out .2s forwards;
 }
 @keyframes swipeUp{
@@ -45,11 +46,14 @@ body.dark #bgWrapper{
 
 /* ===== TOP PILL ===== */
 .pill-bar{
-  position:fixed;top:12px;left:50%;
+  position:fixed;
+  top:12px;
+  left:50%;
   transform:translateX(-50%);
   width:min(92vw,720px);
   height:56px;
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;
+  align-items:center;
   padding:0 18px;
   background:rgba(255,255,255,.55);
   backdrop-filter:blur(26px);
@@ -62,10 +66,8 @@ body.dark #bgWrapper{
 .pill-icon:active{transform:scale(.85)}
 .pill-text{flex:1;text-align:center}
 
-/* ===== CONTAINER ===== */
+/* ===== CONTENT ===== */
 .container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
-
-/* ===== GLASS ===== */
 .glass{
   background:rgba(255,255,255,.55);
   border-radius:24px;
@@ -73,49 +75,43 @@ body.dark #bgWrapper{
   margin:20px auto;
   box-shadow:0 14px 40px rgba(0,0,0,.28);
 }
-
-/* ===== CUSTOM IMAGE ===== */
-.custom-img-wrapper{display:flex;justify-content:center;margin:20px auto}
+.custom-img-wrapper{display:flex;justify-content:center;margin:20px}
 .custom-img-inner{
   background:rgba(255,255,255,.55);
   padding:10px;
   border-radius:24px;
 }
-.custom-img-inner img{
-  display:block;
-  max-width:100%;
-  border-radius:20px;
-  cursor:pointer;
-  transition:transform .3s;
-}
-.custom-img-inner img:hover{transform:scale(1.05)}
-.custom-img-inner img:active{transform:scale(.95)}
+.custom-img-inner img{max-width:100%;border-radius:20px}
 
-/* ===== VIDEO ===== */
-.video-shell{border-radius:24px;overflow:hidden}
-.intro-video{width:100%;border-radius:24px}
-
-/* ===== GRID ===== */
+/* ===== GALLERY ===== */
 .square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.piece{border-radius:20px;overflow:hidden;cursor:pointer;transition:.3s}
-.piece:hover{transform:scale(1.08)}
+.piece{border-radius:20px;overflow:hidden;cursor:pointer}
 .piece img{width:100%;height:100%;object-fit:cover}
 
 /* ===== OVERLAY ===== */
 .overlay{
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background:rgba(0,0,0,.55);
   backdrop-filter:blur(40px);
   display:none;
-  align-items:center;justify-content:center;
+  align-items:center;
+  justify-content:center;
   z-index:999999;
 }
 .overlay img{max-width:90vw;max-height:80vh;border-radius:26px}
 .close-btn{
-  position:fixed;top:18px;right:18px;
-  width:58px;height:58px;border-radius:50%;
+  position:fixed;
+  top:18px;
+  right:18px;
+  width:58px;
+  height:58px;
+  border-radius:50%;
   background:rgba(255,255,255,.35);
-  font-size:32px;display:flex;align-items:center;justify-content:center;
+  font-size:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   cursor:pointer;
 }
 
@@ -128,42 +124,57 @@ body.dark #bgWrapper{
   width:120px;
   height:42px;
   padding:4px;
-  background:rgba(255,255,255,.5);
-  backdrop-filter:blur(16px);
-  border-radius:999px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  background:rgba(255,255,255,.5);
+  backdrop-filter:blur(16px);
+  border-radius:999px;
   box-shadow:0 6px 20px rgba(0,0,0,.35);
-  cursor:pointer;
   z-index:99999;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
+
+/* ✅ NEVER REMOVE translateX */
 .mode-pill:hover{
   transform:translateX(-50%) scale(1.05);
 }
 .mode-pill.active{
-  transform:translateX(-50%) scale(.95);
+  transform:translateX(-50%) scale(0.95);
 }
+
 .mode-icon{
-  width:34px;height:34px;
-  display:flex;align-items:center;justify-content:center;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
   border-radius:999px;
+  cursor:pointer;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
 }
+.mode-icon:hover{transform:scale(1.15)}
+.mode-icon:active{transform:scale(.85)}
+
 .mode-capsule{
   position:absolute;
-  top:4px;left:0;
-  width:50%;height:34px;
+  top:4px;
+  left:0;
+  width:50%;
+  height:34px;
   background:rgba(0,0,0,.2);
   border-radius:999px;
-  transition:left .5s cubic-bezier(.34,1.56,.64,1);
+  transition:left .5s cubic-bezier(.34,1.56,.64,1),background .5s;
 }
-body.dark .mode-capsule{left:50%;background:rgba(255,255,255,.2)}
+body.dark .mode-capsule{
+  left:50%;
+  background:rgba(255,255,255,.2);
+}
 </style>
 </head>
 
 <body>
-
 <div id="bgWrapper"></div>
 <div id="glowSwipe"></div>
 
@@ -175,65 +186,34 @@ body.dark .mode-capsule{left:50%;background:rgba(255,255,255,.2)}
 </div>
 
 <div class="container">
+  <div class="glass">
+    <h1>Welcome to my official website</h1>
+    <h4>Shadow Fight 2 Modder</h4>
+  </div>
 
-<div class="glass">
-<h1>Welcome to my official website</h1>
-<h4>Shadow Fight 2 Modder</h4>
-</div>
-
-<div class="custom-img-wrapper">
-<div class="custom-img-inner">
-<img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg"
-onclick="alert('You clicked the custom image!')">
-</div>
-</div>
-
-<div class="glass video-shell">
-<video class="intro-video" controls>
-<source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v2.mp4">
-</video>
-</div>
-
-<div class="square-cake">
-<div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
-<div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
-</div>
-
-</div>
-
-<div class="overlay" id="overlay" onclick="closeOverlay(event)">
-<span class="close-btn">×</span>
-<img id="overlay-img">
+  <div class="custom-img-wrapper">
+    <div class="custom-img-inner">
+      <img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg">
+    </div>
+  </div>
 </div>
 
 <div class="mode-pill" id="modePill">
-<div class="mode-capsule"></div>
-<div class="mode-icon">☀️</div>
-<div class="mode-icon">🌙</div>
+  <div class="mode-capsule"></div>
+  <div class="mode-icon" data-mode="light">☀️</div>
+  <div class="mode-icon" data-mode="dark">🌙</div>
 </div>
 
 <script>
-function openOverlay(src){
-  document.getElementById('overlay-img').src=src;
-  document.getElementById('overlay').style.display='flex';
-}
-function closeOverlay(e){
-  if(e.target.id==='overlay'||e.target.classList.contains('close-btn')){
-    document.getElementById('overlay').style.display='none';
-  }
-}
-
 const pill=document.getElementById('modePill');
 const capsule=pill.querySelector('.mode-capsule');
-pill.querySelectorAll('.mode-icon').forEach((icon,i)=>{
+pill.querySelectorAll('.mode-icon').forEach(icon=>{
   icon.onclick=()=>{
-    document.body.classList.toggle('dark',i===1);
-    capsule.style.left=i===1?'50%':'0';
+    document.body.classList.toggle('dark',icon.dataset.mode==='dark');
     pill.classList.add('active');
-    setTimeout(()=>pill.classList.remove('active'),200);
+    setTimeout(()=>pill.classList.remove('active'),180);
   };
 });
 </script>
-
 </body>
 </html>
