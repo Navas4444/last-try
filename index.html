@@ -66,10 +66,9 @@ body{
 /* ===== CONTAINER ===== */
 .container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
 
-/* ===== GLASS ===== */
+/* ===== GLASS SECTIONS WITHOUT BLUR ===== */
 .glass{
   background:rgba(255,255,255,.55);
-  backdrop-filter:blur(20px);
   border-radius:24px;
   padding:18px 16px;
   margin:20px auto;
@@ -109,14 +108,14 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 /* ===== CAKE GRID ===== */
 .cake-wrapper{margin:40px auto}
-.cake-glass{background:rgba(255,255,255,.45);backdrop-filter:blur(18px);border-radius:26px;padding:14px}
+.cake-glass{background:rgba(255,255,255,.45);border-radius:26px;padding:14px} /* removed blur */
 .square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .piece{border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
 .piece img{width:100%;height:100%;object-fit:cover}
 .piece:hover{transform:scale(1.08)}
 .piece:active{transform:scale(1.15)}
 
-/* ===== FULLSCREEN OVERLAY ===== */
+/* ===== FULLSCREEN OVERLAY BLUR ===== */
 .overlay{
   position:fixed;top:0;left:0;width:100%;height:100%;
   background:rgba(0,0,0,.55);
@@ -128,7 +127,7 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 }
 .overlay img{max-width:90vw;max-height:80vh;border-radius:26px;box-shadow:0 30px 70px rgba(0,0,0,.6);animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);object-fit:contain}
 @keyframes zoomIn{from{transform:scale(.7)}to{transform:scale(1)}}
-.close-btn{position:fixed;top:18px;right:18px;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.35);backdrop-filter:blur(14px);color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
+.close-btn{position:fixed;top:18px;right:18px;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.35);color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;animation:pop .4s cubic-bezier(.34,1.56,.64,1);cursor:pointer}
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 .close-btn:hover{transform:scale(1.2)}
 .close-btn:active{transform:scale(.85)}
