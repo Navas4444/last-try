@@ -16,13 +16,13 @@ body{
 }
 
 /* ===== DARK MODE OVERLAY ===== */
-body.dark::before{
-  content:'';
+#darkOverlay{
   position:fixed;top:0;left:0;width:100%;height:100%;
   background:rgba(0,0,0,0.5);
-  z-index:0; /* below content */
   pointer-events:none;
-  transition:background 0.5s;
+  opacity:0;
+  transition:opacity 0.5s ease;
+  z-index:0; /* behind content */
 }
 
 /* ===== STARTUP GLOW SWIPE ===== */
@@ -198,8 +198,9 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 .mode-capsule{
   position:absolute;
-  top:4px;
   left:0;
+  top:50%;
+  transform:translateY(-50%);
   width:50%;
   height:34px;
   border-radius:999px;
@@ -207,6 +208,7 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   transition:left .4s cubic-bezier(.34,1.56,.64,1), background .4s;
   z-index:0;
 }
+body.dark #darkOverlay{opacity:1;}
 body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 
 .mode-icon{
@@ -227,10 +229,11 @@ body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 </head>
 <body>
 
-<!-- ===== STARTUP GLOW ===== -->
+<!-- ===== DARK OVERLAY ===== -->
+<div id="darkOverlay"></div>
+
 <div id="glowSwipe"></div>
 
-<!-- ===== PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
@@ -335,16 +338,16 @@ function closeOverlay(e){
 const modePill = document.getElementById('modePill');
 const capsule = modePill.querySelector('.mode-capsule');
 const icons = modePill.querySelectorAll('.mode-icon');
+const darkOverlay = document.getElementById('darkOverlay');
 
 icons.forEach(icon=>{
-  icon.addEventListener('click',()=>{
+  icon.addEventListener('click', ()=>{
     const mode = icon.dataset.mode;
     document.body.classList.toggle('dark', mode==='dark');
-
-    // move capsule
     capsule.style.left = (mode==='dark' ? '50%' : '0');
+    darkOverlay.style.opacity = (mode==='dark'? '1':'0');
 
-    // small bounce animation for pill
+    // bounce animation
     modePill.animate([
       { transform: 'translateX(-50%) scale(1)' },
       { transform: 'translateX(-50%) scale(0.95)' },
