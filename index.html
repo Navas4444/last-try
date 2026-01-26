@@ -168,22 +168,22 @@ GLOW SWIPE ANIMATION
 ===================== */
 #glowSwipe {
   position: fixed;
-  bottom: -30%;
+  bottom: -40%; /* start off-screen */
   left: 50%;
   transform: translateX(-50%) rotate(-25deg);
-  width: 80vw;
-  height: 25vh;
+  width: 120vw; /* wider for dramatic effect */
+  height: 40vh; /* taller glow */
   background: linear-gradient(90deg, rgba(198,85,255,0.6), rgba(255,128,203,0.6));
-  filter: blur(40px);
+  filter: blur(50px);
   z-index: 9999999;
   pointer-events: none;
-  animation: swipeUp 1.6s ease-out 0.3s forwards;
+  animation: swipeUpFull 2s ease-out 0.3s forwards;
 }
 
-@keyframes swipeUp {
-  0% { bottom: -30%; opacity: 0; }
-  20% { opacity: 1; }
-  100% { bottom: 70%; opacity: 0; }
+@keyframes swipeUpFull {
+  0% { bottom: -40%; opacity: 0; }
+  15% { opacity: 1; }
+  100% { bottom: 110%; opacity: 0; } /* move all the way past the top */
 }
 </style>
 </head>
@@ -265,3 +265,4 @@ be played using virtual machines or emulators.</p>
 </div>
 </body>
 </html>
+
