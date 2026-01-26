@@ -168,22 +168,40 @@ GLOW SWIPE ANIMATION
 ===================== */
 #glowSwipe {
   position: fixed;
-  bottom: -40%; /* start off-screen */
+  bottom: -50%; /* start off-screen bottom */
   left: 50%;
   transform: translateX(-50%) rotate(-25deg);
-  width: 120vw; /* wider for dramatic effect */
-  height: 40vh; /* taller glow */
-  background: linear-gradient(90deg, rgba(198,85,255,0.6), rgba(255,128,203,0.6));
-  filter: blur(50px);
+  width: 140vw;  /* wider for dramatic effect */
+  height: 50vh;  /* taller glow */
+  background: linear-gradient(90deg, rgba(198,85,255,0.4), rgba(255,128,203,0.4), rgba(198,85,255,0.4));
+  filter: blur(60px);
   z-index: 9999999;
   pointer-events: none;
-  animation: swipeUpFull 2s ease-out 0.3s forwards;
+  animation: swipeUpGem 2.2s ease-out 0.3s forwards;
 }
 
-@keyframes swipeUpFull {
-  0% { bottom: -40%; opacity: 0; }
+/* Real-time glow effect using a pseudo element */
+#glowSwipe::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,0,255,0.3), rgba(255,128,203,0.3));
+  filter: blur(90px);
+  opacity: 0.6;
+  animation: flicker 0.3s infinite alternate;
+}
+
+@keyframes swipeUpGem {
+  0% { bottom: -50%; opacity: 0; }
   15% { opacity: 1; }
-  100% { bottom: 110%; opacity: 0; } /* move all the way past the top */
+  100% { bottom: 110%; opacity: 0; }
+}
+
+/* Flicker / real-time glow */
+@keyframes flicker {
+  0% { filter: blur(70px); opacity: 0.5; }
+  50% { filter: blur(100px); opacity: 0.8; }
+  100% { filter: blur(80px); opacity: 0.6; }
 }
 </style>
 </head>
@@ -265,4 +283,5 @@ be played using virtual machines or emulators.</p>
 </div>
 </body>
 </html>
+
 
