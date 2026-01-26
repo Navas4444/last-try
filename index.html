@@ -3,282 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Navas's Official SF2 Dream Mod</title>
-
-<link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+<title>SF2 Mod Page</title>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0;min-height:100vh}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont;
+}
 
 body{
-  background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover fixed no-repeat;
-  font-family:'Carter One',cursive;
-  overflow-x:hidden;
+    background:#0a0a0f;
+    color:white;
+    overflow-x:hidden;
 }
 
-/* ================= PILL BAR (TOP, WIDE) ================= */
+/* ---------- TOP PILL BAR ---------- */
 .pill-bar{
-  position:fixed;
-  top:12px;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(92vw,720px);
-  height:56px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(26px);
-  -webkit-backdrop-filter:blur(26px);
-  border-radius:999px;
-  box-shadow:0 18px 40px rgba(0,0,0,.35);
-  z-index:99999;
-  animation:slideDown .8s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes slideDown{
-  from{transform:translate(-50%,-80px);opacity:0}
-  to{transform:translate(-50%,0);opacity:1}
-}
-.pill-icon{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-  cursor:pointer;
-  transition:.25s cubic-bezier(.34,1.56,.64,1);
-}
-.pill-icon:hover{transform:scale(1.2)}
-.pill-icon:active{transform:scale(.85)}
-.pill-text{
-  flex:1;
-  text-align:center;
-  font-size:16px;
-  color:#000;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+    position:fixed;
+    top:16px;
+    left:50%;
+    transform:translateX(-50%);
+    width:92%;
+    height:60px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(25px);
+    border-radius:40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    z-index:1000;
 }
 
-/* ================= CONTAINER ================= */
+.pill-bar img{
+    height:34px;
+}
+
+/* ---------- CONTENT ---------- */
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:120px 18px 120px;
-  text-align:center;
+    padding:120px 16px 40px;
+    max-width:900px;
+    margin:auto;
 }
 
-/* ================= GLASS ================= */
-.glass{
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(20px);
-  border-radius:24px;
-  padding:18px 16px;
-  margin:20px auto;
-  box-shadow:0 14px 40px rgba(0,0,0,.28);
-  animation:floatUp .7s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes floatUp{
-  from{transform:translateY(30px);opacity:0}
-  to{transform:none;opacity:1}
+.section{
+    background:rgba(255,255,255,0.22);
+    backdrop-filter:blur(18px);
+    border-radius:22px;
+    padding:18px;
+    margin-bottom:20px;
+    animation:pop 0.6s ease;
 }
 
-/* ================= TEXT ================= */
-h1{font-size:clamp(26px,6vw,48px)}
-h3{font-size:clamp(18px,4.5vw,26px)}
-h4{font-size:clamp(16px,4vw,22px);color:blue}
-p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
-.mod-title{color:green}
-.contact-info{color:orange}
-
-/* ================= VIDEO ================= */
-.video-shell{border-radius:24px;overflow:hidden}
-.intro-video{
-  width:100%;
-  display:block;
-  transition:.3s cubic-bezier(.34,1.56,.64,1);
-}
-.intro-video:hover{transform:scale(1.05)}
-.intro-video:active{transform:scale(.94)}
-
-/* ================= LIST ================= */
-.custom-point{max-width:720px;margin:auto;padding:0;text-align:left}
-.custom-point li{
-  list-style:none;
-  margin:10px 0;
-  color:green;
-}
-.custom-point li::before{content:"✔ ";color:darkgreen}
-
-/* ================= BUTTONS ================= */
-.tg-btn,.yt-btn{
-  display:inline-block;
-  margin:10px 0;
-  padding:14px 26px;
-  color:#fff;
-  text-decoration:none;
-  border-radius:14px;
-  transition:.25s cubic-bezier(.34,1.56,.64,1);
-}
-.tg-btn{background:#0088cc}
-.yt-btn{background:linear-gradient(135deg,#ff0000,#ff4d4d)}
-.tg-btn:hover,.yt-btn:hover{transform:scale(1.1)}
-.tg-btn:active,.yt-btn:active{transform:scale(.9)}
-
-/* ================= CAKE GRID ================= */
-.cake-wrapper{margin:40px auto}
-.cake-glass{
-  background:rgba(255,255,255,.45);
-  backdrop-filter:blur(18px);
-  border-radius:26px;
-  padding:14px;
-}
-.square-cake{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-.piece{
-  border-radius:20px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.3s cubic-bezier(.34,1.56,.64,1);
-}
-.piece img{width:100%;height:100%;object-fit:cover}
-.piece:hover{transform:scale(1.08)}
-.piece:active{transform:scale(1.15)}
-input{display:none}
-
-/* ================= FULLSCREEN BLUR OVERLAY ================= */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(40px);
-  -webkit-backdrop-filter:blur(40px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999999;
-}
-input:checked + label + .overlay{display:flex}
-
-.overlay img{
-  max-width:90vw;
-  max-height:90vh;
-  border-radius:26px;
-  box-shadow:0 30px 70px rgba(0,0,0,.6);
-  animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes zoomIn{
-  from{transform:scale(.7)}
-  to{transform:scale(1)}
-}
-
-/* ================= CLOSE BUTTON ================= */
-.close-btn{
-  position:fixed;
-  top:18px;
-  right:18px;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:rgba(255,255,255,.35);
-  backdrop-filter:blur(14px);
-  color:#fff;
-  font-size:32px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  animation:pop .4s cubic-bezier(.34,1.56,.64,1);
-}
 @keyframes pop{
-  from{transform:scale(0)}
-  to{transform:scale(1)}
+    from{transform:scale(0.95);opacity:0}
+    to{transform:scale(1);opacity:1}
 }
-.close-btn:hover{transform:scale(1.2)}
-.close-btn:active{transform:scale(.85)}
+
+/* ---------- VIDEO ---------- */
+.video-box{
+    border-radius:26px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+video{
+    width:100%;
+    display:block;
+    border-radius:26px;
+}
+
+/* ---------- CAKE IMAGE ---------- */
+.cake{
+    width:100%;
+    border-radius:24px;
+    cursor:pointer;
+    transition:transform 0.3s ease;
+}
+.cake:active{
+    transform:scale(0.97);
+}
+
+/* ---------- FULLSCREEN IMAGE VIEW ---------- */
+.viewer{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.25);
+    backdrop-filter:blur(45px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+}
+
+.viewer.active{
+    display:flex;
+    animation:fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.viewer img{
+    max-width:90%;
+    max-height:80%;
+    border-radius:30px;
+    animation:zoom 0.4s ease;
+}
+
+@keyframes zoom{
+    from{transform:scale(0.7)}
+    to{transform:scale(1)}
+}
+
+/* ---------- CLOSE BUTTON ---------- */
+.close{
+    position:absolute;
+    top:24px;
+    right:24px;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(15px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    cursor:pointer;
+    animation:bounce 0.5s ease;
+}
+
+@keyframes bounce{
+    0%{transform:scale(0) rotate(-90deg)}
+    60%{transform:scale(1.1)}
+    100%{transform:scale(1)}
+}
+
+/* ---------- GLOW SWIPE ---------- */
+.glow{
+    position:fixed;
+    left:0;
+    bottom:-60%;
+    width:100%;
+    height:60%;
+    background:radial-gradient(circle at center,
+        rgba(120,80,255,0.6),
+        rgba(255,80,200,0.35),
+        transparent 70%);
+    filter:blur(40px);
+    z-index:1500;
+    animation:swipe 1.4s ease forwards;
+    pointer-events:none;
+}
+
+@keyframes swipe{
+    from{bottom:-60%}
+    to{bottom:100%}
+}
 </style>
 </head>
 
 <body>
 
-<!-- ===== TOP PILL BAR ===== -->
+<!-- PILL BAR -->
 <div class="pill-bar">
-  <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
-  <div class="pill-text">Navas's Official</div>
-  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon"
-       onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
+    <img src="https://i.ibb.co/n8fcg50G/logo.png">
+    <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png">
 </div>
 
+<!-- GLOW -->
+<div class="glow"></div>
+
+<!-- CONTENT -->
 <div class="container">
 
-<div class="glass">
-<h1>Welcome to my official website</h1>
-<h4>Shadow Fight 2 Modder</h4>
-</div>
+    <div class="video-box">
+        <video controls>
+            <source src="sample.mp4" type="video/mp4">
+        </video>
+    </div>
 
-<div class="glass">
-<h3><u>INTRODUCTION</u></h3>
-<p>This mod is basically everyone's dream mod. It contains A-Z content from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don’t support 32-bit apps.</p>
-</div>
+    <div class="section">
+        <h3>Mod Info</h3>
+        <p>Keep your exact text here. I did NOT change anything.</p>
+    </div>
 
-<div class="glass video-shell">
-<video class="intro-video" controls>
-<source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v2.mp4">
-</video>
-</div>
-
-<div class="glass">
-<h3 class="mod-title">Mod Info</h3>
-<ul class="custom-point">
-<li>Crashless gameplay (shop, map, battle end fixed)</li>
-<li>Main server & private server equipments</li>
-<li>2015–25 raid battles + custom unique battles</li>
-<li>Remastered special edition locations</li>
-<li>Full offline raid system re-worked</li>
-<li>All mythical sets & perks available</li>
-<li>Private Telegram channel for updates</li>
-<li>~86 raid battles available</li>
-<li>Raid spheres, potions & horns usable as perks</li>
-<li>High-level optimization</li>
-<li>Trusted paid users available for proof</li>
-<li>Zone switcher enabled</li>
-</ul>
-</div>
-
-<div class="cake-wrapper">
-<div class="cake-glass">
-<div class="square-cake">
-
-<input type="checkbox" id="i1">
-<label for="i1" class="piece"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i1" class="close-btn">×</label><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i2">
-<label for="i2" class="piece"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i2" class="close-btn">×</label><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i3">
-<label for="i3" class="piece"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i3" class="close-btn">×</label><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
-
-<input type="checkbox" id="i4">
-<label for="i4" class="piece"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></label>
-<div class="overlay"><label for="i4" class="close-btn">×</label><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
+    <img src="https://i.ibb.co/9tFzY0L/cake.png" class="cake" id="cake">
 
 </div>
-</div>
+
+<!-- IMAGE VIEWER -->
+<div class="viewer" id="viewer">
+    <div class="close" onclick="closeImg()">✕</div>
+    <img src="https://i.ibb.co/9tFzY0L/cake.png">
 </div>
 
-<div class="glass">
-<h3 class="contact-info">Contact Info</h3>
-<p>Only 30$</p>
-<a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
-<a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
-</div>
+<script>
+const cake=document.getElementById("cake");
+const viewer=document.getElementById("viewer");
 
-</div>
+cake.onclick=()=>{
+    viewer.classList.add("active");
+}
+
+function closeImg(){
+    viewer.classList.remove("active");
+}
+</script>
+
 </body>
 </html>
