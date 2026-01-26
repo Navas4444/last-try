@@ -120,9 +120,206 @@
         background-color: #00a2e8;  
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
     }  
+.pill-bar {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+
+  width: min(92vw, 520px);
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 14px;
+
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+
+/* Icons */
+.pill-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.left {
+  margin-left: -10px;
+}
+
+.right {
+  margin-right: -10px;
+}
+
+/* Center text */
+.pill-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.75);
+  text-align: center;
+  font-family: 'Carter One';
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  flex: 1;
+  margin: 0 12px;
+}
+
+
+/* CENTER */
+.cake-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CAKE */
+.square-cake {
+  width: min(90vw, 320px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 6px;
+}
+
+/* PIECES */
+.piece {
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.piece img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* HIDE CHECKBOX */
+input {
+  display: none;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  z-index: 999999;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+/* IMAGE IN OVERLAY */
+.overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+
+  color: #fff;              /* WHITE X */
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  overflow: hidden;         /* IMPORTANT for ripple */
+
+  transition: box-shadow 0.25s ease;
+}
+.close-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+
+  transform: scale(0);
+  opacity: 0;
+}
+@media (hover: hover) {
+  .close-btn:hover::after {
+    animation: ripple 0.6s ease-out;
+  }
+}
+.close-btn:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+/* SHOW OVERLAY */
+input:checked + label + .overlay {
+  display: flex;
+}
+.piece {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease;
+}
+@media (hover: hover) {
+  .close-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  }
+}
+.close-btn:active {
+  transform: scale(1.2);
+}
+
+@media (hover: hover) {
+  .piece:hover {
+    transform: scale(1.05);
+  }
+}
+.piece:active {
+  transform: scale(1.08);
+}
+.piece:hover,
+.piece:active {
+  box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+}
+
 </style>
 
 </head>  <body>  
+<div class="pill-bar">
+  <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon left" alt="left" />
+  <span class="pill-text">Navas's Official</span>
+  <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon right" alt="right" />
+</div>
+
     <div class="container">  
         <h1>Welcome to my official website</h1>  
         <h4>Shadow Fight 2 Modder</h4>  <h3><u>INTRODUCTION</u></h3>  
@@ -158,6 +355,54 @@
         <li>Trusted paid users available for proof</li>  
         <li>Zone switcher enabled</li>  
     </ul>  
+    
+   <div class="cake-wrapper">
+  <div class="square-cake">
+
+    <!-- IMAGE 1 -->
+    <input type="checkbox" id="i1">
+    <label for="i1" class="piece">
+      <img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg">
+    </label>
+    <label for="i1" class="overlay">
+      <span class="close-btn">×</span>
+      <img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg">
+    </label>
+
+    <!-- IMAGE 2 -->
+    <input type="checkbox" id="i2">
+    <label for="i2" class="piece">
+      <img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg">
+    </label>
+    <label for="i2" class="overlay">
+      <span class="close-btn">×</span>
+      <img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg">
+    </label>
+
+    <!-- IMAGE 3 -->
+    <input type="checkbox" id="i3">
+    <label for="i3" class="piece">
+      <img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg">
+    </label>
+    <label for="i3" class="overlay">
+      <span class="close-btn">×</span>
+      <img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg">
+    </label>
+
+    <!-- IMAGE 4 -->
+    <input type="checkbox" id="i4">
+    <label for="i4" class="piece">
+      <img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg">
+    </label>
+    <label for="i4" class="overlay">
+      <span class="close-btn">×</span>
+      <img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg">
+    </label>
+
+  </div>
+</div>
+
+
 
     <h3 class="contact-info">Contact Info</h3>  
     <p>Only 30$</p>  
@@ -171,7 +416,6 @@
 
 </body>  
 </html>
-
 
 
 
