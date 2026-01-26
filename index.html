@@ -63,43 +63,45 @@
         color: orange;  
     }  
 
-    /* Video container with curved edges */
-.video-wrapper {
-/* Video container with curved edges + animation */
+    /* SECTION keeps spacing stable */
+.video-section {
+  margin: 30px auto;
+  display: block;
+}
+
+/* SHELL controls size & rounding */
 .video-shell {
   width: 100%;
   max-width: 840px;
-  margin: 30px auto;
+  margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
+}
 
-  /* animation */
+/* VIDEO gets animated — NOT the layout */
+.intro-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: black;
+  border-radius: inherit;
+
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.25s ease;
 }
 
-/* Ensure video fills container */
-.video-shell video {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: inherit;
-  background: black; /* prevents flash before play */
-}
-
 /* Hover bounce (desktop) */
 @media (hover: hover) {
-  .video-shell:hover {
+  .intro-video:hover {
     transform: scale(1.04);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.28);
   }
 }
 
-/* Press shrink (touch) */
-.video-shell:active {
+/* Touch feedback (mobile) */
+.intro-video:active {
   transform: scale(0.96);
 }
-
     /* Points: centered block + left-aligned text */  
     .custom-point {  
         list-style: none;  
@@ -352,17 +354,17 @@ input:checked + label + .overlay {
     </p>  
 
     <!-- YouTube Video Embed -->  
-    <div class="video-shell">
-  <video
-    class="intro-video"
-    controls
-    preload="metadata"
-    playsinline
-  >
-    <source src="https://d3v55qvjb2v012.cloudfront.net/CBXu/2026/01/26/07/36/cOVOizn3oAO/sc.mp4?&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kM3Y1NXF2amIydjAxMi5jbG91ZGZyb250Lm5ldC9DQlh1LzIwMjYvMDEvMjYvMDcvMzYvY09WT2l6bjNvQU8vc2MubXA0PyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2OTQxNTQ1OH19fV19&Signature=dpn5pgcVZ1IwZY9bKx8byWoXbsgcwEJ2PE24weXLZZ0aOGsyvpssXOtKue1ovw695He6ekyMErE-dtkXoNhdxlIKBezBpHjCHeIXCbIGwU-YxbK0qlf3qoytQozhr6o1mxamQt0gD67OlkZmdnan5lDaUj7WF2GRWHQ0Cie0QvY_&Key-Pair-Id=APKAI4E2RN57D46ONMEQ" 
-            type="video/mp4">
-    Your browser doesn’t support HTML5 video.
-  </video>
+    <div class="video-section">
+  <div class="video-shell">
+    <video
+      class="intro-video"
+      controls
+      preload="metadata"
+      playsinline
+    >
+      <source src="https://d3v55qvjb2v012.cloudfront.net/CBXu/2026/01/26/07/36/cOVOizn3oAO/sc.mp4?&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kM3Y1NXF2amIydjAxMi5jbG91ZGZyb250Lm5ldC9DQlh1LzIwMjYvMDEvMjYvMDcvMzYvY09WT2l6bjNvQU8vc2MubXA0PyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2OTQxNTQ1OH19fV19&Signature=dpn5pgcVZ1IwZY9bKx8byWoXbsgcwEJ2PE24weXLZZ0aOGsyvpssXOtKue1ovw695He6ekyMErE-dtkXoNhdxlIKBezBpHjCHeIXCbIGwU-YxbK0qlf3qoytQozhr6o1mxamQt0gD67OlkZmdnan5lDaUj7WF2GRWHQ0Cie0QvY_&Key-Pair-Id=APKAI4E2RN57D46ONMEQ" type="video/mp4">
+    </video>
+  </div>
     </div>
     <h3 class="mod-title">Mod Info</h3>  
 
@@ -441,6 +443,7 @@ input:checked + label + .overlay {
 
 </body>  
 </html>
+
 
 
 
