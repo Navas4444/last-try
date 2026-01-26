@@ -8,11 +8,21 @@
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}
-html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;overflow-x:hidden}
+html,body{margin:0;padding:0;min-height:100vh;font-family:'Carter One',cursive;overflow-x:hidden;transition:background 0.5s}
 
 /* ===== BACKGROUND ===== */
 body{
   background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover fixed no-repeat;
+}
+
+/* ===== DARK MODE OVERLAY ===== */
+body.dark::before{
+  content:'';
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.5);
+  z-index:5000;
+  pointer-events:none;
+  transition:background 0.5s;
 }
 
 /* ===== STARTUP GLOW SWIPE ===== */
@@ -66,7 +76,7 @@ body{
 /* ===== CONTAINER ===== */
 .container{max-width:900px;margin:auto;padding:120px 18px 120px;text-align:center}
 
-/* ===== GLASS SECTIONS WITHOUT BLUR ===== */
+/* ===== GLASS SECTIONS ===== */
 .glass{
   background:rgba(255,255,255,.55);
   border-radius:24px;
@@ -132,14 +142,14 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 .close-btn:hover{transform:scale(1.2)}
 .close-btn:active{transform:scale(.85)}
 
-/* ===== CUSTOM INTERACTIVE IMAGE BELOW WELCOME ===== */
+/* ===== CUSTOM IMAGE BELOW WELCOME ===== */
 .custom-img-wrapper{
   display:flex;
-  justify-content:center;       /* horizontal centering */
+  justify-content:center; 
   margin:20px auto;
 }
 .custom-img-inner{
-  display:inline-block;         /* wrapper adapts exactly to image size */
+  display:inline-block; 
   background:rgba(255,255,255,.55);
   border-radius:24px;
   padding:10px;
@@ -157,14 +167,60 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 .custom-img-inner img:hover{transform:scale(1.05)}
 .custom-img-inner img:active{transform:scale(0.95)}
 
+/* ===== BOTTOM DARK/LIGHT MODE PILL ===== */
+.mode-pill{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:120px;
+  height:42px;
+  background:rgba(255,255,255,.5);
+  backdrop-filter:blur(16px);
+  border-radius:999px;
+  padding:4px;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  cursor:pointer;
+  z-index:99999;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+}
+.mode-pill.active{transform:translateX(-50%) scale(0.95);}
+.mode-pill:hover{transform:scale(1.05);}
+
+.mode-icon{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  font-size:18px;
+  user-select:none;
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+}
+.mode-icon:hover{transform:scale(1.15)}
+.mode-icon:active{transform:scale(0.85);}
+
+.mode-capsule{
+  position:absolute;
+  width:50%;
+  height:34px;
+  background:rgba(0,0,0,.2);
+  border-radius:999px;
+  top:4px;
+  left:0;
+  transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;
+}
+body.dark .mode-capsule{left:50%; background:rgba(255,255,255,.2);}
 </style>
 </head>
 <body>
 
-<!-- ===== STARTUP GLOW ===== -->
 <div id="glowSwipe"></div>
 
-<!-- ===== PILL BAR ===== -->
 <div class="pill-bar">
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
@@ -178,7 +234,6 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 <h4>Shadow Fight 2 Modder</h4>
 </div>
 
-<!-- ===== CUSTOM IMAGE BELOW WELCOME ===== -->
 <div class="custom-img-wrapper">
   <div class="custom-img-inner">
     <img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg" 
@@ -244,6 +299,13 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   <img id="overlay-img" src="">
 </div>
 
+<!-- ===== DARK/LIGHT MODE PILL ===== -->
+<div class="mode-pill" id="modePill">
+  <div class="mode-capsule"></div>
+  <div class="mode-icon" data-mode="light">☀️</div>
+  <div class="mode-icon" data-mode="dark">🌙</div>
+</div>
+
 <script>
 function openOverlay(src){
   const overlay=document.getElementById('overlay');
@@ -256,6 +318,25 @@ function closeOverlay(e){
     document.getElementById('overlay').style.display='none';
   }
 }
+
+// ===== DARK/LIGHT MODE =====
+const modePill=document.getElementById('modePill');
+const capsule=modePill.querySelector('.mode-capsule');
+const icons=modePill.querySelectorAll('.mode-icon');
+let mode='light';
+
+icons.forEach(icon=>{
+  icon.addEventListener('click',()=>{
+    mode='light';
+    if(icon.dataset.mode==='dark') mode='dark';
+    document.body.classList.toggle('dark', mode==='dark');
+    // capsule move
+    capsule.style.left=(mode==='dark'?'50%':'0');
+    // bounce pill
+    modePill.classList.add('active');
+    setTimeout(()=>modePill.classList.remove('active'),200);
+  });
+});
 </script>
 
 </body>
