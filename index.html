@@ -65,38 +65,39 @@
 
     /* Video container with curved edges */
 .video-wrapper {
+/* Video container with curved edges + animation */
+.video-shell {
   width: 100%;
   max-width: 840px;
   margin: 30px auto;
   border-radius: 20px;
   overflow: hidden;
 
-  transition: transform 0.35s cubic-bezier(0.22, 1.61, 0.36, 1),
-              box-shadow 0.35s ease;
+  /* animation */
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease;
 }
 
-.video-wrapper video {
+/* Ensure video fills container */
+.video-shell video {
   width: 100%;
   height: auto;
   display: block;
   border-radius: inherit;
-  background: black; /* prevents flash */
+  background: black; /* prevents flash before play */
 }
 
+/* Hover bounce (desktop) */
 @media (hover: hover) {
-  .video-wrapper:hover {
-    transform: scale(1.05);
-    box-shadow: 0 18px 35px rgba(0,0,0,0.3);
+  .video-shell:hover {
+    transform: scale(1.04);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
   }
 }
 
-.video-wrapper:active {
-  transform: scale(0.95);
-}
-
-.video-wrapper,
-.video-wrapper video {
-  -webkit-tap-highlight-color: transparent;
+/* Press shrink (touch) */
+.video-shell:active {
+  transform: scale(0.96);
 }
 
     /* Points: centered block + left-aligned text */  
@@ -351,16 +352,16 @@ input:checked + label + .overlay {
     </p>  
 
     <!-- YouTube Video Embed -->  
-    <div class="video-wrapper">
+    <div class="video-shell">
   <video
     class="intro-video"
     controls
     preload="metadata"
-    muted
     playsinline
   >
-    <source src="https://filebin.net/5w34lp18ob0sh9y6/private_mod_intro_v2.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    <source src="https://d3v55qvjb2v012.cloudfront.net/CBXu/2026/01/26/07/36/cOVOizn3oAO/sc.mp4?&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kM3Y1NXF2amIydjAxMi5jbG91ZGZyb250Lm5ldC9DQlh1LzIwMjYvMDEvMjYvMDcvMzYvY09WT2l6bjNvQU8vc2MubXA0PyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2OTQxNTQ1OH19fV19&Signature=dpn5pgcVZ1IwZY9bKx8byWoXbsgcwEJ2PE24weXLZZ0aOGsyvpssXOtKue1ovw695He6ekyMErE-dtkXoNhdxlIKBezBpHjCHeIXCbIGwU-YxbK0qlf3qoytQozhr6o1mxamQt0gD67OlkZmdnan5lDaUj7WF2GRWHQ0Cie0QvY_&Key-Pair-Id=APKAI4E2RN57D46ONMEQ" 
+            type="video/mp4">
+    Your browser doesn’t support HTML5 video.
   </video>
     </div>
     <h3 class="mod-title">Mod Info</h3>  
@@ -440,6 +441,7 @@ input:checked + label + .overlay {
 
 </body>  
 </html>
+
 
 
 
