@@ -168,43 +168,45 @@ GLOW SWIPE ANIMATION
 ===================== */
 #glowSwipe {
   position: fixed;
-  bottom: -50%;           /* start off-screen */
+  bottom: -60%;         /* start well below screen */
   left: 50%;
   transform: translateX(-50%) rotate(-15deg);
-  width: 300vw;           /* extra wide for diagonal */
-  height: 30vh;
-  background: rgba(138,43,226,0.3); /* violet base */
-  backdrop-filter: blur(50px);      /* REAL TIME BLUR */
-  -webkit-backdrop-filter: blur(50px); 
-  mix-blend-mode: screen;           /* glow effect */
+  width: 400vw;         /* very wide for streak effect */
+  height: 50vh;
+  background: radial-gradient(circle, rgba(138,43,226,0.3), rgba(255,20,147,0));
   border-radius: 50%;
+  
+  backdrop-filter: blur(50px);      /* REAL blur behind content */
+  -webkit-backdrop-filter: blur(50px);
+  mix-blend-mode: screen;           /* makes glow blend naturally */
+  
   z-index: 999999;
   pointer-events: none;
-  animation: glowSwipeUp 4s ease-out forwards;
+
+  animation: swipeUp 4s ease-out forwards;
 }
 
-/* Flicker for more glow variation */
+/* Flickering for dynamic glow */
 #glowSwipe::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,20,147,0.2); /* pink overlay */
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
   border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,255,0.2), rgba(0,0,255,0));
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  mix-blend-mode: screen;
   opacity: 0.7;
-  animation: glowFlicker 0.4s infinite alternate;
+  animation: flicker 0.5s infinite alternate;
 }
 
-/* Swipe animation */
-@keyframes glowSwipeUp {
-  0% { bottom: -50%; opacity: 0; }
-  10% { opacity: 0.8; }
+@keyframes swipeUp {
+  0% { bottom: -60%; opacity: 0; }
+  10% { opacity: 0.9; }
   100% { bottom: 120%; opacity: 0; }
 }
 
-/* Flicker animation */
-@keyframes glowFlicker {
+@keyframes flicker {
   0% { opacity: 0.5; }
   50% { opacity: 0.8; }
   100% { opacity: 0.6; }
@@ -289,6 +291,7 @@ be played using virtual machines or emulators.</p>
 </div>
 </body>
 </html>
+
 
 
 
