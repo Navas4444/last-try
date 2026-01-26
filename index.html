@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Navas's Official SF2 Dream Mod</title>
+
 <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
 
 <style>
@@ -19,8 +20,10 @@ html,body{
   min-height:100vh;
   font-family:'Carter One',cursive;
   overflow-x:hidden;
+  transition:background 0.5s;
 }
 
+/* ===== BACKGROUND WRAPPER ===== */
 /* ===== BACKGROUND WRAPPER ===== */
 #bgWrapper{
   position:fixed;
@@ -37,14 +40,14 @@ html,body{
   inset:0;
   background:rgba(0,0,0,0.55);
   opacity:0;
-  transition:opacity 0.1s ease-in-out;
+  transition:opacity 0.1s ease-in-out; /* 👈 ultra smooth */
   pointer-events:none;
 }
 
+/* dark mode fade-in */
 body.dark #bgWrapper::after{
   opacity:1;
 }
-
 /* ===== STARTUP GLOW SWIPE ===== */
 #glowSwipe{
   position:fixed;
@@ -53,11 +56,7 @@ body.dark #bgWrapper::after{
   transform:translateX(-50%) rotate(-25deg);
   width:120vw;
   height:40vh;
-  background:linear-gradient(
-    90deg,
-    rgba(198,85,255,0.6),
-    rgba(255,128,203,0.6)
-  );
+  background:linear-gradient(90deg, rgba(198,85,255,0.6), rgba(255,128,203,0.6));
   filter:blur(50px);
   z-index:999999;
   pointer-events:none;
@@ -123,7 +122,7 @@ body.dark #bgWrapper::after{
   text-align:center
 }
 
-/* ===== GLASS SECTIONS ===== */
+/* ===== GLASS ===== */
 .glass{
   background:rgba(255,255,255,.55);
   border-radius:24px;
@@ -191,27 +190,15 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 
 /* ===== CAKE GRID ===== */
 .cake-wrapper{margin:40px auto}
-.cake-glass{
-  background:rgba(255,255,255,.45);
-  border-radius:26px;
-  padding:14px
-}
-.square-cake{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
+.cake-glass{background:rgba(255,255,255,.45);border-radius:26px;padding:14px}
+.square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .piece{
   border-radius:20px;
   overflow:hidden;
   cursor:pointer;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1)
 }
-.piece img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
+.piece img{width:100%;height:100%;object-fit:cover}
 .piece:hover{transform:scale(1.08)}
 .piece:active{transform:scale(1.15)}
 
@@ -224,19 +211,22 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:999999
+  z-index:999999;
 }
+
 .overlay img{
   max-width:90vw;
   max-height:80vh;
   border-radius:26px;
   box-shadow:0 30px 70px rgba(0,0,0,.6);
-  animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1)
+  animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);
 }
+
 @keyframes zoomIn{
   from{transform:scale(.7)}
   to{transform:scale(1)}
 }
+
 .close-btn{
   position:fixed;
   top:18px;
@@ -250,8 +240,17 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   display:flex;
   align-items:center;
   justify-content:center;
-  cursor:pointer
+  cursor:pointer;
+  animation:pop .4s cubic-bezier(.34,1.56,.64,1);
 }
+
+@keyframes pop{
+  from{transform:scale(0)}
+  to{transform:scale(1)}
+}
+
+.close-btn:hover{transform:scale(1.2)}
+.close-btn:active{transform:scale(.85)}
 
 /* ===== CUSTOM IMAGE ===== */
 .custom-img-wrapper{
@@ -263,46 +262,45 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
   background:rgba(255,255,255,.55);
   border-radius:24px;
   padding:10px;
-  box-shadow:0 14px 40px rgba(0,0,0,.28)
+  box-shadow:0 14px 40px rgba(0,0,0,.28);
 }
 .custom-img-inner img{
+  display:block;
   max-width:100%;
   border-radius:20px;
-  cursor:pointer
+  cursor:pointer;
+  transition:.3s cubic-bezier(.34,1.56,.64,1)
 }
+.custom-img-inner img:hover{transform:scale(1.05)}
+.custom-img-inner img:active{transform:scale(.95)}
 
-/* ===== MODE PILL ===== */
+/* ===== MODE PILL (FIXED) ===== */
 .mode-pill{
   position:fixed;
   bottom:18px;
   left:50%;
   transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   width:120px;
   height:42px;
   background:rgba(255,255,255,.5);
   backdrop-filter:blur(16px);
   border-radius:999px;
   padding:4px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
   box-shadow:0 6px 20px rgba(0,0,0,.35);
-  z-index:99999
+  cursor:pointer;
+  z-index:99999;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
 
-.mode-capsule{
-  position:absolute;
-  width:50%;
-  height:34px;
-  top:4px;
-  left:0;
-  border-radius:999px;
-  background:rgba(0,0,0,.2);
-  transition:left .4s cubic-bezier(.34,1.56,.64,1)
+/* 🔥 FIX: KEEP translateX ALWAYS */
+.mode-pill:hover{
+  transform:translateX(-50%) scale(1.05);
 }
-body.dark .mode-capsule{
-  left:50%;
-  background:rgba(255,255,255,.2)
+.mode-pill.active{
+  transform:translateX(-50%) scale(0.95);
 }
 
 .mode-icon{
@@ -313,7 +311,23 @@ body.dark .mode-capsule{
   justify-content:center;
   border-radius:999px;
   font-size:18px;
-  cursor:pointer
+  user-select:none;
+}
+
+.mode-capsule{
+  position:absolute;
+  width:50%;
+  height:34px;
+  background:rgba(0,0,0,.2);
+  border-radius:999px;
+  top:4px;
+  left:0;
+  transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;
+}
+
+body.dark .mode-capsule{
+  left:50%;
+  background:rgba(255,255,255,.2);
 }
 </style>
 </head>
@@ -327,48 +341,100 @@ body.dark .mode-capsule{
   <img src="https://i.ibb.co/n8fcg50G/logo.png" class="pill-icon">
   <div class="pill-text">Navas's Official</div>
   <img src="https://i.ibb.co/994GQQpz/Youtube-logo.png" class="pill-icon"
-   onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
+       onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
 </div>
 
 <div class="container">
 
-<div class="glass">
-<h1>Welcome to my official website</h1>
-<h4>Shadow Fight 2 Modder</h4>
+  <div class="glass">
+    <h1>Welcome to my official website</h1>
+    <h4>Shadow Fight 2 Modder</h4>
+  </div>
+
+  <div class="custom-img-wrapper">
+    <div class="custom-img-inner">
+      <img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg"
+           onclick="alert('You clicked the custom image!')">
+    </div>
+  </div>
+
+  <div class="glass">
+    <h3><u>INTRODUCTION</u></h3>
+    <p>This mod is basically everyone's dream mod. It contains A-Z content from 2015–2025. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don’t support 32-bit apps.</p>
+  </div>
+
+  <div class="glass video-shell">
+    <video class="intro-video" controls>
+      <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v2.mp4">
+    </video>
+  </div>
+
+  <div class="glass">
+    <h3 class="mod-title">Mod Info</h3>
+    <ul class="custom-point">
+      <li>Crashless gameplay (shop, map, battle end fixed)</li>
+      <li>Main server & private server equipments</li>
+      <li>2015–25 raid battles + custom unique battles</li>
+      <li>Remastered special edition locations</li>
+      <li>Full offline raid system re-worked</li>
+      <li>All mythical sets & perks available</li>
+      <li>Private Telegram channel for updates</li>
+      <li>~86 raid battles available</li>
+      <li>Raid spheres, potions & horns usable as perks</li>
+      <li>High-level optimization</li>
+      <li>Trusted paid users available for proof</li>
+      <li>Zone switcher enabled</li>
+    </ul>
+  </div>
+
+  <div class="cake-wrapper">
+    <div class="cake-glass">
+      <div class="square-cake">
+        <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://i.ibb.co/Wp09s9JL/Screenshot-20260126-111036-Shadow-Fight-2.jpg"></div>
+        <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://i.ibb.co/4Rcm3Yf6/Screenshot-20260126-111200-Shadow-Fight-2.jpg"></div>
+        <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://i.ibb.co/mmHdng7/Screenshot-20260126-111129-Shadow-Fight-2.jpg"></div>
+        <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://i.ibb.co/Z1VtPh9b/Screenshot-20260126-111318-Shadow-Fight-2.jpg"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass">
+    <h3 class="contact-info">Contact Info</h3>
+    <p>Only 30$</p>
+    <a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
+    <a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
+  </div>
+
 </div>
 
-<div class="custom-img-wrapper">
-<div class="custom-img-inner">
-<img src="https://i.ibb.co/zWF40HrR/preview-private-mod-bg.jpg"
- onclick="alert('You clicked the custom image!');">
-</div>
-</div>
-
-<div class="glass">
-<h3><u>INTRODUCTION</u></h3>
-<p>This mod is basically everyone's dream mod. It contains A-Z content from 2015–2025.</p>
-</div>
-
-<div class="glass video-shell">
-<video class="intro-video" controls>
-<source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v2.mp4">
-</video>
-</div>
-
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <span class="close-btn">×</span>
+  <img id="overlay-img">
 </div>
 
 <div class="mode-pill" id="modePill">
-<div class="mode-capsule"></div>
-<div class="mode-icon" data-mode="light">☀️</div>
-<div class="mode-icon" data-mode="dark">🌙</div>
+  <div class="mode-capsule"></div>
+  <div class="mode-icon" data-mode="light">☀️</div>
+  <div class="mode-icon" data-mode="dark">🌙</div>
 </div>
 
 <script>
-const icons=document.querySelectorAll('.mode-icon');
-icons.forEach(icon=>{
+function openOverlay(src){
+  const overlay=document.getElementById('overlay');
+  document.getElementById('overlay-img').src=src;
+  overlay.style.display='flex';
+}
+function closeOverlay(e){
+  if(e.target.id==='overlay'||e.target.classList.contains('close-btn')){
+    document.getElementById('overlay').style.display='none';
+  }
+}
+document.querySelectorAll('.mode-icon').forEach(icon=>{
   icon.onclick=()=>{
     document.body.classList.toggle('dark',icon.dataset.mode==='dark');
-  }
+    document.getElementById('modePill').classList.add('active');
+    setTimeout(()=>document.getElementById('modePill').classList.remove('active'),200);
+  };
 });
 </script>
 
