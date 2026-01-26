@@ -24,31 +24,29 @@ html,body{
 }
 
 /* ===== BACKGROUND WRAPPER ===== */
-/* ===== BACKGROUND WRAPPER ===== */
 #bgWrapper{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100svh; /* 🔥 FIX for mobile fast scroll */
+  inset:0;
   z-index:-1;
   background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
   overflow:hidden;
 }
+
 /* smooth dark overlay */
 #bgWrapper::after{
   content:"";
-  position:fixed; /* 🔥 FIX: not absolute */
-  top:0;
-  left:0;
-  width:100%;
-  height:100svh; /* 🔥 FULL viewport always */
+  position:absolute;
+  inset:0;
   background:rgba(0,0,0,0.55);
   opacity:0;
-  transition:opacity 0.1s ease-in-out;
+  transition:opacity 0.1s ease-in-out; /* 👈 ultra smooth */
   pointer-events:none;
 }
 
+/* dark mode fade-in */
+body.dark #bgWrapper::after{
+  opacity:1;
+}
 /* dark mode fade-in */
 body.dark #bgWrapper::after{
   opacity:1;
@@ -464,5 +462,6 @@ document.querySelectorAll('.mode-icon').forEach(icon=>{
 
 </body>
 </html>
+
 
 
