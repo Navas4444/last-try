@@ -126,10 +126,14 @@ body.dark #bgWrapper::after{
 }
 
 .glass-icon img {
-  width: 22px;
-  height: 22px;
-  pointer-events: none;
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  cursor:pointer;
+  transition:.25s cubic-bezier(.34,1.56,.64,1)
 }
+.glass-icon:hover{transform:scale(1.2)}
+.glass-icon{transform:scale(.85)}
 
 
   .icon-rounded {
@@ -520,6 +524,7 @@ document.querySelectorAll('.mode-icon').forEach(icon=>{
 
 </body>
 </html>
+
 
 
 
