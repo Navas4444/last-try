@@ -104,30 +104,30 @@ body.dark #bgWrapper::after{
   height: 52px;
    border-radius: 50%;
 
+ 
   display: flex;
   align-items: center;
   justify-content: center;
 
   background: conic-gradient(
-    from 0deg,
-    #00ff99,
+    #00ff88,
     #00ccff,
-    #00ff99
+    #0066ff,
+    #00ff88
   );
-  animation: spin 2.5s linear infinite;
+
+  animation: spin 2s linear infinite;
 }
 
-/* glow effect */
-.glow-ring::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  filter: blur(8px);
-  background: inherit;
-  opacity: 0.8;
+/* THIS LINE IS IMPORTANT */
+.glow-ring {
+  transform-origin: center;
 }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
   
   .glass-icon {
   position: fixed;
@@ -563,6 +563,7 @@ document.querySelectorAll('.mode-icon').forEach(icon=>{
 
 </body>
 </html>
+
 
 
 
