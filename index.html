@@ -94,91 +94,75 @@ body.dark #bgWrapper::after{
   animation:slideDown .8s cubic-bezier(.34,1.56,.64,1);
 }
 
-.glow-ring {
+.float-wrap {
   position: fixed;
   bottom: 15px;
   right: 24px;
   top: auto;
 
-  width: 52px;
-  height: 52px;
-   border-radius: 50%;
-
- 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: conic-gradient(
-    #00ff88,
-    #00ccff,
-    #0066ff,
-    #00ff88
-  );
-
-  animation: spin 2s linear infinite;
+  width: 56px;
+  height: 56px;
 }
 
-/* THIS LINE IS IMPORTANT */
-.glow-ring {
-  transform-origin: center;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-  
-  .glass-icon {
-  position: fixed;
- bottom: 15px;
+/* 🔄 rotating glow ring */
+.glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  bottom: 15px;
   right: 24px;
   top: auto;
 
-  width: 52px;
-  height: 52px;
+
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    #00ff88 25%,
+    #00ccff 45%,
+    #0066ff 65%,
+    transparent 85%
+  );
+
+  filter: blur(8px);
+  opacity: 0.9;
+
+  animation: spin 2.5s linear infinite;
+}
+
+/* inner glass icon (STATIC) */
+.glass-icon {
+  position: absolute;
+  inset: 6px;
+bottom: 15px;
+  right: 24px;
+  top: auto;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  border-radius: 50%;
-
   border: 1px solid rgba(255,255,255,.35);
-  box-shadow: 0 10px 28px rgba(0,0,0,.25);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
 
-  cursor: pointer;
-  z-index: 99999;
-
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-
-.glass-icon:hover {
-  transform: scale(1.08);
-  box-shadow: 0 14px 36px rgba(0,0,0,.35);
+  z-index: 1;
 }
 
 .glass-icon img {
-  width:46px;
+ width:46px;
   height:46px;
-  object-fit:contain;
-  cursor:pointer;
-  transition:.25s cubic-bezier(.34,1.56,.64,1)
 }
-.glass-icon:hover{transform:scale(1.2)}
-.glass-icon{transform:scale(.85)}
 
-
-  .icon-rounded {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;   /* VERY important */
+/* rotation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
+
 
 
 @keyframes slideDown{
@@ -436,11 +420,13 @@ body.dark .mode-capsule{
        onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
 </div>
 
-<div class="glow-ring">
+<div class="float-wrap">
+<div class="glow">
   <div class="glass-icon">
    <img src="https://i.ibb.co/BKTV83zh/IMG-20260129-212327-854.jpg" class="icon-rounded"
        onclick="window.open('https://t.me/shadowfightexperiment')">
     </div>
+  </div>
   </div>
 
 <div class="container">
@@ -563,6 +549,7 @@ document.querySelectorAll('.mode-icon').forEach(icon=>{
 
 </body>
 </html>
+
 
 
 
