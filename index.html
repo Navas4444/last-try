@@ -221,6 +221,19 @@ body.dark #bgWrapper::after{
 }
 
 /* ===== GLASS ===== */
+.glass1{
+  background:rgba(255,255,255,.55);
+  border-radius:24px;
+  padding:18px 16px;
+  margin:20px auto;
+  box-shadow:0 14px 40px rgba(0,0,0,.28);
+  animation:floatUp .7s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes floatUp{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:none;opacity:1}
+}
 .glass{
   background:rgba(255,255,255,.55);
   border-radius:24px;
@@ -273,7 +286,7 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 }
 
   .custom-point1{
-  max-width:520px;
+  max-width:720px;
   margin:auto;
   padding:0;
   text-align:left
@@ -285,6 +298,7 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 }
 .custom-point1 li::before{
   content:"🌟 ";
+  color:
 }
 
 /* ===== BUTTONS ===== */
@@ -534,7 +548,7 @@ body.dark .mode-capsule{
 
 </div>
 
-  <div class="glass">
+  <div class="glass1">
     <h3 class="mod-title1">Special thanks to</h3>
     <ul class="custom-point1">
       <li>test</li>
@@ -593,6 +607,7 @@ document.querySelectorAll('.mode-icon').forEach(icon=>{
 
 </body>
 </html>
+
 
 
 
