@@ -242,6 +242,7 @@ h4{font-size:clamp(16px,4vw,22px);color:blue}
 p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 .mod-title{color:green}
 .contact-info{color:orange}
+  .mod-title{color:red}
 
 /* ===== VIDEO ===== */
 .video-shell{border-radius:24px;overflow:hidden}
@@ -269,6 +270,21 @@ p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
 .custom-point li::before{
   content:"✔ ";
   color:darkgreen
+}
+
+  .custom-point1{
+  max-width:720px;
+  margin:auto;
+  padding:0;
+  text-align:left
+}
+.custom-point1 li{
+  list-style:none;
+  margin:10px 0;
+  color:red
+}
+.custom-point1 li::before{
+  content:"🌟 ";
 }
 
 /* ===== BUTTONS ===== */
@@ -518,6 +534,13 @@ body.dark .mode-capsule{
 
 </div>
 
+  <div class="glass">
+    <h3 class="mod-title1">Special thanks to</h3>
+    <ul class="custom-point1">
+      <li></li>
+    </ul>
+  </div>
+
 <div class="overlay" id="overlay" onclick="closeOverlay(event)">
   <span class="close-btn">×</span>
   <img id="overlay-img">
@@ -570,6 +593,7 @@ document.querySelectorAll('.mode-icon').forEach(icon=>{
 
 </body>
 </html>
+
 
 
 
