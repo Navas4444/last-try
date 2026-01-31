@@ -22,26 +22,28 @@
          transition:background 0.5s;
          }
          #bgWrapper{
-         position:fixed;
-         inset:0;
-         z-index:-2;
-         background:url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center/cover no-repeat;
-         overflow:hidden;
-         will-change: transform;
-         transform: translateZ(0);
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url('https://i.ibb.co/0jtbchLK/sf2-web-bg.jpg') center / cover no-repeat;
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
          }
-         #bgWrapper::after{
-         content:"";
-         position:absolute;
-         inset:0;
-         background:rgba(0,0,0,0.55);
-         opacity:0;
-         transition:opacity 0.35s ease-in-out; 
-         pointer-events:none;
-         }
-         body.dark #bgWrapper::after{
-         opacity:1;
-         }
+         body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1; /* above bgWrapper */
+  transition: opacity 0.35s ease-in-out;
+}
+
+body.dark::before{
+  opacity: 1;
+}
          .pill-bar{
          position:fixed;
          top:12px;
@@ -517,6 +519,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
 </html>
+
 
 
 
