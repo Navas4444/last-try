@@ -41,24 +41,6 @@
          body.dark #bgWrapper::after{
          opacity:1;
          }
-         #glowSwipe{
-         position:fixed;
-         bottom:-40%;
-         left:50%;
-         transform:translateX(-50%) rotate(-25deg);
-         width:120vw;
-         height:40vh;
-         background:linear-gradient(90deg, rgba(198,85,255,0.6), rgba(255,128,203,0.6));
-         filter:blur(50px);
-         z-index:999999;
-         pointer-events:none;
-         animation:swipeUp 1s ease-out 0.35s forwards;
-         }
-         @keyframes swipeUp{
-         0%{bottom:-40%;opacity:0}
-         15%{opacity:1}
-         100%{bottom:110%;opacity:0}
-         }
          .pill-bar{
          position:fixed;
          top:12px;
@@ -416,7 +398,6 @@
    </head>
    <body>
       <div id="bgWrapper"></div>
-      <div id="glowSwipe"></div>
       <div class="pill-bar">
          <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/logo_1.webp" class="pill-icon">
          <div class="pill-text">Navas's Official</div>
@@ -551,3 +532,4 @@
       </script>
    </body>
 </html>
+
