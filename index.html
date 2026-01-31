@@ -165,18 +165,28 @@ body.dark::before{
   padding: 18px 16px;
   margin: 20px auto;
   box-shadow: 0 14px 40px rgba(0,0,0,.28);
-  animation: floatUp 0.7s cubic-bezier(.34,1.56,.64,1);
-         }
-         @keyframes floatUp{
-  from{transform:translateY(30px);opacity:0}
-  to{transform:none;opacity:1}
-         }
-         .glass:nth-child(1){ animation-delay: .1s }
-.glass:nth-child(2){ animation-delay: .25s }
-.glass:nth-child(3){ animation-delay: .4s }
-.glass:nth-child(4){ animation-delay: .55s }
-.glass:nth-child(5){ animation-delay: .7s }
-.glass:nth-child(6){ animation-delay: .85s }
+  animation: floatUp 0.7s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes floatUp{
+  from{
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to{
+    transform: none;
+    opacity: 1;
+  }
+}
+         .container .glass:nth-of-type(1){ animation-delay: .1s; }
+.container .glass:nth-of-type(2){ animation-delay: .25s; }
+.container .glass:nth-of-type(3){ animation-delay: .4s; }
+.container .glass:nth-of-type(4){ animation-delay: .55s; }
+.container .glass:nth-of-type(5){ animation-delay: .7s; }
+.container .glass:nth-of-type(6){ animation-delay: .85s; }
+.container .glass:nth-of-type(7){ animation-delay: 1s; }
+.container .glass:nth-of-type(8){ animation-delay: 1.15s; }
+         
          h1{font-size:clamp(26px,6vw,48px)}
          h3{font-size:clamp(18px,4.5vw,26px)}
          h4{font-size:clamp(16px,4vw,22px);color:black}
@@ -525,6 +535,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
 </html>
+
 
 
 
