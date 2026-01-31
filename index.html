@@ -38,9 +38,6 @@
          body.dark #bgWrapper::after{
          opacity:1;
          }
-         body.dark #bgWrapper::after{
-         opacity:1;
-         }
          .pill-bar{
          position:fixed;
          top:12px;
@@ -385,6 +382,11 @@
     transition: none !important;
   }
          }
+         @supports not (backdrop-filter: blur(10px)) {
+  .glass, .pill-bar, .glass-icon {
+    background: rgba(255,255,255,0.85);
+  }
+}
       </style>
    </head>
    <body>
@@ -409,12 +411,12 @@
          </div>
          <div class="custom-img-wrapper">
             <div class="custom-img-inner">
-               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/preview_private_mod_bg.webp">
+               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/preview_private_mod_bg.webp" loading="lazy" decoding="async">
             </div>
          </div>
          <div class="custom-img-wrapper">
             <div class="custom-img-inner">
-               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_bg.webp">
+               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_bg.webp" loading="lazy" decoding="async">
             </div>
          </div>
          <div class="glass">
@@ -422,7 +424,7 @@
             <p>This mod is basically everyone's dream mod. It contains A-Z content from 2015-25. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don't support 32-bit apps.</p>
          </div>
          <div class="glass video-shell">
-            <video class="intro-video" controls>
+            <video class="intro-video" controls preload="metadata" playsinline>
                <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.mp4">
             </video>
          </div>
@@ -446,10 +448,10 @@
          <div class="cake-wrapper">
             <div class="cake-glass">
                <div class="square-cake">
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp"></div>
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp"></div>
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_3.webp"></div>
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp"></div>
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp" loading="lazy" decoding="async"></div>
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp" loading="lazy" decoding="async"></div>
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_3.webp" loading="lazy" decoding="async"></div>
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp" loading="lazy" decoding="async"></div>
                </div>
             </div>
          </div>
@@ -488,42 +490,35 @@
          <div class="mode-icon" data-mode="dark">🌙</div>
       </div>
       <script>
-         function openOverlay(src){
-           const overlay=document.getElementById('overlay');
-           document.getElementById('overlay-img').src=src;
-           overlay.style.display='flex';
-         }
-         
-         function closeOverlay(e){
-           if(e.target.id==='overlay'||e.target.classList.contains('close-btn')){
-             document.getElementById('overlay').style.display='none';
-           }
-         }
-         
-         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-         
-         function applySystemTheme(e){
-           document.body.classList.toggle('dark', e.matches);
-         }
-         
-         applySystemTheme(prefersDark);
-         
-         prefersDark.addEventListener('change', applySystemTheme);
-         
-         document.querySelectorAll('.mode-icon').forEach(icon=>{
-           icon.onclick=()=>{
-             const isDark = icon.dataset.mode === 'dark';
-             document.body.classList.toggle('dark', isDark);
-         
-             const pill = document.getElementById('modePill');
-             pill.classList.add('active');
-             setTimeout(()=>pill.classList.remove('active'),200);
-           };
-         });
-      </script>
+  const overlay = document.getElementById('overlay');
+  const overlayImg = document.getElementById('overlay-img');
+  const modePill = document.getElementById('modePill');
+  function openOverlay(src) {
+    overlayImg.src = src;
+    overlay.style.display = 'flex';
+  }
+  function closeOverlay(e) {
+    if (e.target === overlay || e.target.classList.contains('close-btn')) {
+      overlay.style.display = 'none';
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function applySystemTheme(e) {
+    document.body.classList.toggle('dark', e.matches);
+  }
+  applySystemTheme(prefersDark);
+  prefersDark.addEventListener('change', applySystemTheme);
+  modePill.addEventListener('click', e => {
+    const icon = e.target.closest('.mode-icon');
+    if (!icon) return;
+
+    document.body.classList.toggle('dark', icon.dataset.mode === 'dark');
+
+    modePill.classList.add('active');
+    setTimeout(() => modePill.classList.remove('active'), 200);
+    document.body.style.overflow = 'hidden';
+document.body.style.overflow = '';
+  });
+</script>
    </body>
-</html>
-
-
-
-
+   </html>
