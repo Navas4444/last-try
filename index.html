@@ -160,17 +160,21 @@ body.dark::before{
          text-align:center
          }
          .glass{
-         background:rgba(255,255,255,.55);
-         border-radius:24px;
-         padding:18px 16px;
-         margin:20px auto;
-         box-shadow:0 14px 40px rgba(0,0,0,.28);
-         animation:floatUp .7s cubic-bezier(.34,1.56,.64,1);
-         }
-         @keyframes floatUp{
-         from{transform:translateY(30px);opacity:0}
-         to{transform:none;opacity:1}
-         }
+  background: rgba(255,255,255,.55);
+  border-radius: 24px;
+  padding: 18px 16px;
+  margin: 20px auto;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  opacity: 0;
+  transform: translateY(30px);
+}
+.glass.show{
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(.34,1.56,.64,1);
+}
          h1{font-size:clamp(26px,6vw,48px)}
          h3{font-size:clamp(18px,4.5vw,26px)}
          h4{font-size:clamp(16px,4vw,22px);color:black}
@@ -519,6 +523,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
 </html>
+
 
 
 
