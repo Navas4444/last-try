@@ -406,6 +406,12 @@
   );
   animation: shimmer 1.4s infinite;
          }
+         @media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+         }
       </style>
    </head>
    <body>
@@ -545,6 +551,7 @@
       </script>
    </body>
 </html>
+
 
 
 
