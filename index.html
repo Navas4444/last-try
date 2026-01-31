@@ -4,6 +4,8 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Navas's Official SF2 Dream Mod</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
       <style>
          *{
@@ -153,18 +155,6 @@
          padding:120px 18px 120px;
          text-align:center
          }
-         .glass1{
-         background:rgba(255,255,255,.55);
-         border-radius:24px;
-         padding:18px 16px;
-         margin:20px auto;
-         box-shadow:0 14px 40px rgba(0,0,0,.28);
-         animation:floatUp .7s cubic-bezier(.34,1.56,.64,1);
-         }
-         @keyframes floatUp{
-         from{transform:translateY(30px);opacity:0}
-         to{transform:none;opacity:1}
-         }
          .glass{
          background:rgba(255,255,255,.55);
          border-radius:24px;
@@ -222,7 +212,6 @@
          }
          .custom-point1 li::before{
          content:"🌟 ";
-         color:
          }
          .custom-point2{
          max-width:720px;
@@ -237,7 +226,6 @@
          }
          .custom-point2 li::before{
          content:"✨ ";
-         color:
          }
          .tg-btn,.yt-btn{
          display:inline-block;
@@ -425,7 +413,7 @@
          </div>
          <div class="glass video-shell">
             <video class="intro-video" controls preload="metadata" playsinline>
-               <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.mp4">
+               <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.mp4" type="video/mp4">
             </video>
          </div>
          <div class="glass">
@@ -461,7 +449,7 @@
             <a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
             <a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
          </div>
-         <div class="glass1">
+         <div class="glass">
             <h3 class="mod-title1">Special thanks to</h3>
             <ul class="custom-point1">
                <li>David Monge</li>
@@ -470,7 +458,7 @@
                <li>Ferri Ardiansyah</li>
             </ul>
          </div>
-         <div class="glass1">
+         <div class="glass">
             <h3 class="mod-title2">My inspiration</h3>
             <ul class="custom-point2">
                <li>Tiago gameplay</li>
@@ -490,35 +478,40 @@
          <div class="mode-icon" data-mode="dark">🌙</div>
       </div>
       <script>
-  const overlay = document.getElementById('overlay');
-  const overlayImg = document.getElementById('overlay-img');
-  const modePill = document.getElementById('modePill');
-  function openOverlay(src) {
-    overlayImg.src = src;
-    overlay.style.display = 'flex';
+const overlay = document.getElementById('overlay');
+const overlayImg = document.getElementById('overlay-img');
+function openOverlay(src) {
+  overlayImg.src = src;
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeOverlay(e) {
+  if (e.target === overlay || e.target.classList.contains('close-btn')) {
+    overlay.style.display = 'none';
+    overlayImg.src = '';
+    document.body.style.overflow = '';
   }
-  function closeOverlay(e) {
-    if (e.target === overlay || e.target.classList.contains('close-btn')) {
-      overlay.style.display = 'none';
-    }
+}
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+const modePill = document.getElementById('modePill');
+let manualTheme = null;
+function applyTheme(isDark) {
+  document.body.classList.toggle('dark', isDark);
+}
+applyTheme(prefersDark.matches);
+prefersDark.addEventListener('change', e => {
+  if (manualTheme === null) {
+    applyTheme(e.matches);
   }
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  function applySystemTheme(e) {
-    document.body.classList.toggle('dark', e.matches);
-  }
-  applySystemTheme(prefersDark);
-  prefersDark.addEventListener('change', applySystemTheme);
-  modePill.addEventListener('click', e => {
-    const icon = e.target.closest('.mode-icon');
-    if (!icon) return;
-
-    document.body.classList.toggle('dark', icon.dataset.mode === 'dark');
-
-    modePill.classList.add('active');
-    setTimeout(() => modePill.classList.remove('active'), 200);
-    document.body.style.overflow = 'hidden';
-document.body.style.overflow = '';
-  });
+});
+modePill.addEventListener('click', e => {
+  const icon = e.target.closest('.mode-icon');
+  if (!icon) return;
+  manualTheme = icon.dataset.mode === 'dark';
+  applyTheme(manualTheme);
+  modePill.classList.add('active');
+  setTimeout(() => modePill.classList.remove('active'), 200);
+});
 </script>
    </body>
-   </html>
+</html>
