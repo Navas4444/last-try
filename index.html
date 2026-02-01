@@ -395,79 +395,97 @@ body.dark::before{
     background: rgba(255,255,255,0.85);
   }
 }
-         .leaf-overlay {
+         /* =========================
+   LEAF PARTIAL EFFECT
+   ========================= */
+
+.leaf-layer{
   position: fixed;
   inset: 0;
-  pointer-events: none; /* content clickable */
+  pointer-events: none;
   overflow: hidden;
-  z-index: 999;
+  z-index: 50; /* IMPORTANT: above content, below pills */
 }
 
-.leaf {
+.leaf{
   position: absolute;
-  top: -10%;
-  opacity: 0.5;
-  animation-name: fall, sway;
+  top: -15%;
+  opacity: 0.45;
+  will-change: transform;
+  animation-name: leaf-fall, leaf-sway;
   animation-timing-function: linear, ease-in-out;
   animation-iteration-count: infinite;
 }
 
 /* Falling */
-@keyframes fall {
-  to {
-    transform: translateY(110vh);
+@keyframes leaf-fall{
+  to{
+    transform: translateY(120vh);
   }
 }
 
-/* Swinging */
-@keyframes sway {
-  0%   { margin-left: 0; transform: rotate(0deg); }
-  50%  { margin-left: 30px; transform: rotate(8deg); }
-  100% { margin-left: 0; transform: rotate(-8deg); }
-}
-         .leaf1 {
-  left: 10%;
-  width: 22px;
-  animation-duration: 18s, 4s;
+/* Swing + rotate */
+@keyframes leaf-sway{
+  0%   { transform: rotate(0deg) translateX(0); }
+  50%  { transform: rotate(10deg) translateX(35px); }
+  100% { transform: rotate(-10deg) translateX(0); }
 }
 
-.leaf2 {
-  left: 30%;
+/* =========================
+   INDIVIDUAL VARIATIONS
+   ========================= */
+
+.l1{
+  left: 5%;
   width: 14px;
+  animation-duration: 28s, 7s;
+}
+
+.l2{
+  left: 18%;
+  width: 22px;
   opacity: 0.35;
   animation-duration: 24s, 6s;
-  animation-delay: -5s;
+  animation-delay: -8s;
 }
 
-.leaf3 {
-  left: 55%;
-  width: 28px;
-  animation-duration: 20s, 5s;
-  animation-delay: -10s;
-}
-
-.leaf4 {
-  left: 75%;
+.l3{
+  left: 40%;
   width: 18px;
-  opacity: 0.3;
-  animation-duration: 26s, 7s;
-}
-
-.leaf5 {
-  left: 90%;
-  width: 12px;
   animation-duration: 30s, 8s;
   animation-delay: -15s;
-   }
+}
+
+.l4{
+  left: 62%;
+  width: 26px;
+  animation-duration: 22s, 5s;
+}
+
+.l5{
+  left: 78%;
+  width: 16px;
+  opacity: 0.3;
+  animation-duration: 32s, 9s;
+  animation-delay: -20s;
+}
+
+.l6{
+  left: 92%;
+  width: 12px;
+  animation-duration: 36s, 10s;
+  animation-delay: -12s;
+}
       </style>
    </head>
    <body>
-      <div class="leaf-overlay">
-  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf leaf1">
-  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf leaf2">
-  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf leaf3">
-  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf leaf4">
-  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf leaf5">
+      <div class="leaf-layer">
+  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf l1">
+  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf l2">
+  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf l3">
+  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf l4">
+  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf l5">
+  <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png" class="leaf l6">
       </div>
       <div id="bgWrapper"></div>
       <div class="pill-bar">
@@ -606,6 +624,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
    </html>
+
 
 
 
