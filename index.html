@@ -445,26 +445,30 @@ body.dark::before{
   }
 }
 
-/* TRUE rotation */
-@keyframes leafRotate{
-  from{ transform: rotate(0deg); }
-  to{ transform: rotate(360deg); }
+@keyframes leafFall{
+  0%   { transform: translate(-20px, -20vh); }
+  25%  { transform: translate(30px, 25vh); }
+  50%  { transform: translate(-35px, 55vh); }
+  75%  { transform: translate(25px, 85vh); }
+  100% { transform: translate(-20px, 120vh); }
 }
 
 /* =========================
    VARIATIONS (DENSITY)
    ========================= */
 
-.l1{ left: 3%;  width: 12px; animation-duration: 34s; }
-.l2{ left: 10%; width: 16px; animation-duration: 28s; }
-.l3{ left: 18%; width: 20px; animation-duration: 30s; }
-.l4{ left: 28%; width: 14px; animation-duration: 36s; }
-.l5{ left: 40%; width: 26px; animation-duration: 24s; }
-.l6{ left: 55%; width: 18px; animation-duration: 32s; }
-.l7{ left: 68%; width: 22px; animation-duration: 26s; }
-.l8{ left: 80%; width: 15px; animation-duration: 38s; }
-.l9{ left: 92%; width: 12px; animation-duration: 42s; }
-
+..l1  { left: 2%;  width: 12px; animation-duration: 14s; animation-delay: -12s; }
+.l2  { left: 8%;  width: 16px; animation-duration: 16s; animation-delay: -6s; }
+.l3  { left: 14%; width: 20px; animation-duration: 18s; animation-delay: -15s; }
+.l4  { left: 22%; width: 14px; animation-duration: 13s; animation-delay: -9s; }
+.l5  { left: 30%; width: 26px; animation-duration: 15s; animation-delay: -11s; }
+.l6  { left: 38%; width: 18px; animation-duration: 17s; animation-delay: -4s; }
+.l7  { left: 46%; width: 22px; animation-duration: 14s; animation-delay: -13s; }
+.l8  { left: 56%; width: 15px; animation-duration: 19s; animation-delay: -8s; }
+.l9  { left: 66%; width: 12px; animation-duration: 16s; animation-delay: -10s; }
+.l10 { left: 76%; width: 20px; animation-duration: 18s; animation-delay: -14s; }
+.l11 { left: 86%; width: 14px; animation-duration: 13s; animation-delay: -7s; }
+.l12 { left: 94%; width: 16px; animation-duration: 15s; animation-delay: -12s; }
 /* Different rotation speeds */
 .l1 img{ animation-duration: 14s; }
 .l2 img{ animation-duration: 10s; }
@@ -488,6 +492,9 @@ body.dark::before{
   <div class="leaf l7"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
   <div class="leaf l8"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
   <div class="leaf l9"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l10"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l11"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l12"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
       </div>
       <div id="bgWrapper"></div>
       <div class="pill-bar">
@@ -626,6 +633,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
    </html>
+
 
 
 
