@@ -410,7 +410,7 @@ body.dark::before{
 .leaf{
   position: absolute;
   top: -20%;
-  animation: leafFall linear infinite;
+  animation-timing-function: linear;
   will-change: transform;
 }
 
@@ -426,13 +426,22 @@ body.dark::before{
 /* Falling + sway */
 @keyframes leafFall{
   0%{
-    transform: translateY(-10vh) translateX(0);
+    transform: translate(-10px, -10vh);
   }
-  50%{
-    transform: translateY(50vh) translateX(35px);
+  20%{
+    transform: translate(15px, 20vh);
+  }
+  40%{
+    transform: translate(-20px, 45vh);
+  }
+  60%{
+    transform: translate(25px, 70vh);
+  }
+  80%{
+    transform: translate(-15px, 95vh);
   }
   100%{
-    transform: translateY(120vh) translateX(0);
+    transform: translate(10px, 120vh);
   }
 }
 
@@ -617,6 +626,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
    </html>
+
 
 
 
