@@ -425,32 +425,16 @@ body.dark::before{
 
 /* Falling + sway */
 @keyframes leafFall{
-  0%{
-    transform: translate(-10px, -20vh);
-  }
-  20%{
-    transform: translate(15px, 15vh);
-  }
-  40%{
-    transform: translate(-20px, 45vh);
-  }
-  60%{
-    transform: translate(25px, 70vh);
-  }
-  80%{
-    transform: translate(-15px, 95vh);
-  }
-  100%{
-    transform: translate(10px, 120vh);
-  }
-}
-
-@keyframes leafFall{
   0%   { transform: translate(-20px, -20vh); }
   25%  { transform: translate(30px, 25vh); }
   50%  { transform: translate(-35px, 55vh); }
   75%  { transform: translate(25px, 85vh); }
   100% { transform: translate(-20px, 120vh); }
+}
+
+@keyframes leafRotate{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
 }
 
 /* =========================
@@ -633,6 +617,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
    </html>
+
 
 
 
