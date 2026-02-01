@@ -1,182 +1,184 @@
-<!DOCTYPE html>  <html lang="en">  
-   <head>  
-      <meta charset="UTF-8">  
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" content="user-scalable=no">  
-      <title>Navas's Official SF2 Dream Mod</title>  
-      <link rel="preconnect" href="https://fonts.googleapis.com">  
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
-      <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">  
-      <style>  
-         *{  
-         box-sizing:border-box;  
-         -webkit-tap-highlight-color:transparent;  
-         scroll-behavior:smooth  
-         }  
-         html,body{  
-         margin:0;  
-         padding:0;  
-         min-height:100vh;  
-         font-family:'Carter One',cursive;  
-         overflow-x:hidden;  
-         transition:background 0.5s;  
-         }  
-         #bgWrapper{  
-  position: fixed;  
-  inset: 0;  
-  z-index: -2;  
-  background: url('https://github.com/Navas4444/last-try/releases/download/Custom_logo/bamboo_background.webp') center / cover no-repeat;  
-  overflow: hidden;  
-  will-change: transform;  
-  transform: translateZ(0);  
-         }  
-         body::before{  
-  content: "";  
-  position: fixed;  
-  inset: 0;  
-  background: rgba(0,0,0,0.55);  
-  opacity: 0;  
-  pointer-events: none;  
-  z-index: -1;  
-  transition: opacity 0.35s ease-in-out;  
-}  body.dark::before{
-opacity: 1;
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" content="user-scalable=no">
+      <title>Navas's Official SF2 Dream Mod</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+      <style>
+         *{
+         box-sizing:border-box;
+         -webkit-tap-highlight-color:transparent;
+         scroll-behavior:smooth
+         }
+         html,body{
+         margin:0;
+         padding:0;
+         min-height:100vh;
+         font-family:'Carter One',cursive;
+         overflow-x:hidden;
+         transition:background 0.5s;
+         }
+         #bgWrapper{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url('https://github.com/Navas4444/last-try/releases/download/Custom_logo/web_bg.webp') center / cover no-repeat;
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+         }
+         body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.35s ease-in-out;
 }
-.pill-bar{
-position:fixed;
-top:12px;
-left:50%;
-transform:translateX(-50%);
-width: min(calc(92vw * 1.03), calc(700px * 1.03));
-height:56px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 18px;
-background:rgba(255,255,255,.55);
-backdrop-filter:blur(5px);
-border-radius:999px;
-box-shadow:0 18px 40px rgba(0,0,0,.35);
-z-index:99999;
-animation:slideDown .8s cubic-bezier(.34,1.56,.64,1);
+
+body.dark::before{
+  opacity: 1;
 }
-.glass-icon {
-position: fixed;
-bottom: 13px;
-right: 24px;
-top: auto;
-width: 52px;
-height: 52px;
-display: flex;
-align-items: center;
-justify-content: center;
-background: rgba(255, 255, 255, 0.5);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border-radius: 50%;
-border: 1px solid rgba(255,255,255,.35);
-box-shadow: 0 10px 28px rgba(0,0,0,.25);
-cursor: pointer;
-z-index: 99999;
-transition: transform .2s ease, box-shadow .2s ease;
-}
-.glass-icon:hover {
-transform: scale(1.08);
-box-shadow: 0 14px 36px rgba(0,0,0,.35);
-}
-.glow-wrap {
-position: fixed;
-bottom: 13px;
-right: 24px;
-width: 52px;
-height: 52px;
-z-index: 99998;
-}
-.glow-ring {
-position: absolute;
-top: 50%;
-left: 50%;
-width: 50px;
-height: 50px;
-margin: -25px 0 0 -25px;
-border-radius: 50%;
-background: conic-gradient(
-#00ff88,
-#00ccff,
-#0066ff,
-#00ff88
-);
-filter: blur(5px);
-opacity: 0.7;
-animation: glowSpin 2s linear infinite;
-pointer-events: none;
-}
-@keyframes glowSpin {
-to { transform: rotate(360deg); }
-}
-.glass-icon img {
-width:46px;
-height:46px;
-object-fit:contain;
-cursor:pointer;
-transition:.25s cubic-bezier(.34,1.56,.64,1)
-}
-.glass-icon:hover{transform:scale(1.2)}
-.glass-icon{transform:scale(.85)}
-.icon-rounded {
-width: 44px;
-height: 44px;
-border-radius: 50%;
-object-fit: cover;
-}
-@keyframes slideDown{
-from{transform:translate(-50%,-80px);opacity:0}
-to{transform:translate(-50%,0);opacity:1}
-}
-.pill-icon{
-width:42px;
-height:42px;
-object-fit:contain;
-cursor:pointer;
-transition:.25s cubic-bezier(.34,1.56,.64,1)
-}
-.pill-icon:hover{transform:scale(1.2)}
-.pill-icon:active{transform:scale(.85)}
-.pill-text{
-flex:1;
-text-align:center;
-font-size:16px;
-color:#000;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
-}
-.container{
-.container{
+         .pill-bar{
+         position:fixed;
+         top:12px;
+         left:50%;
+         transform:translateX(-50%);
+         width: min(calc(92vw * 1.03), calc(700px * 1.03));
+         height:56px;
+         display:flex;
+         align-items:center;
+         justify-content:space-between;
+         padding:0 18px;
+         background:rgba(255,255,255,.55);
+         backdrop-filter:blur(5px);
+         border-radius:999px;
+         box-shadow:0 18px 40px rgba(0,0,0,.35);
+         z-index:99999;
+         animation:slideDown .8s cubic-bezier(.34,1.56,.64,1);
+         }
+         .glass-icon {
+         position: fixed;
+         bottom: 13px;
+         right: 24px;
+         top: auto;
+         width: 52px;
+         height: 52px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background: rgba(255, 255, 255, 0.5);
+         backdrop-filter: blur(5px);
+         -webkit-backdrop-filter: blur(5px);
+         border-radius: 50%;
+         border: 1px solid rgba(255,255,255,.35);
+         box-shadow: 0 10px 28px rgba(0,0,0,.25);
+         cursor: pointer;
+         z-index: 99999;
+         transition: transform .2s ease, box-shadow .2s ease;
+         }
+         .glass-icon:hover {
+         transform: scale(1.08);
+         box-shadow: 0 14px 36px rgba(0,0,0,.35);
+         }
+         .glow-wrap {
+         position: fixed;
+         bottom: 13px;
+         right: 24px;
+         width: 52px;
+         height: 52px;
+         z-index: 99998;
+         }
+         .glow-ring {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         width: 50px;
+         height: 50px;
+         margin: -25px 0 0 -25px; 
+         border-radius: 50%;
+         background: conic-gradient(
+         #00ff88,
+         #00ccff,
+         #0066ff,
+         #00ff88
+         );
+         filter: blur(5px);
+         opacity: 0.7;
+         animation: glowSpin 2s linear infinite;
+         pointer-events: none;
+         }
+         @keyframes glowSpin {
+         to { transform: rotate(360deg); }
+         }
+         .glass-icon img {
+         width:46px;
+         height:46px;
+         object-fit:contain;
+         cursor:pointer;
+         transition:.25s cubic-bezier(.34,1.56,.64,1)
+         }
+         .glass-icon:hover{transform:scale(1.2)}
+         .glass-icon{transform:scale(.85)}
+         .icon-rounded {
+         width: 44px;
+         height: 44px;
+         border-radius: 50%;
+         object-fit: cover; 
+         }
+         @keyframes slideDown{
+         from{transform:translate(-50%,-80px);opacity:0}
+         to{transform:translate(-50%,0);opacity:1}
+         }
+         .pill-icon{
+         width:42px;
+         height:42px;
+         object-fit:contain;
+         cursor:pointer;
+         transition:.25s cubic-bezier(.34,1.56,.64,1)
+         }
+         .pill-icon:hover{transform:scale(1.2)}
+         .pill-icon:active{transform:scale(.85)}
+         .pill-text{
+         flex:1;
+         text-align:center;
+         font-size:16px;
+         color:#000;
+         white-space:nowrap;
+         overflow:hidden;
+         text-overflow:ellipsis
+         }
+         .container{
          max-width:900px;
          margin:auto;
-         padding:120px 18px 120px;
+         padding:61px 10px 58px;
          text-align:center
-}
-.glass{
-background: rgba(255,255,255,.55);
-border-radius: 24px;
-padding: 18px 16px;
-margin: 20px auto;
-box-shadow: 0 14px 40px rgba(0,0,0,.28);
-animation: floatUp 0.7s cubic-bezier(.34,1.56,.64,1) both;
+         }
+         .glass{
+  background: rgba(255,255,255,.55);
+  border-radius: 24px;
+  padding: 18px 16px;
+  margin: 20px auto;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  animation: floatUp 0.7s cubic-bezier(.34,1.56,.64,1) both;
 }
 
 @keyframes floatUp{
-from{
-transform: translateY(30px);
-opacity: 0;
+  from{
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to{
+    transform: none;
+    opacity: 1;
+  }
 }
-to{
-transform: none;
-opacity: 1;
-}
-}
-.container .glass:nth-of-type(1){ animation-delay: .1s; }
+         .container .glass:nth-of-type(1){ animation-delay: .1s; }
 .container .glass:nth-of-type(2){ animation-delay: .25s; }
 .container .glass:nth-of-type(3){ animation-delay: .4s; }
 .container .glass:nth-of-type(4){ animation-delay: .55s; }
@@ -184,249 +186,253 @@ opacity: 1;
 .container .glass:nth-of-type(6){ animation-delay: .85s; }
 .container .glass:nth-of-type(7){ animation-delay: 1s; }
 .container .glass:nth-of-type(8){ animation-delay: 1.15s; }
-
-h1{font-size:clamp(26px,6vw,48px)}  
-     h3{font-size:clamp(18px,4.5vw,26px)}  
-     h4{font-size:clamp(16px,4vw,22px);color:black}  
-     p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}  
-     .mod-title{color:black}  
-     .contact-info{color:black}  
-     .mod-title1{color:ForestGreen}  
-     .mod-title2{color:ForestGreen}  
-     .video-shell{border-radius:24px;overflow:hidden}  
-     .intro-video{  
-     width:100%;  
-     display:block;  
-     border-radius:24px;  
-     transition:.3s cubic-bezier(.34,1.56,.64,1)  
-     }  
-     .intro-video:hover{transform:scale(1.05)}  
-     .intro-video:active{transform:scale(.94)}  
-     .custom-point{  
-     max-width:720px;  
-     margin:auto;  
-     padding:0;  
-     text-align:left  
-     }  
-     .custom-point li{  
-     list-style:none;  
-     margin:10px 0;  
-     color:black  
-     }  
-     .custom-point li::before{  
-     content:"✔ ";  
-     color:black  
-     }  
-     .custom-point1{  
-     max-width:720px;  
-     margin:auto;  
-     padding:0;  
-     text-align:left  
-     }  
-     .custom-point1 li{  
-     list-style:none;  
-     margin:10px 0;  
-     color:ForestGreen  
-     }  
-     .custom-point1 li::before{  
-     content:"🌟 ";  
-     }  
-     .custom-point2{  
-     max-width:720px;  
-     margin:auto;  
-     padding:0;  
-     text-align:left  
-     }  
-     .custom-point2 li{  
-     list-style:none;  
-     margin:10px 0;  
-     color:ForestGreen  
-     }  
-     .custom-point2 li::before{  
-     content:"✨ ";  
-     }  
-     .tg-btn,.yt-btn{  
-     display:inline-block;  
-     margin:10px 0;  
-     padding:14px 26px;  
-     color:#fff;  
-     text-decoration:none;  
-     border-radius:14px;  
-     transition:.25s cubic-bezier(.34,1.56,.64,1)  
-     }  
-     .tg-btn{background:#0088cc}  
-     .yt-btn{background:linear-gradient(135deg,#ff0000,#ff4d4d)}  
-     .tg-btn:hover,.yt-btn:hover{transform:scale(1.1)}  
-     .tg-btn:active,.yt-btn:active{transform:scale(.9)}  
-     .cake-wrapper{margin:20px auto}  
-     .cake-glass{background:rgba(255,255,255,.45);border-radius:26px;padding:14px}  
-     .square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}  
-     .piece{  
-     border-radius:20px;  
-     overflow:hidden;  
-     cursor:pointer;  
-     transition:transform .3s cubic-bezier(.34,1.56,.64,1)  
-     }  
-     .piece img{width:100%;height:100%;object-fit:cover}  
-     .piece:hover{transform:scale(1.08)}  
-     .piece:active{transform:scale(1.15)}  
-     .overlay{  
-     position:fixed;  
-     inset:0;  
-     background:rgba(0,0,0,.55);  
-     backdrop-filter:blur(5px);  
-     display:none;  
-     align-items:center;  
-     justify-content:center;  
-     z-index:999999;  
-     }  
-     .overlay img{  
-     max-width:90vw;  
-     max-height:80vh;  
-     border-radius:26px;  
-     box-shadow:0 30px 70px rgba(0,0,0,.6);  
-     animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);  
-     }  
-     @keyframes zoomIn{  
-     from{transform:scale(.7)}  
-     to{transform:scale(1)}  
-     }  
-     .close-btn{  
-     position:fixed;  
-     top:18px;  
-     right:18px;  
-     width:58px;  
-     height:58px;  
-     border-radius:50%;  
-     background:rgba(255,255,255,.35);  
-     color:#fff;  
-     font-size:32px;  
-     display:flex;  
-     align-items:center;  
-     justify-content:center;  
-     cursor:pointer;  
-     animation:pop .4s cubic-bezier(.34,1.56,.64,1);  
-     }  
-     @keyframes pop{  
-     from{transform:scale(0)}  
-     to{transform:scale(1)}  
-     }  
-     .close-btn:hover{transform:scale(1.2)}  
-     .close-btn:active{transform:scale(.85)}  
-     .custom-img-wrapper{  
-     display:flex;  
-     justify-content:center;  
-     margin:20px auto  
-     }  
-     .custom-img-inner{  
-     background:rgba(255,255,255,.55);  
-     border-radius:24px;  
-     padding:10px;  
-     box-shadow:0 14px 40px rgba(0,0,0,.28);  
-     }  
-     .custom-img-inner img{  
-     display:block;  
-     max-width:100%;  
-     border-radius:20px;  
-     cursor:pointer;  
-     transition:.3s cubic-bezier(.34,1.56,.64,1)  
-     }  
-     .custom-img-inner img:hover{transform:scale(1.05)}  
-     .custom-img-inner img:active{transform:scale(.95)}  
-     .mode-pill{  
-     position:fixed;  
-     bottom:18px;  
-     left:50%;  
-     transform:translateX(-50%);  
-     display:flex;  
-     align-items:center;  
-     justify-content:space-between;  
-     width:120px;  
-     height:42px;  
-     background:rgba(255,255,255,.5);  
-     backdrop-filter:blur(5px);  
-     border-radius:999px;  
-     padding:4px;  
-     box-shadow:0 6px 20px rgba(0,0,0,.35);  
-     cursor:pointer;  
-     z-index:99999;  
-     transition:transform .3s cubic-bezier(.34,1.56,.64,1);  
-     }  
-     .mode-pill:hover{  
-     transform:translateX(-50%) scale(1.05);  
-     }  
-     .mode-pill.active{  
-     transform:translateX(-50%) scale(0.95);  
-     }  
-     .mode-icon{  
-     width:34px;  
-     height:34px;  
-     display:flex;  
-     align-items:center;  
-     justify-content:center;  
-     border-radius:999px;  
-     font-size:18px;  
-     user-select:none;  
-     }  
-     .mode-capsule{  
-     position:absolute;  
-     width:50%;  
-     height:34px;  
-     background:rgba(0,0,0,.2);  
-     border-radius:999px;  
-     top:4px;  
-     left:0;  
-     transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;  
-     }  
-     body.dark .mode-capsule{  
-     left:50%;  
-     background:rgba(255,255,255,.2);  
-     }  
-     @media (prefers-reduced-motion: reduce) {
-
-{
-animation: none !important;
-transition: none !important;
-}
-}
-@supports not (backdrop-filter: blur(5px)) {
-.glass, .pill-bar, .glass-icon {
-background: rgba(255,255,255,0.85);
-}
+         
+         h1{font-size:clamp(26px,6vw,48px)}
+         h3{font-size:clamp(18px,4.5vw,26px)}
+         h4{font-size:clamp(16px,4vw,22px);color:black}
+         p{font-size:clamp(14px,4vw,18px);line-height:1.6;color:black}
+         .mod-title{color:black}
+         .contact-info{color:black}
+         .mod-title1{color:ForestGreen}
+         .mod-title2{color:ForestGreen}
+         .video-shell{border-radius:24px;overflow:hidden}
+         .intro-video{
+         width:100%;
+         display:block;
+         border-radius:24px;
+         transition:.3s cubic-bezier(.34,1.56,.64,1)
+         }
+         .intro-video:hover{transform:scale(1.05)}
+         .intro-video:active{transform:scale(.94)}
+         .custom-point{
+         max-width:720px;
+         margin:auto;
+         padding:0;
+         text-align:left
+         }
+         .custom-point li{
+         list-style:none;
+         margin:10px 0;
+         color:black
+         }
+         .custom-point li::before{
+         content:"âœ” ";
+         color:black
+         }
+         .custom-point1{
+         max-width:720px;
+         margin:auto;
+         padding:0;
+         text-align:left
+         }
+         .custom-point1 li{
+         list-style:none;
+         margin:10px 0;
+         color:ForestGreen
+         }
+         .custom-point1 li::before{
+         content:"ðŸŒŸ ";
+         }
+         .custom-point2{
+         max-width:720px;
+         margin:auto;
+         padding:0;
+         text-align:left
+         }
+         .custom-point2 li{
+         list-style:none;
+         margin:10px 0;
+         color:ForestGreen
+         }
+         .custom-point2 li::before{
+         content:"âœ¨ ";
+         }
+         .tg-btn,.yt-btn{
+         display:inline-block;
+         margin:10px 0;
+         padding:14px 26px;
+         color:#fff;
+         text-decoration:none;
+         border-radius:14px;
+         transition:.25s cubic-bezier(.34,1.56,.64,1)
+         }
+         .tg-btn{background:#0088cc}
+         .yt-btn{background:linear-gradient(135deg,#ff0000,#ff4d4d)}
+         .tg-btn:hover,.yt-btn:hover{transform:scale(1.1)}
+         .tg-btn:active,.yt-btn:active{transform:scale(.9)}
+         .cake-wrapper{margin:20px auto}
+         .cake-glass{background:rgba(255,255,255,.45);border-radius:26px;padding:14px}
+         .square-cake{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+         .piece{
+         border-radius:20px;
+         overflow:hidden;
+         cursor:pointer;
+         transition:transform .3s cubic-bezier(.34,1.56,.64,1)
+         }
+         .piece img{width:100%;height:100%;object-fit:cover}
+         .piece:hover{transform:scale(1.08)}
+         .piece:active{transform:scale(1.15)}
+         .overlay{
+         position:fixed;
+         inset:0;
+         background:rgba(0,0,0,.55);
+         backdrop-filter:blur(5px);
+         display:none;
+         align-items:center;
+         justify-content:center;
+         z-index:999999;
+         }
+         .overlay img{
+         max-width:90vw;
+         max-height:80vh;
+         border-radius:26px;
+         box-shadow:0 30px 70px rgba(0,0,0,.6);
+         animation:zoomIn .35s cubic-bezier(.34,1.56,.64,1);
+         }
+         @keyframes zoomIn{
+         from{transform:scale(.7)}
+         to{transform:scale(1)}
+         }
+         .close-btn{
+         position:fixed;
+         top:18px;
+         right:18px;
+         width:58px;
+         height:58px;
+         border-radius:50%;
+         background:rgba(255,255,255,.35);
+         color:#fff;
+         font-size:32px;
+         display:flex;
+         align-items:center;
+         justify-content:center;
+         cursor:pointer;
+         animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+         }
+         @keyframes pop{
+         from{transform:scale(0)}
+         to{transform:scale(1)}
+         }
+         .close-btn:hover{transform:scale(1.2)}
+         .close-btn:active{transform:scale(.85)}
+         .custom-img-wrapper{
+         display:flex;
+         justify-content:center;
+         margin:20px auto
+         }
+         .custom-img-inner{
+         background:rgba(255,255,255,.55);
+         border-radius:24px;
+         padding:10px;
+         box-shadow:0 14px 40px rgba(0,0,0,.28);
+         }
+         .custom-img-inner img{
+         display:block;
+         max-width:100%;
+         border-radius:20px;
+         cursor:pointer;
+         transition:.3s cubic-bezier(.34,1.56,.64,1)
+         }
+         .custom-img-inner img:hover{transform:scale(1.05)}
+         .custom-img-inner img:active{transform:scale(.95)}
+         .mode-pill{
+         position:fixed;
+         bottom:18px;
+         left:50%;
+         transform:translateX(-50%);
+         display:flex;
+         align-items:center;
+         justify-content:space-between;
+         width:120px;
+         height:42px;
+         background:rgba(255,255,255,.5);
+         backdrop-filter:blur(5px);
+         border-radius:999px;
+         padding:4px;
+         box-shadow:0 6px 20px rgba(0,0,0,.35);
+         cursor:pointer;
+         z-index:99999;
+         transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+         }
+         .mode-pill:hover{
+         transform:translateX(-50%) scale(1.05);
+         }
+         .mode-pill.active{
+         transform:translateX(-50%) scale(0.95);
+         }
+         .mode-icon{
+         width:34px;
+         height:34px;
+         display:flex;
+         align-items:center;
+         justify-content:center;
+         border-radius:999px;
+         font-size:18px;
+         user-select:none;
+         }
+         .mode-capsule{
+         position:absolute;
+         width:50%;
+         height:34px;
+         background:rgba(0,0,0,.2);
+         border-radius:999px;
+         top:4px;
+         left:0;
+         transition:left .5s cubic-bezier(.34,1.56,.64,1), background .5s;
+         }
+         body.dark .mode-capsule{
+         left:50%;
+         background:rgba(255,255,255,.2);
+         }
+         @media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+         }
+         @supports not (backdrop-filter: blur(5px)) {
+  .glass, .pill-bar, .glass-icon {
+    background: rgba(255,255,255,0.85);
+  }
 }
 .leaf-layer{
-position: fixed;
-inset: 0;
-pointer-events: none;
-overflow: hidden;
-z-index: 20;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
 }
 
 .leaf{
-position: absolute;
-top: -20%;
-animation: leafFall linear infinite;
-will-change: transform;
+  position: absolute;
+  top: -20%;
+  animation: leafFall linear infinite;
+  will-change: transform;
 }
+
+/* Inner image rotates independently */
 .leaf img{
-display: block;
-width: 100%;
-height: auto;
-opacity: 0.45;
-animation: leafRotate linear infinite;
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.45;
+  animation: leafRotate linear infinite;
 }
+
+/* Falling + sway */
 @keyframes leafFall{
-0%   { transform: translate(-20px, -20vh); }
-25%  { transform: translate(30px, 25vh); }
-50%  { transform: translate(-35px, 55vh); }
-75%  { transform: translate(25px, 85vh); }
-100% { transform: translate(-20px, 120vh); }
+  0%   { transform: translate(-20px, -20vh); }
+  25%  { transform: translate(30px, 25vh); }
+  50%  { transform: translate(-35px, 55vh); }
+  75%  { transform: translate(25px, 85vh); }
+  100% { transform: translate(-20px, 120vh); }
 }
 
 @keyframes leafRotate{
-from{ transform: rotate(0deg); }
-to{ transform: rotate(360deg); }
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
 }
+
 ..l1  { left: 2%;  width: 12px; animation-duration: 14s; animation-delay: -12s; }
 .l2  { left: 8%;  width: 16px; animation-duration: 16s; animation-delay: -6s; }
 .l3  { left: 14%; width: 20px; animation-duration: 18s; animation-delay: -15s; }
@@ -449,158 +455,157 @@ to{ transform: rotate(360deg); }
 .l7 img{ animation-duration: 11s; }
 .l8 img{ animation-duration: 20s; }
 .l9 img{ animation-duration: 15s; }
-</style>
-
-   </head>  
-   <body>  
-      <div class="leaf-layer">  
-  <div class="leaf l1"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l2"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l3"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l4"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l5"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l6"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l7"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l8"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l9"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l10"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l11"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-  <div class="leaf l12"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>  
-      </div>  
-      <div id="bgWrapper"></div>  
-      <div class="pill-bar">  
-         <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/logo_1.webp" class="pill-icon">  
-         <div class="pill-text">Navas's Official</div>  
-         <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/youtube_logo.webp" class="pill-icon"  
-            onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">  
-      </div>  
-      <div class="glow-wrap">  
-         <div class="glow-ring"></div>  
-         <div class="glass-icon in-glow">  
-            <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/logo_2.webp" class="icon-rounded"  
-               onclick="window.open('https://t.me/shadowfightexperiment')">  
-         </div>  
-      </div>  
-      <div class="container">  
-         <div class="glass">  
-            <h1>Welcome to my official website</h1>  
-            <h4>Shadow Fight 2 Modder</h4>  
-         </div>  
-         <div class="custom-img-wrapper">  
-            <div class="custom-img-inner">  
-               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/preview_private_mod_bg.webp" loading="lazy" decoding="async">  
-            </div>  
-         </div>  
-         <div class="custom-img-wrapper">  
-            <div class="custom-img-inner">  
-               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_bg.webp" loading="lazy" decoding="async">  
-            </div>  
-         </div>  
-         <div class="glass">  
-            <h3><u>INTRODUCTION</u></h3>  
-            <p>This mod is basically everyone's dream mod. It contains A-Z content from 2015-25. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don't support 32-bit apps.</p>  
-         </div>  
-         <div class="glass video-shell">  
-            <video class="intro-video" controls preload="metadata" playsinline>  
-               <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.mp4" type="video/mp4">  
-            </video>  
-         </div>  
-         <div class="glass">  
-            <h3 class="mod-title">Mod Info</h3>  
-            <ul class="custom-point">  
-               <li>Crashless gameplay (shop, map, battle end fixed)</li>  
-               <li>Main server & private server equipments</li>  
-               <li>2015-25 raid battles + custom unique battles</li>  
-               <li>RemasteForestGreen special edition locations</li>  
-               <li>Full offline raid system re-worked</li>  
-               <li>All mythical sets & perks available</li>  
-               <li>Private Telegram channel for updates</li>  
-               <li>~86 raid battles available</li>  
-               <li>Raid spheres, potions & horns usable as perks</li>  
-               <li>High-level optimization</li>  
-               <li>Trusted paid users available for proof</li>  
-               <li>Zone switcher enabled</li>  
-            </ul>  
-         </div>  
-         <div class="cake-wrapper">  
-            <div class="cake-glass">  
-               <div class="square-cake">  
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp" loading="lazy" decoding="async"></div>  
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp" loading="lazy" decoding="async"></div>  
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_3.webp" loading="lazy" decoding="async"></div>  
-                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp" loading="lazy" decoding="async"></div>  
-               </div>  
-            </div>  
-         </div>  
-         <div class="glass">  
-            <h3 class="contact-info">Contact Info</h3>  
-            <p>"Only 30$"</p>  
-            <a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>  
-            <a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>  
-         </div>  
-         <div class="glass">  
-            <h3 class="mod-title1">Special thanks to</h3>  
-            <ul class="custom-point1">  
-               <li>David Monge</li>  
-               <li>Kazi sunny ul islam</li>  
-               <li>Iván Gregorio Silva Huinca</li>  
-               <li>Ferri Ardiansyah</li>  
-            </ul>  
-         </div>  
-         <div class="glass">  
-            <h3 class="mod-title2">My inspiration</h3>  
-            <ul class="custom-point2">  
-               <li>Tiago gameplay</li>  
-               <li>Hassan gameplay</li>  
-               <li>Super shadow pro gaming</li>  
-               <li>Shadow fight forum</li>  
-            </ul>  
-         </div>  
-      </div>  
-      <div class="overlay" id="overlay" onclick="closeOverlay(event)">  
-         <span class="close-btn">X</span>  
-         <img id="overlay-img">  
-      </div>  
-      <div class="mode-pill" id="modePill">  
-         <div class="mode-capsule"></div>  
-         <div class="mode-icon" data-mode="light">☀️</div>  
-         <div class="mode-icon" data-mode="dark">🌙</div>  
-      </div>  
-      <script>  
-const overlay = document.getElementById('overlay');  
-const overlayImg = document.getElementById('overlay-img');  
-function openOverlay(src) {  
-  overlayImg.src = src;  
-  overlay.style.display = 'flex';  
-  document.body.style.overflow = 'hidden';  
-}  
-function closeOverlay(e) {  
-  if (e.target === overlay || e.target.classList.contains('close-btn')) {  
-    overlay.style.display = 'none';  
-    overlayImg.src = '';  
-    document.body.style.overflow = '';  
-  }  
-}  
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');  
-const modePill = document.getElementById('modePill');  
-let manualTheme = null;  
-function applyTheme(isDark) {  
-  document.body.classList.toggle('dark', isDark);  
-}  
-applyTheme(prefersDark.matches);  
-prefersDark.addEventListener('change', e => {  
-  if (manualTheme === null) {  
-    applyTheme(e.matches);  
-  }  
-});  
-modePill.addEventListener('click', e => {  
-  const icon = e.target.closest('.mode-icon');  
-  if (!icon) return;  
-  manualTheme = icon.dataset.mode === 'dark';  
-  applyTheme(manualTheme);  
-  modePill.classList.add('active');  
-  setTimeout(() => modePill.classList.remove('active'), 200);  
-});  
-</script>  
-   </body>  
-   </html>
+      </style>
+   </head>
+   <body>
+      <div class="leaf-layer">
+  <div class="leaf l1"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l2"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l3"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l4"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l5"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l6"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l7"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l8"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l9"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l10"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l11"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+  <div class="leaf l12"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
+      </div>
+      <div id="bgWrapper"></div>
+      <div class="pill-bar">
+         <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/logo_1.webp" class="pill-icon">
+         <div class="pill-text">Navas's Official</div>
+         <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/youtube_logo.webp" class="pill-icon"
+            onclick="window.open('https://youtube.com/@cbtpartition-wm3vf','_blank')">
+      </div>
+      <div class="glow-wrap">
+         <div class="glow-ring"></div>
+         <div class="glass-icon in-glow">
+            <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/logo_2.webp" class="icon-rounded"
+               onclick="window.open('https://t.me/shadowfightexperiment')">
+         </div>
+      </div>
+      <div class="container">
+         <div class="glass">
+            <h1>Welcome to my official website</h1>
+            <h4>Shadow Fight 2 Modder</h4>
+         </div>
+         <div class="custom-img-wrapper">
+            <div class="custom-img-inner">
+               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/preview_private_mod_bg.webp" loading="lazy" decoding="async">
+            </div>
+         </div>
+         <div class="custom-img-wrapper">
+            <div class="custom-img-inner">
+               <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_bg.webp" loading="lazy" decoding="async">
+            </div>
+         </div>
+         <div class="glass">
+            <h3><u>INTRODUCTION</u></h3>
+            <p>This mod is basically everyone's dream mod. It contains A-Z content from 2015-25. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don't support 32-bit apps.</p>
+         </div>
+         <div class="glass video-shell">
+            <video class="intro-video" controls preload="metadata" playsinline>
+               <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.mp4" type="video/mp4">
+            </video>
+         </div>
+         <div class="glass">
+            <h3 class="mod-title">Mod Info</h3>
+            <ul class="custom-point">
+               <li>Crashless gameplay (shop, map, battle end fixed)</li>
+               <li>Main server & private server equipments</li>
+               <li>2015-25 raid battles + custom unique battles</li>
+               <li>RemasteForestGreen special edition locations</li>
+               <li>Full offline raid system re-worked</li>
+               <li>All mythical sets & perks available</li>
+               <li>Private Telegram channel for updates</li>
+               <li>~86 raid battles available</li>
+               <li>Raid spheres, potions & horns usable as perks</li>
+               <li>High-level optimization</li>
+               <li>Trusted paid users available for proof</li>
+               <li>Zone switcher enabled</li>
+            </ul>
+         </div>
+         <div class="cake-wrapper">
+            <div class="cake-glass">
+               <div class="square-cake">
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp" loading="lazy" decoding="async"></div>
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp" loading="lazy" decoding="async"></div>
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_3.webp" loading="lazy" decoding="async"></div>
+                  <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp" loading="lazy" decoding="async"></div>
+               </div>
+            </div>
+         </div>
+         <div class="glass">
+            <h3 class="contact-info">Contact Info</h3>
+            <p>"Only 30$"</p>
+            <a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
+            <a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
+         </div>
+         <div class="glass">
+            <h3 class="mod-title1">Special thanks to</h3>
+            <ul class="custom-point1">
+               <li>David Monge</li>
+               <li>Kazi sunny ul islam</li>
+               <li>IvÃ¡n Gregorio Silva Huinca</li>
+               <li>Ferri Ardiansyah</li>
+            </ul>
+         </div>
+         <div class="glass">
+            <h3 class="mod-title2">My inspiration</h3>
+            <ul class="custom-point2">
+               <li>Tiago gameplay</li>
+               <li>Hassan gameplay</li>
+               <li>Super shadow pro gaming</li>
+               <li>Shadow fight forum</li>
+            </ul>
+         </div>
+      </div>
+      <div class="overlay" id="overlay" onclick="closeOverlay(event)">
+         <span class="close-btn">X</span>
+         <img id="overlay-img">
+      </div>
+      <div class="mode-pill" id="modePill">
+         <div class="mode-capsule"></div>
+         <div class="mode-icon" data-mode="light">â˜€ï¸</div>
+         <div class="mode-icon" data-mode="dark">ðŸŒ™</div>
+      </div>
+      <script>
+const overlay = document.getElementById('overlay');
+const overlayImg = document.getElementById('overlay-img');
+function openOverlay(src) {
+  overlayImg.src = src;
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeOverlay(e) {
+  if (e.target === overlay || e.target.classList.contains('close-btn')) {
+    overlay.style.display = 'none';
+    overlayImg.src = '';
+    document.body.style.overflow = '';
+  }
+}
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+const modePill = document.getElementById('modePill');
+let manualTheme = null;
+function applyTheme(isDark) {
+  document.body.classList.toggle('dark', isDark);
+}
+applyTheme(prefersDark.matches);
+prefersDark.addEventListener('change', e => {
+  if (manualTheme === null) {
+    applyTheme(e.matches);
+  }
+});
+modePill.addEventListener('click', e => {
+  const icon = e.target.closest('.mode-icon');
+  if (!icon) return;
+  manualTheme = icon.dataset.mode === 'dark';
+  applyTheme(manualTheme);
+  modePill.classList.add('active');
+  setTimeout(() => modePill.classList.remove('active'), 200);
+});
+</script>
+   </body>
+            </html>
