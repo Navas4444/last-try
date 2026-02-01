@@ -158,26 +158,29 @@ body.dark::before{
   max-width: 900px;
   margin: auto;
   padding: 61px 10px 58px;
-  text-align: center;
   border-radius: 20px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-.container::before{
-  content: "";
+/* cloned background */
+.container-bg{
   position: absolute;
   inset: 0;
 
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: url('https://github.com/Navas4444/last-try/releases/download/Custom_logo/bamboo_background.webp')
+              center / cover no-repeat;
+
+  filter: blur(10px);
+  transform: scale(1.1); /* prevents blur edges */
+  opacity: 0.9;
 
   z-index: 0;
 }
 
-.container > *{
+/* keep content sharp */
+.container > *:not(.container-bg){
   position: relative;
-  z-index: 1; 
+  z-index: 1;
 }
          .glass{
   background: rgba(255,255,255,.55);
@@ -515,30 +518,36 @@ body.dark::before{
          </div>
       </div>
       <div class="container">
+         <div class="container-bg"></div>
          <div class="glass">
             <h1>Welcome to my official website</h1>
             <h4>Shadow Fight 2 Modder</h4>
          </div>
          <div class="custom-img-wrapper">
+            <div class="container-bg"></div>
             <div class="custom-img-inner">
                <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/preview_private_mod_bg.webp" loading="lazy" decoding="async">
             </div>
          </div>
          <div class="custom-img-wrapper">
+            <div class="container-bg"></div>
             <div class="custom-img-inner">
                <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_bg.webp" loading="lazy" decoding="async">
             </div>
          </div>
          <div class="glass">
+            <div class="container-bg"></div>
             <h3><u>INTRODUCTION</u></h3>
             <p>This mod is basically everyone's dream mod. It contains A-Z content from 2015-25. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don't support 32-bit apps.</p>
          </div>
          <div class="glass video-shell">
+            <div class="container-bg"></div>
             <video class="intro-video" controls preload="metadata" playsinline>
                <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.mp4" type="video/mp4">
             </video>
          </div>
          <div class="glass">
+            <div class="container-bg"></div>
             <h3 class="mod-title">Mod Info</h3>
             <ul class="custom-point">
                <li>Crashless gameplay (shop, map, battle end fixed)</li>
@@ -556,6 +565,7 @@ body.dark::before{
             </ul>
          </div>
          <div class="cake-wrapper">
+            <div class="container-bg"></div>
             <div class="cake-glass">
                <div class="square-cake">
                   <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp" loading="lazy" decoding="async"></div>
@@ -566,12 +576,14 @@ body.dark::before{
             </div>
          </div>
          <div class="glass">
+            <div class="container-bg"></div>
             <h3 class="contact-info">Contact Info</h3>
             <p>"Only 30$"</p>
             <a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
             <a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
          </div>
          <div class="glass">
+            <div class="container-bg"></div>
             <h3 class="mod-title1">Special thanks to</h3>
             <ul class="custom-point1">
                <li>David Monge</li>
@@ -581,6 +593,7 @@ body.dark::before{
             </ul>
          </div>
          <div class="glass">
+            <div class="container-bg"></div>
             <h3 class="mod-title2">My inspiration</h3>
             <ul class="custom-point2">
                <li>Tiago gameplay</li>
@@ -637,6 +650,7 @@ modePill.addEventListener('click', e => {
 </script>
    </body>
    </html>
+
 
 
 
