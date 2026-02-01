@@ -11,7 +11,7 @@
          .reveal{
   opacity: 0;
   transform: translateY(30px);
-  transition: 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal.active{
@@ -499,8 +499,8 @@ body.dark::before{
       </div>
       <div class="container">
          <div class="glass">
-            <h1>Welcome to my official website</h1>
-            <h4>Shadow Fight 2 Modder</h4>
+            <h1 class="reveal">Welcome to my official website</h1>
+            <h4 class="reveal">Shadow Fight 2 Modder</h4>
          </div>
          <div class="custom-img-wrapper">
             <div class="custom-img-inner">
@@ -513,8 +513,8 @@ body.dark::before{
             </div>
          </div>
          <div class="glass">
-            <h3><u>INTRODUCTION</u></h3>
-            <p>This mod is basically everyone's dream mod. It contains A-Z content from 2015-25. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don't support 32-bit apps.</p>
+            <h3 class="reveal"><u>INTRODUCTION</u></h3>
+            <p class="reveal">This mod is basically everyone's dream mod. It contains A-Z content from 2015-25. Unfortunately it was based on version 1.9.21 (32-bit), and modern Android devices don't support 32-bit apps.</p>
          </div>
          <div class="glass video-shell">
             <video class="intro-video" controls preload="metadata" playsinline>
@@ -524,18 +524,18 @@ body.dark::before{
          <div class="glass">
             <h3 class="mod-title">Mod Info</h3>
             <ul class="custom-point">
-               <li>Crashless gameplay (shop, map, battle end fixed)</li>
-               <li>Main server & private server equipments</li>
-               <li>2015-25 raid battles + custom unique battles</li>
-               <li>RemasteForestGreen special edition locations</li>
-               <li>Full offline raid system re-worked</li>
-               <li>All mythical sets & perks available</li>
-               <li>Private Telegram channel for updates</li>
-               <li>~86 raid battles available</li>
-               <li>Raid spheres, potions & horns usable as perks</li>
-               <li>High-level optimization</li>
-               <li>Trusted paid users available for proof</li>
-               <li>Zone switcher enabled</li>
+               <li class="reveal">Crashless gameplay (shop, map, battle end fixed)</li>
+               <li class="reveal">Main server & private server equipments</li>
+               <li class="reveal">2015-25 raid battles + custom unique battles</li>
+               <li class="reveal">RemasteForestGreen special edition locations</li>
+               <li class="reveal">Full offline raid system re-worked</li>
+               <li class="reveal">All mythical sets & perks available</li>
+               <li class="reveal">Private Telegram channel for updates</li>
+               <li class="reveal">~86 raid battles available</li>
+               <li class="reveal">Raid spheres, potions & horns usable as perks</li>
+               <li class="reveal">High-level optimization</li>
+               <li class="reveal">Trusted paid users available for proof</li>
+               <li class="reveal">Zone switcher enabled</li>
             </ul>
          </div>
          <div class="cake-wrapper">
@@ -547,32 +547,32 @@ body.dark::before{
                   <div class="piece" onclick="openOverlay(this.querySelector('img').src)"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp" loading="lazy" decoding="async"></div>
                </div>
             </div>
-         </div>
          <div class="glass">
-            <h3 class="contact-info">Contact Info</h3>
+            <h3 class="contact-info reveal">Contact Info</h3>
             <p>"Only 30$"</p>
-            <a class="tg-btn" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
-            <a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
+            <a class="tg-btn reveal" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
+            <a class="yt-btn reveal" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
          </div>
          <div class="glass">
-            <h3 class="mod-title1">Special thanks to</h3>
-            <ul class="custom-point1">
-               <li>David Monge</li>
-               <li>Kazi sunny ul islam</li>
-               <li>IvÃ¡n Gregorio Silva Huinca</li>
-               <li>Ferri Ardiansyah</li>
+            <h3 class="mod-title1 reveal">Special thanks to</h3>
+            <ul class="custom-point1 reveal">
+               <li class="reveal">David Monge</li>
+               <li class="reveal">Kazi sunny ul islam</li>
+               <li class="reveal">IvÃ¡n Gregorio Silva Huinca</li>
+               <li class="reveal">Ferri Ardiansyah</li>
             </ul>
          </div>
          <div class="glass">
-            <h3 class="mod-title2">My inspiration</h3>
+            <h3 class="mod-title2 reveal">My inspiration</h3>
             <ul class="custom-point2">
-               <li>Tiago gameplay</li>
-               <li>Hassan gameplay</li>
-               <li>Super shadow pro gaming</li>
-               <li>Shadow fight forum</li>
+               <li class="reveal">Tiago gameplay</li>
+               <li class="reveal">Hassan gameplay</li>
+               <li class="reveal">Super shadow pro gaming</li>
+               <li class="reveal">Shadow fight forum</li>
             </ul>
          </div>
       </div>
+</div>
       <div class="overlay" id="overlay" onclick="closeOverlay(event)">
          <span class="close-btn">X</span>
          <img id="overlay-img">
@@ -626,26 +626,24 @@ modePill.addEventListener('click', e => {
   setTimeout(() => modePill.classList.remove('active'), 200);
 });
 
-/* ===========================
-   REVEAL ANIMATION (ADDED)
-   =========================== */
-
 const revealElements = document.querySelectorAll('.reveal');
 
-function revealOnScroll() {
-  revealElements.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    const trigger = window.innerHeight - 100;
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      } else {
+        entry.target.classList.remove('active');
+      }
+    });
+  },
+  {
+    threshold: 0.2
+  }
+);
 
-    if (top < trigger) {
-      el.classList.add('active');
-    }
-  });
-}
-
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+revealElements.forEach(el => observer.observe(el));
 </script>
    </body>
    </html>
-
