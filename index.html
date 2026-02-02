@@ -694,35 +694,43 @@ const observer = new IntersectionObserver(
 revealElements.forEach(el => observer.observe(el));
          const perfBtn = document.getElementById('perfToggle');
 
-/* Detect mobile by capability */
+const perfBtn = document.getElementById('perfToggle');
+
+/* 1. Detect mobile by capability */
 const isMobile =
   matchMedia('(hover: none)').matches &&
   matchMedia('(pointer: coarse)').matches;
 
-/* Read saved choice */
-let perfOff = localStorage.getItem('perfOff');
+/* 2. Read user override (if any) */
+let userChoice = localStorage.getItem('perfUser');
 
-/* Decide default mode */
-if (perfOff === null) {
-  perfOff = isMobile ? '1' : '0';
-  localStorage.setItem('perfOff', perfOff);
+/* 3. Decide mode */
+let perfOff;
+if (userChoice === null) {
+  // AUTO MODE
+  perfOff = isMobile;   // mobile = true, desktop = false
+} else {
+  // USER MODE
+  perfOff = userChoice === '1';
 }
 
-/* Apply */
-perfOff = perfOff === '1';
+/* 4. Apply immediately */
 document.body.classList.toggle('perf-off', perfOff);
 perfBtn.textContent = perfOff ? '🚀' : '⚡';
 
-/* Manual toggle */
+/* 5. Manual toggle */
 perfBtn.addEventListener('click', () => {
   perfOff = !perfOff;
   document.body.classList.toggle('perf-off', perfOff);
-  localStorage.setItem('perfOff', perfOff ? '1' : '0');
   perfBtn.textContent = perfOff ? '🚀' : '⚡';
+
+  // Save user override
+  localStorage.setItem('perfUser', perfOff ? '1' : '0');
 });
 </script>
    </body>
    </html>
+
 
 
 
