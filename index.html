@@ -511,33 +511,10 @@ body.perf-off .overlay{
   -webkit-backdrop-filter: none !important;
   background: rgba(255,255,255,0.85) !important;
 }
-         .glow-ring1 {
-         position: absolute;
-         bottom: 16px;
-         left: 50px;
-         width: 50px;
-         height: 50px;
-         margin: -25px 0 0 -25px; 
-         border-radius: 50%;
-         background: conic-gradient(
-         #00ff88,
-         #00ccff,
-         #0066ff,
-         #00ff88
-         );
-         filter: blur(5px);
-         opacity: 0.7;
-         animation: glowSpin 2s linear infinite;
-         pointer-events: none;
-         }
-         @keyframes glowSpin {
-         to { transform: rotate(360deg); }
-         }
-         
       </style>
    </head>
    <body>
-      <div class="perf-toggle glow-ring1" id="perfToggle">
+      <div class="perf-toggle" id="perfToggle">
   ⚡
       </div>
       <div class="leaf-layer">
@@ -726,6 +703,7 @@ perfBtn.addEventListener('click', () => {
 </script>
    </body>
    </html>
+
 
 
 
