@@ -466,9 +466,53 @@ body.dark::before{
 .l7 img{ animation-duration: 11s; }
 .l8 img{ animation-duration: 20s; }
 .l9 img{ animation-duration: 15s; }
+         .perf-toggle{
+  position: fixed;
+  bottom: 74px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 99999;
+  box-shadow: 0 8px 26px rgba(0,0,0,.35);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+
+.perf-toggle:hover{ transform: translateX(-50%) scale(1.1); }
+.perf-toggle:active{ transform: translateX(-50%) scale(.9); }
+         /* PERFORMANCE MODE */
+body.perf-off *{
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Kill heavy visuals only */
+body.perf-off .leaf-layer,
+body.perf-off .glow-ring{
+  display: none !important;
+}
+
+body.perf-off .glass,
+body.perf-off .pill-bar,
+body.perf-off .glass-icon,
+body.perf-off .mode-pill{
+  backdrop-filter: none !important;
+  background: rgba(255,255,255,0.85) !important;
+}
       </style>
    </head>
    <body>
+      <div class="perf-toggle" id="perfToggle">
+  ⚡
+      </div>
       <div class="leaf-layer">
   <div class="leaf l1"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
   <div class="leaf l2"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/partial_effect_leafs.png"></div>
@@ -644,9 +688,18 @@ const observer = new IntersectionObserver(
 );
 
 revealElements.forEach(el => observer.observe(el));
+         const perfBtn = document.getElementById('perfToggle');
+let perfOff = false;
+
+perfBtn.addEventListener('click', () => {
+  perfOff = !perfOff;
+  document.body.classList.toggle('perf-off', perfOff);
+  perfBtn.textContent = perfOff ? '🚀' : '⚡';
+});
 </script>
    </body>
    </html>
+
 
 
 
