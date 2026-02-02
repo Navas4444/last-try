@@ -693,15 +693,27 @@ const observer = new IntersectionObserver(
 
 revealElements.forEach(el => observer.observe(el));
          (function () {
-  const body = document.body;
-  const btn = document.querySelector('.perf-toggle');
+  var body = document.body;
+  var btn = document.querySelector('.perf-toggle');
 
   function isTouchDevice() {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
   }
 
   function isLowEndDevice() {
     return navigator.deviceMemory && navigator.deviceMemory <= 4;
+  }
+
+  function updateButton() {
+    if (!btn) return;
+
+    if (body.classList.contains('perf-off')) {
+      btn.innerText = '✨ Premium';
+      btn.title = 'Switch to Premium mode';
+    } else {
+      btn.innerText = '⚡ Performance';
+      btn.title = 'Switch to Performance mode';
+    }
   }
 
   function applyMode(mode) {
@@ -712,14 +724,13 @@ revealElements.forEach(el => observer.observe(el));
       body.classList.add('premium-on');
       body.classList.remove('perf-off');
     }
+    updateButton();
   }
 
-  /* 1️⃣ Check saved preference */
-  const savedMode = localStorage.getItem('site-mode');
+  var savedMode = localStorage.getItem('site-mode');
   if (savedMode) {
     applyMode(savedMode);
   } else {
-    /* 2️⃣ Auto mode (runs ONCE) */
     if (isTouchDevice() || isLowEndDevice()) {
       applyMode('perf');
     } else {
@@ -727,11 +738,10 @@ revealElements.forEach(el => observer.observe(el));
     }
   }
 
-  /* 3️⃣ Manual toggle */
   if (btn) {
-    btn.addEventListener('click', () => {
-      const isPerf = body.classList.contains('perf-off');
-      const newMode = isPerf ? 'premium' : 'perf';
+    btn.addEventListener('click', function () {
+      var isPerf = body.classList.contains('perf-off');
+      var newMode = isPerf ? 'premium' : 'perf';
 
       applyMode(newMode);
       localStorage.setItem('site-mode', newMode);
@@ -741,6 +751,7 @@ revealElements.forEach(el => observer.observe(el));
 </script>
    </body>
    </html>
+
 
 
 
