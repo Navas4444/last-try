@@ -693,16 +693,37 @@ const observer = new IntersectionObserver(
 
 revealElements.forEach(el => observer.observe(el));
          const perfBtn = document.getElementById('perfToggle');
-let perfOff = false;
 
+/* Detect mobile by capability */
+const isMobile =
+  matchMedia('(hover: none)').matches &&
+  matchMedia('(pointer: coarse)').matches;
+
+/* Read saved choice */
+let perfOff = localStorage.getItem('perfOff');
+
+/* Decide default mode */
+if (perfOff === null) {
+  perfOff = isMobile ? '1' : '0';
+  localStorage.setItem('perfOff', perfOff);
+}
+
+/* Apply */
+perfOff = perfOff === '1';
+document.body.classList.toggle('perf-off', perfOff);
+perfBtn.textContent = perfOff ? '🚀' : '⚡';
+
+/* Manual toggle */
 perfBtn.addEventListener('click', () => {
   perfOff = !perfOff;
   document.body.classList.toggle('perf-off', perfOff);
+  localStorage.setItem('perfOff', perfOff ? '1' : '0');
   perfBtn.textContent = perfOff ? '🚀' : '⚡';
 });
 </script>
    </body>
    </html>
+
 
 
 
