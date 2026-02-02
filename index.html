@@ -694,20 +694,18 @@ const observer = new IntersectionObserver(
 revealElements.forEach(el => observer.observe(el));
          (function () {
   const body = document.body;
+  const btn = document.querySelector('.perf-toggle');
 
   function isTouchDevice() {
-    return (
-      'ontouchstart' in window ||
-      navigator.maxTouchPoints > 0
-    );
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   }
 
   function isLowEndDevice() {
     return navigator.deviceMemory && navigator.deviceMemory <= 4;
   }
 
-  function autoSetMode() {
-    if (isTouchDevice() || isLowEndDevice()) {
+  function applyMode(mode) {
+    if (mode === 'perf') {
       body.classList.add('perf-off');
       body.classList.remove('premium-on');
     } else {
@@ -716,11 +714,34 @@ revealElements.forEach(el => observer.observe(el));
     }
   }
 
-  autoSetMode();
+  /* 1️⃣ Check saved preference */
+  const savedMode = localStorage.getItem('site-mode');
+  if (savedMode) {
+    applyMode(savedMode);
+  } else {
+    /* 2️⃣ Auto mode (runs ONCE) */
+    if (isTouchDevice() || isLowEndDevice()) {
+      applyMode('perf');
+    } else {
+      applyMode('premium');
+    }
+  }
+
+  /* 3️⃣ Manual toggle */
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const isPerf = body.classList.contains('perf-off');
+      const newMode = isPerf ? 'premium' : 'perf';
+
+      applyMode(newMode);
+      localStorage.setItem('site-mode', newMode);
+    });
+  }
 })();
 </script>
    </body>
    </html>
+
 
 
 
