@@ -692,44 +692,36 @@ const observer = new IntersectionObserver(
 );
 
 revealElements.forEach(el => observer.observe(el));
-         const perfBtn = document.getElementById('perfToggle');
+         (function () {
+  const body = document.body;
 
-const perfBtn = document.getElementById('perfToggle');
+  function isTouchDevice() {
+    return (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0
+    );
+  }
 
-/* 1. Detect mobile by capability */
-const isMobile =
-  matchMedia('(hover: none)').matches &&
-  matchMedia('(pointer: coarse)').matches;
+  function isLowEndDevice() {
+    return navigator.deviceMemory && navigator.deviceMemory <= 4;
+  }
 
-/* 2. Read user override (if any) */
-let userChoice = localStorage.getItem('perfUser');
+  function autoSetMode() {
+    if (isTouchDevice() || isLowEndDevice()) {
+      body.classList.add('perf-off');
+      body.classList.remove('premium-on');
+    } else {
+      body.classList.add('premium-on');
+      body.classList.remove('perf-off');
+    }
+  }
 
-/* 3. Decide mode */
-let perfOff;
-if (userChoice === null) {
-  // AUTO MODE
-  perfOff = isMobile;   // mobile = true, desktop = false
-} else {
-  // USER MODE
-  perfOff = userChoice === '1';
-}
-
-/* 4. Apply immediately */
-document.body.classList.toggle('perf-off', perfOff);
-perfBtn.textContent = perfOff ? '🚀' : '⚡';
-
-/* 5. Manual toggle */
-perfBtn.addEventListener('click', () => {
-  perfOff = !perfOff;
-  document.body.classList.toggle('perf-off', perfOff);
-  perfBtn.textContent = perfOff ? '🚀' : '⚡';
-
-  // Save user override
-  localStorage.setItem('perfUser', perfOff ? '1' : '0');
-});
+  autoSetMode();
+})();
 </script>
    </body>
    </html>
+
 
 
 
