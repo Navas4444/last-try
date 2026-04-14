@@ -512,9 +512,40 @@ body.perf-off .overlay{
   -webkit-backdrop-filter: none !important;
   background: rgba(255,255,255,0.85) !important;
 }
-      </style>
+/* CONTINUOUS GRADIENT TRAIL */
+.trail-point {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+
+  /* 💜 Violet → Pink gradient */
+  background: radial-gradient(circle, #a855f7, #ec4899);
+
+  /* Strong blur to merge points */
+  filter: blur(10px);
+
+  /* This is the MAGIC for continuous look */
+  mix-blend-mode: screen;
+
+  opacity: 0.7;
+  transform: translate(-50%, -50%);
+  z-index: 999999;
+}
+
+/* Make inner points stronger, outer softer */
+.trail-point {
+  transition: opacity 0.2s;
+}
+
+/* Performance mode */
+body.perf-off .trail-point {
+  display: none !important;
+}</style>
    </head>
    <body>
+<div id="trail-container"></div>
       <div class="perf-toggle" id="perfToggle">
   ⚡
       </div>
@@ -598,7 +629,7 @@ body.perf-off .overlay{
             </div>
          <div class="glass">
             <h3 class="contact-info reveal">Contact Info</h3>
-            <p class="reveal">"Only 30$"</p>
+            <p class="reveal">"Only 17$"</p>
             <a class="tg-btn reveal" href="https://t.me/ShadowFight2Hunter">Contact on Telegram</a><br>
             <a class="yt-btn reveal" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank">Subscribe</a>
          </div>
@@ -749,41 +780,70 @@ revealElements.forEach(el => observer.observe(el));
     });
   }
 })();
+
+
+const container = document.getElementById("trail-container");
+
+const trailCount = 30; // more = smoother tail
+const points = [];
+
+// create trail elements
+for (let i = 0; i < trailCount; i++) {
+  const el = document.createElement("div");
+  el.className = "trail-point";
+  container.appendChild(el);
+
+  points.push({
+    x: 0,
+    y: 0,
+    el
+  });
+}
+
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animate() {
+
+  if (document.body.classList.contains("perf-off")) {
+    requestAnimationFrame(animate);
+    return;
+  }
+
+  // first point follows cursor
+  points[0].x += (mouseX - points[0].x) * 0.3;
+  points[0].y += (mouseY - points[0].y) * 0.3;
+
+  // rest follow previous points
+  for (let i = 1; i < points.length; i++) {
+    points[i].x += (points[i - 1].x - points[i].x) * 0.3;
+    points[i].y += (points[i - 1].y - points[i].y) * 0.3;
+  }
+
+  // render
+points.forEach((p, i) => {
+  p.el.style.left = p.x + "px";
+  p.el.style.top = p.y + "px";
+
+  const t = i / trailCount;
+
+  // smoother falloff
+  const scale = 1 - t * 0.8;
+  const opacity = 1 - t * 0.9;
+
+  p.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  p.el.style.opacity = opacity;
+});
+
+  requestAnimationFrame(animate);
+}
+
+animate();
 </script>
    </body>
    </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
