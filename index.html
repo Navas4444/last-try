@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- Standard compliant viewport allowing native mobile browser address bar collapse -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,6 +32,7 @@
       --card-border: rgba(0, 0, 0, 0.08);
       --card-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
       --accent-cornflower: #3b71e8;
+      --accent-reddish-brown: #a63a2a;
       --highlight: #2e7d32;
       --edge-fade: #ffffff;
       --trail-core: #b83a28;
@@ -55,6 +55,7 @@
       --card-border: rgba(255, 255, 255, 0.12);
       --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
       --accent-cornflower: #3b71e8;
+      --accent-reddish-brown: #b54332;
       --highlight: #4caf50;
       --edge-fade: #000000;
       --trail-core: #c44734;
@@ -73,7 +74,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Unconstrained root allows browser window chrome to collapse naturally */
     html {
       margin: 0;
       padding: 0;
@@ -85,7 +85,7 @@
     body {
       margin: 0;
       padding: 0;
-      min-height: 100.5vh; /* Provides guaranteed scroll delta to trigger immediate top-bar retraction */
+      min-height: 100.5vh;
       background-color: var(--bg-color);
       color: var(--text-main);
       font-family: 'Samsung Sans', 'SamsungOne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -130,7 +130,7 @@
 
     #appWrapper {
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     #appWrapper.ready {
@@ -150,37 +150,42 @@
       opacity: 1;
     }
 
-    /* Screen-centered expanding cornflower circle */
-    .bg-circle-glow {
+    .bg-dual-glow {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate3d(-50%, -50%, 0) scale(0.2);
-      width: min(650px, 90vw);
-      height: min(650px, 90vw);
+      transform: translate3d(-50%, -50%, 0) scale(0.25);
+      width: min(820px, 94vw);
+      height: min(820px, 94vw);
       border-radius: 50%;
-      background: radial-gradient(circle, var(--accent-cornflower) 0%, rgba(59, 113, 232, 0.45) 45%, rgba(59, 113, 232, 0) 75%);
+      background:
+        radial-gradient(circle at 35% 40%, var(--accent-cornflower) 0%, rgba(59, 113, 232, 0.45) 40%, transparent 68%),
+        radial-gradient(circle at 65% 60%, var(--accent-reddish-brown) 0%, rgba(166, 58, 42, 0.45) 40%, transparent 68%);
       opacity: 0;
-      filter: blur(40px);
+      filter: blur(55px);
       pointer-events: none;
       z-index: 0;
+      will-change: transform, opacity;
     }
 
-    .bg-circle-glow.start-expansion {
-      animation: expandGlow 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .bg-dual-glow.start-expansion {
+      animation: expandDualGlowSlow 3.2s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
     }
 
-    @keyframes expandGlow {
+    @keyframes expandDualGlowSlow {
       0% {
-        transform: translate3d(-50%, -50%, 0) scale(0.2);
+        transform: translate3d(-50%, -50%, 0) scale(0.25);
         opacity: 0;
       }
-      40% {
-        opacity: 0.85;
+      30% {
+        opacity: 0.15;
+      }
+      70% {
+        opacity: 0.45;
       }
       100% {
-        transform: translate3d(-50%, -50%, 0) scale(1.5);
-        opacity: 0.5;
+        transform: translate3d(-50%, -50%, 0) scale(1.45);
+        opacity: 0.58;
       }
     }
 
@@ -214,10 +219,11 @@
       .fade-edge-bottom { height: 70px; }
     }
 
+    /* Dark/Light Mode Pill Centered at Bottom of Screen */
     .theme-toggle-pill {
       position: fixed;
-      top: max(16px, calc(env(safe-area-inset-top) + 8px));
-      right: max(16px, env(safe-area-inset-right));
+      bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
+      left: 50%;
       width: 76px;
       height: 40px;
       box-sizing: border-box;
@@ -232,7 +238,8 @@
       z-index: 999999;
       cursor: pointer;
       user-select: none;
-      transform: translateZ(0);
+      transform: translate3d(-50%, 0, 0);
+      will-change: transform, opacity;
       transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
                   transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
                   backdrop-filter 0.25s ease,
@@ -249,7 +256,7 @@
     .theme-toggle-pill.scrolling-hidden {
       opacity: 0;
       pointer-events: none;
-      transform: translate3d(0, -6px, 0);
+      transform: translate3d(-50%, 8px, 0);
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
     }
@@ -291,10 +298,43 @@
       display: block;
       margin: auto;
       fill: currentColor;
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     #darkIcon svg {
       transform: translateX(1px);
+    }
+
+    .toggle-icon-slot.spin-once svg {
+      animation: rotateIconOnce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes rotateIconOnce {
+      0% {
+        transform: rotate(0deg) scale(0.8);
+      }
+      50% {
+        transform: rotate(180deg) scale(1.15);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    #darkIcon.spin-once svg {
+      animation: rotateDarkIconOnce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes rotateDarkIconOnce {
+      0% {
+        transform: translateX(1px) rotate(0deg) scale(0.8);
+      }
+      50% {
+        transform: translateX(1px) rotate(180deg) scale(1.15);
+      }
+      100% {
+        transform: translateX(1px) rotate(360deg) scale(1);
+      }
     }
 
     body.dark .toggle-icon-slot {
@@ -307,7 +347,7 @@
 
     .site-header {
       width: min(92vw, 900px);
-      margin: calc(env(safe-area-inset-top) + 64px) auto 16px;
+      margin: calc(env(safe-area-inset-top) + 24px) auto 16px;
       padding: 0 8px;
       text-align: left;
       position: relative;
@@ -334,7 +374,7 @@
 
     .container {
       max-width: 900px;
-      margin: 0 auto calc(env(safe-area-inset-bottom) + 50px);
+      margin: 0 auto calc(env(safe-area-inset-bottom) + 80px);
       padding: 0 16px;
       position: relative;
       z-index: 1;
@@ -348,7 +388,9 @@
       margin: clamp(14px, 3vw, 22px) 0;
       box-shadow: var(--card-shadow);
       overflow: hidden;
-      contain: content;
+      contain: layout paint;
+      transform: translateZ(0);
+      will-change: opacity, transform;
       transition: background var(--fade-duration) ease, border-color var(--fade-duration) ease;
     }
 
@@ -565,7 +607,7 @@
         transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
       .theme-toggle-pill:hover {
-        transform: scale(1.05);
+        transform: translate3d(-50%, 0, 0) scale(1.05);
         box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
       }
       .tg-btn:hover {
@@ -634,7 +676,7 @@
       }
     }
 
-    /* Fullscreen Image Carousel Overlay */
+    /* FIXED: Fullscreen Image Carousel Overlay (No cutouts on screen edges) */
     .image-viewer-overlay {
       position: fixed;
       inset: 0;
@@ -645,7 +687,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: clamp(16px, 4vw, 32px);
+      /* Properly handles mobile cutouts, notches & curved screen corners */
+      padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(80px, calc(env(safe-area-inset-bottom) + 60px)) max(12px, env(safe-area-inset-left));
+      box-sizing: border-box;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -666,18 +710,19 @@
     .viewer-viewport {
       position: relative;
       width: 100%;
-      max-width: 860px;
-      height: 85vh;
+      height: 100%;
+      max-width: 900px;
+      max-height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .viewer-card {
       position: absolute;
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -690,10 +735,12 @@
 
     .viewer-img {
       max-width: 100%;
-      max-height: 85vh;
+      max-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: contain;
-      border-radius: 28px;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
       user-select: none;
       -webkit-user-drag: none;
     }
@@ -785,10 +832,32 @@
       transition: none;
     }
 
-    .viewer-btn {
+    /* Interactive Bottom Control Bar Aligned in the Same Horizontal X-Axis */
+    .viewer-controls-bar {
       position: fixed;
-      width: 46px;
-      height: 46px;
+      bottom: max(18px, calc(env(safe-area-inset-bottom) + 12px));
+      left: 50%;
+      transform: translate3d(-50%, 20px, 0);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      z-index: 1000002;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease 0.1s,
+                  transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s;
+    }
+
+    .image-viewer-overlay.active .viewer-controls-bar {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate3d(-50%, 0, 0);
+    }
+
+    .viewer-btn {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 1px solid var(--card-border);
       background: var(--nav-btn-bg);
@@ -800,19 +869,10 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      z-index: 1000002;
-      opacity: 0;
-      transform: scale(0.85);
       user-select: none;
-      transition: opacity 0.3s ease 0.1s,
-                  transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
                   background 0.2s ease,
                   box-shadow 0.2s ease;
-    }
-
-    .image-viewer-overlay.active .viewer-btn {
-      opacity: 1;
-      transform: scale(1);
     }
 
     .viewer-btn:active {
@@ -822,7 +882,7 @@
 
     @media (hover: hover) and (pointer: fine) {
       .viewer-btn:hover {
-        transform: scale(1.08);
+        transform: scale(1.1);
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
       }
     }
@@ -836,48 +896,6 @@
       stroke-linejoin: round;
       fill: none;
     }
-
-    .viewer-close-btn {
-      top: max(20px, calc(env(safe-area-inset-top) + 8px));
-      right: max(20px, env(safe-area-inset-right));
-    }
-
-    .viewer-arrow-btn.prev {
-      left: max(16px, env(safe-area-inset-left));
-      top: 50%;
-      transform: translateY(-50%) scale(0.85);
-    }
-
-    .viewer-arrow-btn.next {
-      right: max(16px, env(safe-area-inset-right));
-      top: 50%;
-      transform: translateY(-50%) scale(0.85);
-    }
-
-    .image-viewer-overlay.active .viewer-arrow-btn.prev {
-      transform: translateY(-50%) scale(1);
-    }
-
-    .image-viewer-overlay.active .viewer-arrow-btn.next {
-      transform: translateY(-50%) scale(1);
-    }
-
-    .image-viewer-overlay.active .viewer-arrow-btn.prev:active {
-      transform: translateY(-50%) scale(0.88);
-    }
-
-    .image-viewer-overlay.active .viewer-arrow-btn.next:active {
-      transform: translateY(-50%) scale(0.88);
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .image-viewer-overlay.active .viewer-arrow-btn.prev:hover {
-        transform: translateY(-50%) scale(1.08);
-      }
-      .image-viewer-overlay.active .viewer-arrow-btn.next:hover {
-        transform: translateY(-50%) scale(1.08);
-      }
-    }
   </style>
 </head>
 <body>
@@ -889,37 +907,16 @@
   <div id="appWrapper">
     <div id="themeFadeOverlay"></div>
 
-    <div class="theme-toggle-pill blurred-state" id="themePill" title="Toggle Light / Dark mode">
-      <div class="pill-slider" id="pillSlider"></div>
-      <div class="toggle-icon-slot active" id="lightIcon">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-          <line x1="12" y1="20" x2="12" y2="23" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-          <line x1="1" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-          <line x1="20" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-          <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
-        </svg>
-      </div>
-      <div class="toggle-icon-slot" id="darkIcon">
-        <svg viewBox="0 0 24 24">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </div>
-    </div>
-
     <div class="fade-edge-top"></div>
     <div class="fade-edge-bottom"></div>
 
-    <div class="bg-circle-glow" id="bgCircleGlow"></div>
+    <!-- Dual Colliding Cornflower Blue & Reddish Brown Glow -->
+    <div class="bg-dual-glow" id="bgDualGlow"></div>
 
     <div class="trail-container" id="trailContainer"></div>
 
     <header class="site-header reveal">
-      <h1 class="site-title">Navas's Official SF2 Dream Mod</h1>
+      <h1 class="site-title">Navas's Official</h1>
       <div class="site-subtitle">Shadow Fight 2 Modder</div>
     </header>
 
@@ -976,7 +973,7 @@
         <p style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Not available</p>
         <div class="btn-group">
           <a class="tg-btn" href="https://t.me/ShadowFight2Hunter" target="_blank" rel="noopener">Contact on Telegram</a>
-          <a class="yt-btn" href="https://youtube.com/@cbtpartition-wm3vf" target="_blank" rel="noopener">YouTube Channel</a>
+          <a class="yt-btn" href="https://m.youtube.com/@Navas4444_Official" target="_blank" rel="noopener">YouTube Channel</a>
         </div>
       </div>
 
@@ -1001,32 +998,58 @@
       </div>
 
     </div>
+
+    <!-- Theme Toggle Pill Centered at Bottom -->
+    <div class="theme-toggle-pill blurred-state" id="themePill" title="Toggle Light / Dark mode">
+      <div class="pill-slider" id="pillSlider"></div>
+      <div class="toggle-icon-slot active" id="lightIcon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+          <line x1="12" y1="20" x2="12" y2="23" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+          <line x1="1" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+          <line x1="20" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+          <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+        </svg>
+      </div>
+      <div class="toggle-icon-slot" id="darkIcon">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </div>
+    </div>
   </div>
 
+  <!-- Fullscreen Image Viewer with Bottom Horizontal Aligned Controls -->
   <div class="image-viewer-overlay" id="imageViewer" onclick="closeImageViewer(event)">
-    <button class="viewer-btn viewer-close-btn" id="viewerCloseBtn" aria-label="Close image preview">
-      <svg viewBox="0 0 24 24">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-
-    <button class="viewer-btn viewer-arrow-btn prev" id="viewerPrevBtn" aria-label="Previous image">
-      <svg viewBox="0 0 24 24">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
-
-    <button class="viewer-btn viewer-arrow-btn next" id="viewerNextBtn" aria-label="Next image">
-      <svg viewBox="0 0 24 24">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
-
     <div class="viewer-viewport">
       <div class="viewer-card" id="viewerCard">
         <img src="" alt="Full Preview" class="viewer-img" id="viewerImg">
       </div>
+    </div>
+
+    <div class="viewer-controls-bar" id="viewerControlsBar">
+      <button class="viewer-btn viewer-arrow-btn prev" id="viewerPrevBtn" aria-label="Previous image">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="viewer-btn viewer-close-btn" id="viewerCloseBtn" aria-label="Close image preview">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <button class="viewer-btn viewer-arrow-btn next" id="viewerNextBtn" aria-label="Next image">
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -1050,14 +1073,14 @@
 
       const preloader = document.getElementById('sitePreloader');
       const app = document.getElementById('appWrapper');
-      const bgCircle = document.getElementById('bgCircleGlow');
+      const dualGlow = document.getElementById('bgDualGlow');
 
       preloader.classList.add('loaded');
       app.classList.add('ready');
 
       setTimeout(() => {
-        bgCircle.classList.add('start-expansion');
-      }, 100);
+        dualGlow.classList.add('start-expansion');
+      }, 550);
 
       initObserver();
       initStaticBlurAndScrollPill();
@@ -1065,9 +1088,7 @@
       initBrowserBarRetraction();
     });
 
-    // Native mobile browser address bar collapse trigger
     function initBrowserBarRetraction() {
-      // Small 1px programmatic nudge kicks mobile browsers into collapsing top/bottom navigation chrome
       const kickScroll = () => {
         if (window.scrollY === 0) {
           window.scrollTo(0, 1);
@@ -1094,6 +1115,11 @@
     }
 
     function syncIcons(targetIsDark) {
+      const activeSlot = targetIsDark ? darkIcon : lightIcon;
+      activeSlot.classList.remove('spin-once');
+      void activeSlot.offsetWidth;
+      activeSlot.classList.add('spin-once');
+
       if (targetIsDark) {
         darkIcon.classList.add('active');
         lightIcon.classList.remove('active');
@@ -1352,7 +1378,10 @@
       renderComet();
     }
 
+    /* OPTIMIZED: Mouse pointer down ripple only (Fixes mobile touch scroll stutter) */
     window.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return; // Prevent spawning ripple nodes during touch scrolls
+      
       const ripple = document.createElement('div');
       ripple.className = 'click-ripple';
       ripple.style.left = `${e.clientX}px`;
@@ -1366,4 +1395,5 @@
   </script>
 </body>
 </html>
+ 
 
