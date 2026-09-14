@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Standard compliant viewport allowing native mobile browser address bar collapse -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#ffffff" id="metaThemeColor">
   <title>Navas's Official SF2 Dream Mod</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <style>
     @font-face {
       font-family: 'Samsung Sans';
@@ -69,10 +73,19 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html, body {
+    /* Unconstrained root allows browser window chrome to collapse naturally */
+    html {
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+      background-color: var(--bg-color);
+      overflow-x: hidden;
+      transition: background-color var(--fade-duration) ease;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100.5vh; /* Provides guaranteed scroll delta to trigger immediate top-bar retraction */
       background-color: var(--bg-color);
       color: var(--text-main);
       font-family: 'Samsung Sans', 'SamsungOne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -117,7 +130,7 @@
 
     #appWrapper {
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.5s ease;
     }
 
     #appWrapper.ready {
@@ -137,6 +150,7 @@
       opacity: 1;
     }
 
+    /* Screen-centered expanding cornflower circle */
     .bg-circle-glow {
       position: fixed;
       top: 50%;
@@ -152,8 +166,8 @@
       z-index: 0;
     }
 
-    #appWrapper.ready .bg-circle-glow {
-      animation: expandGlow 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .bg-circle-glow.start-expansion {
+      animation: expandGlow 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes expandGlow {
@@ -176,7 +190,7 @@
       position: fixed;
       left: 0;
       right: 0;
-      height: 56px;
+      height: calc(56px + env(safe-area-inset-top));
       pointer-events: none;
       z-index: 100;
       transition: background var(--fade-duration) ease;
@@ -191,18 +205,18 @@
 
     .fade-edge-bottom {
       bottom: 0;
+      height: calc(56px + env(safe-area-inset-bottom));
       background: linear-gradient(to top, var(--edge-fade) 0%, transparent 100%);
     }
 
     @media (min-width: 769px) {
-      .fade-edge-top, .fade-edge-bottom {
-        height: 70px;
-      }
+      .fade-edge-top { height: 70px; }
+      .fade-edge-bottom { height: 70px; }
     }
 
     .theme-toggle-pill {
       position: fixed;
-      top: max(16px, env(safe-area-inset-top));
+      top: max(16px, calc(env(safe-area-inset-top) + 8px));
       right: max(16px, env(safe-area-inset-right));
       width: 76px;
       height: 40px;
@@ -293,7 +307,7 @@
 
     .site-header {
       width: min(92vw, 900px);
-      margin: max(60px, calc(env(safe-area-inset-top) + 40px)) auto 16px;
+      margin: calc(env(safe-area-inset-top) + 64px) auto 16px;
       padding: 0 8px;
       text-align: left;
       position: relative;
@@ -320,7 +334,7 @@
 
     .container {
       max-width: 900px;
-      margin: 0 auto max(40px, env(safe-area-inset-bottom));
+      margin: 0 auto calc(env(safe-area-inset-bottom) + 50px);
       padding: 0 16px;
       position: relative;
       z-index: 1;
@@ -565,9 +579,6 @@
     }
 
     @media (max-width: 480px) {
-      .site-header {
-        margin-top: max(74px, calc(env(safe-area-inset-top) + 54px));
-      }
       .btn-group {
         flex-direction: column;
       }
@@ -623,7 +634,7 @@
       }
     }
 
-    /* Fullscreen Android 15 Smooth Viewer Overlay */
+    /* Fullscreen Image Carousel Overlay */
     .image-viewer-overlay {
       position: fixed;
       inset: 0;
@@ -687,19 +698,15 @@
       -webkit-user-drag: none;
     }
 
-    /* Exit Overlay Animation State */
     .image-viewer-overlay.closing .viewer-card {
       transform: translate3d(-100%, 0, 0) scale(0.72);
       opacity: 0;
     }
 
-    /* Directional Dynamic Slide + Scale Animation Sequence */
-    /* Slide out left: expands briefly before shrinking into distance */
     .viewer-card.slide-out-left {
       animation: slideOutLeftScale 0.44s cubic-bezier(0.2, 0, 0.3, 1) forwards;
     }
 
-    /* Slide out right: expands briefly before shrinking into distance */
     .viewer-card.slide-out-right {
       animation: slideOutRightScale 0.44s cubic-bezier(0.2, 0, 0.3, 1) forwards;
     }
@@ -734,12 +741,10 @@
       }
     }
 
-    /* Slide in from right: starts shrunk, expands to focal size, relaxes to natural scale */
     .viewer-card.slide-in-right {
       animation: slideInRightScale 0.48s cubic-bezier(0.12, 0.95, 0.22, 1) forwards;
     }
 
-    /* Slide in from left: starts shrunk, expands to focal size, relaxes to natural scale */
     .viewer-card.slide-in-left {
       animation: slideInLeftScale 0.48s cubic-bezier(0.12, 0.95, 0.22, 1) forwards;
     }
@@ -774,14 +779,12 @@
       }
     }
 
-    /* Initial open transition states */
     .viewer-card.from-right {
       transform: translate3d(100%, 0, 0) scale(0.68);
       opacity: 0;
       transition: none;
     }
 
-    /* Navigation Controls & Close Button */
     .viewer-btn {
       position: fixed;
       width: 46px;
@@ -835,7 +838,7 @@
     }
 
     .viewer-close-btn {
-      top: max(20px, env(safe-area-inset-top));
+      top: max(20px, calc(env(safe-area-inset-top) + 8px));
       right: max(20px, env(safe-area-inset-right));
     }
 
@@ -911,7 +914,7 @@
     <div class="fade-edge-top"></div>
     <div class="fade-edge-bottom"></div>
 
-    <div class="bg-circle-glow"></div>
+    <div class="bg-circle-glow" id="bgCircleGlow"></div>
 
     <div class="trail-container" id="trailContainer"></div>
 
@@ -1000,7 +1003,6 @@
     </div>
   </div>
 
-  <!-- Android 15 Fullscreen Viewer Overlay with Dynamic Scale-Slide Transitions -->
   <div class="image-viewer-overlay" id="imageViewer" onclick="closeImageViewer(event)">
     <button class="viewer-btn viewer-close-btn" id="viewerCloseBtn" aria-label="Close image preview">
       <svg viewBox="0 0 24 24">
@@ -1048,21 +1050,48 @@
 
       const preloader = document.getElementById('sitePreloader');
       const app = document.getElementById('appWrapper');
+      const bgCircle = document.getElementById('bgCircleGlow');
 
       preloader.classList.add('loaded');
       app.classList.add('ready');
 
+      setTimeout(() => {
+        bgCircle.classList.add('start-expansion');
+      }, 100);
+
       initObserver();
       initStaticBlurAndScrollPill();
+      syncStatusBarSystemTheme();
+      initBrowserBarRetraction();
     });
+
+    // Native mobile browser address bar collapse trigger
+    function initBrowserBarRetraction() {
+      // Small 1px programmatic nudge kicks mobile browsers into collapsing top/bottom navigation chrome
+      const kickScroll = () => {
+        if (window.scrollY === 0) {
+          window.scrollTo(0, 1);
+        }
+      };
+
+      setTimeout(kickScroll, 300);
+      window.addEventListener('touchstart', kickScroll, { once: true, passive: true });
+    }
 
     const themePill = document.getElementById('themePill');
     const lightIcon = document.getElementById('lightIcon');
     const darkIcon = document.getElementById('darkIcon');
     const fadeOverlay = document.getElementById('themeFadeOverlay');
+    const metaThemeColor = document.getElementById('metaThemeColor');
 
     let isDark = false;
     let isTransitioning = false;
+
+    function syncStatusBarSystemTheme() {
+      const currentColor = isDark ? '#000000' : '#ffffff';
+      metaThemeColor.setAttribute('content', currentColor);
+      document.documentElement.style.backgroundColor = currentColor;
+    }
 
     function syncIcons(targetIsDark) {
       if (targetIsDark) {
@@ -1072,6 +1101,7 @@
         lightIcon.classList.add('active');
         darkIcon.classList.remove('active');
       }
+      syncStatusBarSystemTheme();
     }
 
     themePill.addEventListener('click', () => {
@@ -1143,7 +1173,6 @@
       revealElements.forEach(el => observer.observe(el));
     }
 
-    /* Carousel Image Viewer Logic with Shrink/Expand Dynamics */
     const galleryList = [
       'https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp',
       'https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp',
@@ -1191,7 +1220,6 @@
       const exitClass = isNext ? 'slide-out-left' : 'slide-out-right';
       const enterClass = isNext ? 'slide-in-right' : 'slide-in-left';
 
-      // Step 1: Slide out with expand-then-shrink trajectory
       viewerCard.className = `viewer-card ${exitClass}`;
 
       setTimeout(() => {
@@ -1202,8 +1230,6 @@
         }
 
         viewerImg.src = galleryList[currentImgIndex];
-
-        // Step 2: Slide in with shrink-then-expand entry
         viewerCard.className = `viewer-card ${enterClass}`;
 
         setTimeout(() => {
