@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,14 +40,25 @@
       --trail-core: #b83a28;
       --trail-glow: rgba(184, 58, 40, 0.45);
       --ripple-color: rgba(184, 58, 40, 0.35);
-      --pill-bg: rgba(255, 255, 255, 0.72);
-      --pill-border: rgba(0, 0, 0, 0.14);
-      --pill-slider-bg: rgba(0, 0, 0, 0.08);
+
+      /* Liquid Glass Variables (Light Mode) */
+      --pill-bg: rgba(255, 255, 255, 0.62);
+      --pill-border: rgba(255, 255, 255, 0.85);
+      --pill-shadow: 
+        0 14px 28px -6px rgba(0, 0, 0, 0.12),
+        0 4px 12px -2px rgba(0, 0, 0, 0.08),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+      --pill-slider-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 243, 0.75));
+      --pill-slider-shadow: 0 3px 10px rgba(0, 0, 0, 0.14), inset 0 1px 1px rgba(255, 255, 255, 1);
+
       --overlay-backdrop: rgba(255, 255, 255, 0.65);
       --nav-btn-bg: rgba(0, 0, 0, 0.07);
       --nav-btn-color: #111111;
       --scrollbar-thumb: rgba(0, 0, 0, 0.35);
       --scrollbar-thumb-active: rgba(0, 0, 0, 0.85);
+      --glow-green: rgba(46, 125, 50, 0.14);
+      --glow-blue: rgba(59, 113, 232, 0.15);
       --fade-duration: 0.35s;
     }
 
@@ -63,14 +76,25 @@
       --trail-core: #c44734;
       --trail-glow: rgba(196, 71, 52, 0.45);
       --ripple-color: rgba(196, 71, 52, 0.45);
-      --pill-bg: rgba(28, 28, 30, 0.72);
-      --pill-border: rgba(255, 255, 255, 0.18);
-      --pill-slider-bg: rgba(255, 255, 255, 0.16);
+
+      /* Liquid Glass Variables (Dark Mode) */
+      --pill-bg: rgba(28, 28, 32, 0.58);
+      --pill-border: rgba(255, 255, 255, 0.22);
+      --pill-shadow: 
+        0 16px 32px -4px rgba(0, 0, 0, 0.65),
+        0 4px 12px -2px rgba(0, 0, 0, 0.4),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.3),
+        inset 0 -1.5px 2px rgba(0, 0, 0, 0.45);
+      --pill-slider-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
+      --pill-slider-shadow: 0 3px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+
       --overlay-backdrop: rgba(0, 0, 0, 0.65);
       --nav-btn-bg: rgba(255, 255, 255, 0.12);
       --nav-btn-color: #ffffff;
       --scrollbar-thumb: rgba(255, 255, 255, 0.35);
       --scrollbar-thumb-active: rgba(255, 255, 255, 0.95);
+      --glow-green: rgba(76, 175, 80, 0.18);
+      --glow-blue: rgba(59, 113, 232, 0.22);
     }
 
     * {
@@ -89,24 +113,40 @@
       padding: 0;
       background-color: var(--bg-color);
       overflow-x: hidden;
+      overflow-y: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      transition: background-color var(--fade-duration) ease;
     }
 
     body {
       margin: 0;
       padding: 0;
-      min-height: 100.5vh;
+      min-height: 100vh;
       background-color: var(--bg-color);
       color: var(--text-main);
       font-family: 'Samsung Sans', 'SamsungOne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-weight: 400;
       overflow-x: hidden;
+      overflow-y: visible;
       -webkit-font-smoothing: antialiased;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: none;
-      transition: background-color var(--fade-duration) ease, color var(--fade-duration) ease;
+      overscroll-behavior-y: auto;
+    }
+
+    /* Hardware Composited Fullscreen Theme Cross-Fade Layer */
+    #themeFadeOverlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1000001;
+      opacity: 0;
+      transform: translateZ(0);
+      will-change: opacity;
+      transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    #themeFadeOverlay.active {
+      opacity: 1;
     }
 
     /* Isolated Composited Scroll Handle */
@@ -115,7 +155,7 @@
       top: 0;
       bottom: 0;
       right: 0;
-      width: 24px;
+      width: 14px;
       z-index: 9999998;
       pointer-events: none;
       transform: translateZ(0);
@@ -131,11 +171,16 @@
       border-radius: 9999px;
       opacity: 0;
       cursor: pointer;
-      pointer-events: auto;
-      touch-action: none;
+      pointer-events: none;
       will-change: transform, opacity;
       transform: translate3d(0, 0, 0);
-      transition: opacity 0.2s ease, width 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+      transition: opacity 0.2s ease, width 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @media (pointer: fine) {
+      #customScrollThumb {
+        pointer-events: auto;
+      }
     }
 
     #customScrollThumb.visible {
@@ -158,14 +203,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.4s ease, visibility 0.4s;
-      pointer-events: all;
+      transition: opacity 0.35s ease, visibility 0.35s;
+      pointer-events: auto;
     }
 
     #sitePreloader.loaded {
       opacity: 0;
       visibility: hidden;
-      pointer-events: none;
+      pointer-events: none !important;
+      display: none !important;
     }
 
     .loader-custom-img {
@@ -199,35 +245,33 @@
       opacity: 1;
     }
 
-    #themeFadeOverlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity var(--fade-duration) ease;
-    }
-
-    #themeFadeOverlay.active {
-      opacity: 1;
-    }
-
+    /* Enhanced Soft-Fade Dual Background Glow */
     .bg-dual-glow {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate3d(-50%, -50%, 0) scale(0.25);
-      width: min(820px, 94vw);
-      height: min(820px, 94vw);
+      width: min(860px, 96vw);
+      height: min(860px, 96vw);
       border-radius: 50%;
       background:
-        radial-gradient(circle at 35% 40%, rgba(59, 113, 232, 0.28) 0%, rgba(59, 113, 232, 0.12) 35%, transparent 68%),
-        radial-gradient(circle at 65% 60%, rgba(166, 58, 42, 0.28) 0%, rgba(166, 58, 42, 0.12) 35%, transparent 68%);
+        radial-gradient(circle at 32% 38%, rgba(59, 113, 232, 0.58) 0%, rgba(59, 113, 232, 0.36) 30%, rgba(59, 113, 232, 0.14) 55%, rgba(59, 113, 232, 0.03) 72%, transparent 85%),
+        radial-gradient(circle at 68% 62%, rgba(166, 58, 42, 0.58) 0%, rgba(166, 58, 42, 0.36) 30%, rgba(166, 58, 42, 0.14) 55%, rgba(166, 58, 42, 0.03) 72%, transparent 85%);
+      filter: blur(72px);
+      -webkit-filter: blur(72px);
       opacity: 0;
       pointer-events: none;
       z-index: 0;
       will-change: transform, opacity;
       transform: translateZ(0);
+    }
+
+    body.dark .bg-dual-glow {
+      background:
+        radial-gradient(circle at 35% 40%, rgba(59, 113, 232, 0.32) 0%, rgba(59, 113, 232, 0.18) 32%, rgba(59, 113, 232, 0.05) 58%, transparent 78%),
+        radial-gradient(circle at 65% 60%, rgba(166, 58, 42, 0.32) 0%, rgba(166, 58, 42, 0.18) 32%, rgba(166, 58, 42, 0.05) 58%, transparent 78%);
+      filter: blur(64px);
+      -webkit-filter: blur(64px);
     }
 
     .bg-dual-glow.start-expansion {
@@ -236,9 +280,9 @@
 
     @keyframes expandDualGlowSlow {
       0% { transform: translate3d(-50%, -50%, 0) scale(0.25); opacity: 0; }
-      30% { opacity: 0.25; }
-      70% { opacity: 0.65; }
-      100% { transform: translate3d(-50%, -50%, 0) scale(1.4); opacity: 0.85; }
+      30% { opacity: 0.35; }
+      70% { opacity: 0.8; }
+      100% { transform: translate3d(-50%, -50%, 0) scale(1.42); opacity: 1; }
     }
 
     .fade-edge-top,
@@ -251,7 +295,6 @@
       pointer-events: none;
       z-index: 100;
       transform: translateZ(0);
-      transition: background var(--fade-duration) ease;
     }
 
     .fade-edge-top {
@@ -269,70 +312,72 @@
       .fade-edge-top, .fade-edge-bottom { height: 70px; }
     }
 
-    /* Fixed Glass Pill with Static Blur */
+    /* Hardware-Accelerated Liquid Glass Pill */
     .theme-toggle-pill {
       position: fixed;
       bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
       left: 50%;
-      width: 76px;
-      height: 40px;
+      width: 78px;
+      height: 42px;
       box-sizing: border-box;
       display: grid;
-      grid-template-columns: 36px 36px;
+      grid-template-columns: 37px 37px;
       align-items: center;
       justify-content: center;
       border-radius: 9999px;
       background: var(--pill-bg);
       border: 1px solid var(--pill-border);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--pill-shadow);
       z-index: 999999;
       cursor: pointer;
       user-select: none;
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
       transform: translate3d(-50%, 0, 0);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       will-change: transform, opacity;
-      transition: opacity 0.24s cubic-bezier(0.2, 0.8, 0.2, 1),
-                  transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1),
-                  background var(--fade-duration) ease,
-                  border-color var(--fade-duration) ease;
+      contain: layout paint;
+      transition: opacity 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .theme-toggle-pill.scrolling-hidden {
       opacity: 0;
       pointer-events: none;
-      transform: translate3d(-50%, 12px, 0);
+      transform: translate3d(-50%, 14px, 0);
     }
 
     .pill-slider {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 32px;
-      height: 32px;
+      top: 3.5px;
+      left: 3.5px;
+      width: 33px;
+      height: 33px;
       border-radius: 50%;
       background: var(--pill-slider-bg);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background var(--fade-duration) ease;
+      box-shadow: var(--pill-slider-shadow);
+      border: 0.5px solid rgba(255, 255, 255, 0.4);
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
+      pointer-events: none;
     }
 
     body.dark .pill-slider {
       transform: translateX(36px);
+      border-color: rgba(255, 255, 255, 0.16);
     }
 
     .toggle-icon-slot {
       position: relative;
-      width: 36px;
+      width: 37px;
       height: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2;
-      color: #111111;
-      opacity: 0.4;
+      color: var(--text-main);
+      opacity: 0.35;
       line-height: 0;
-      transition: opacity 0.25s ease, color var(--fade-duration) ease;
+      transition: opacity 0.25s ease;
     }
 
     .toggle-icon-slot svg {
@@ -345,7 +390,7 @@
     }
 
     #darkIcon svg {
-      transform: translateX(1px);
+      transform: none;
     }
 
     .toggle-icon-slot.spin-once svg {
@@ -363,13 +408,9 @@
     }
 
     @keyframes rotateDarkIconOnce {
-      0% { transform: translateX(1px) rotate(0deg) scale(0.8); }
-      50% { transform: translateX(1px) rotate(180deg) scale(1.15); }
-      100% { transform: translateX(1px) rotate(360deg) scale(1); }
-    }
-
-    body.dark .toggle-icon-slot {
-      color: #ffffff;
+      0% { transform: rotate(0deg) scale(0.8); }
+      50% { transform: rotate(180deg) scale(1.15); }
+      100% { transform: rotate(360deg) scale(1); }
     }
 
     .toggle-icon-slot.active {
@@ -393,7 +434,6 @@
       color: var(--text-main);
       letter-spacing: -0.5px;
       line-height: 1.15;
-      transition: color var(--fade-duration) ease;
     }
 
     .site-subtitle {
@@ -401,7 +441,6 @@
       font-size: clamp(14px, 3.5vw, 18px);
       color: var(--text-muted);
       margin-top: 6px;
-      transition: color var(--fade-duration) ease;
     }
 
     .container {
@@ -422,7 +461,6 @@
       box-shadow: var(--card-shadow);
       overflow: hidden;
       transform: translateZ(0);
-      transition: background var(--fade-duration) ease, border-color var(--fade-duration) ease;
     }
 
     @media (min-width: 769px) {
@@ -449,8 +487,8 @@
       box-shadow: var(--card-shadow);
       background: var(--card-bg);
       border: 1px solid var(--card-border);
+      position: relative;
       transform: translateZ(0);
-      transition: background var(--fade-duration) ease, border-color var(--fade-duration) ease;
     }
 
     @media (min-width: 769px) {
@@ -470,6 +508,42 @@
 
     .material-item.group-bottom {
       border-radius: 6px 6px 24px 24px;
+    }
+
+    /* Bottom-Right Corner Soft Radial Fade Glows */
+    .glow-green-br,
+    .glow-blue-br {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow-green-br::after,
+    .glow-blue-br::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: clamp(130px, 32vw, 240px);
+      height: clamp(130px, 32vw, 240px);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(25%, 25%);
+      filter: blur(28px);
+    }
+
+    .glow-green-br::after {
+      background: radial-gradient(circle, var(--glow-green) 0%, rgba(46, 125, 50, 0.04) 55%, transparent 75%);
+    }
+
+    .glow-blue-br::after {
+      background: radial-gradient(circle, var(--glow-blue) 0%, rgba(59, 113, 232, 0.04) 55%, transparent 75%);
+    }
+
+    .glow-green-br > *,
+    .glow-blue-br > * {
+      position: relative;
+      z-index: 1;
     }
 
     .media-segment {
@@ -512,8 +586,8 @@
       font-size: clamp(18px, 4.5vw, 24px);
       margin-top: 0;
       margin-bottom: 10px;
+      color: var(--text-main);
       letter-spacing: -0.3px;
-      transition: color var(--fade-duration) ease;
     }
 
     p {
@@ -521,12 +595,6 @@
       line-height: 1.6;
       color: var(--text-muted);
       margin: 0;
-      transition: color var(--fade-duration) ease;
-    }
-
-    .highlight-title {
-      color: var(--highlight);
-      transition: color var(--fade-duration) ease;
     }
 
     .custom-point {
@@ -541,7 +609,6 @@
       font-size: clamp(13.5px, 3.8vw, 15px);
       line-height: 1.45;
       color: var(--text-main);
-      transition: color var(--fade-duration) ease;
     }
 
     .custom-point li::before {
@@ -566,6 +633,111 @@
       width: 1.3em;
     }
 
+    /* Mod Info Accordion and Bottom Fade Styles */
+    .mod-info-card {
+      position: relative;
+      padding-bottom: 56px;
+    }
+
+    .mod-expandable-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    .mod-expandable-wrap.expanded {
+      grid-template-rows: 1fr;
+    }
+
+    .mod-expandable-inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .mod-info-card .custom-point {
+      margin-top: 10px;
+    }
+
+    .mod-expandable-inner .custom-point {
+      margin-top: 0;
+    }
+
+    .mod-fade-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 46px;
+      height: 64px;
+      background: linear-gradient(to bottom, transparent 0%, var(--card-bg) 95%);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 1;
+      transition: opacity 0.35s ease;
+    }
+
+    @media (min-width: 769px) {
+      .mod-fade-overlay {
+        background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.94) 95%);
+      }
+      body.dark .mod-fade-overlay {
+        background: linear-gradient(to bottom, transparent 0%, rgba(22, 22, 24, 0.95) 95%);
+      }
+    }
+
+    .mod-fade-overlay.hidden {
+      opacity: 0;
+    }
+
+    .mod-toggle-btn {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--nav-btn-bg);
+      border: 1px solid var(--card-border);
+      color: var(--nav-btn-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      user-select: none;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.2s ease;
+    }
+
+    .mod-toggle-btn:active {
+      transform: translateX(-50%) scale(0.88);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .mod-toggle-btn:hover {
+        transform: translateX(-50%) scale(1.12);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      }
+    }
+
+    .mod-toggle-icon {
+      width: 18px;
+      height: 18px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .mod-toggle-btn.expanded .mod-toggle-icon {
+      transform: rotate(180deg);
+    }
+
     .image-grid-card {
       padding: 0;
       border-radius: 24px;
@@ -581,7 +753,6 @@
       margin: 0;
       padding: 0;
       background: var(--card-border);
-      transition: background var(--fade-duration) ease;
     }
 
     .grid-img-wrap {
@@ -590,7 +761,6 @@
       line-height: 0;
       background: var(--card-bg);
       cursor: pointer;
-      transition: background var(--fade-duration) ease;
     }
 
     .grid-img-wrap.top-left { border-radius: 24px 4px 4px 4px; }
@@ -637,9 +807,7 @@
       color: #ffffff;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       transform: translateZ(0);
-      transition: background var(--fade-duration) ease,
-                  color var(--fade-duration) ease,
-                  transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
                   opacity 0.2s ease;
     }
 
@@ -672,9 +840,7 @@
     @media (hover: hover) and (pointer: fine) {
       .card, .material-item {
         transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1),
-                    box-shadow 0.24s ease,
-                    background var(--fade-duration) ease,
-                    border-color var(--fade-duration) ease;
+                    box-shadow 0.24s ease;
       }
       .card:hover, .material-item:hover {
         transform: scale(1.015);
@@ -694,7 +860,7 @@
       }
       .theme-toggle-pill:hover {
         transform: translate3d(-50%, 0, 0) scale(1.05);
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
       }
       .tg-btn:hover, .yt-btn:hover {
         transform: translateY(-1px);
@@ -889,7 +1055,7 @@
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       user-select: none;
-      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .viewer-btn:active {
@@ -921,7 +1087,10 @@
     <div id="customScrollThumb" title="Scroll"></div>
   </div>
 
-  <!-- Custom Image Preloader (Replace src with any image/icon URL) -->
+  <!-- Fullscreen GPU Theme Crossfade Shield -->
+  <div id="themeFadeOverlay"></div>
+
+  <!-- Custom Image Preloader -->
   <div id="sitePreloader">
     <img
       src="https://github.com/Navas4444/last-try/releases/download/Title/icon.png"
@@ -931,8 +1100,6 @@
   </div>
 
   <div id="appWrapper">
-    <div id="themeFadeOverlay"></div>
-
     <div class="fade-edge-top"></div>
     <div class="fade-edge-bottom"></div>
 
@@ -966,18 +1133,33 @@
           <p>This mod contains comprehensive A-Z content from 2015–2025. Optimized with high-level performance adjustments and custom battles.</p>
         </div>
 
-        <div class="card material-item group-bottom">
+        <div class="card material-item group-bottom mod-info-card" id="modInfoCard">
           <h3>Mod Info</h3>
           <ul class="custom-point">
             <li>Crashless gameplay (shop, map, battle end fixed)</li>
             <li>Main server & private server equipments</li>
             <li>2015–25 raid battles + custom unique battles (~86 available)</li>
-            <li>Remastered special edition locations</li>
-            <li>Full offline raid system reworked</li>
-            <li>All mythical sets & perks available</li>
-            <li>Raid spheres, potions & horns usable as perks</li>
-            <li>High-level optimization & zone switcher enabled</li>
           </ul>
+
+          <div class="mod-expandable-wrap" id="modExpandableWrap">
+            <div class="mod-expandable-inner">
+              <ul class="custom-point">
+                <li>Remastered special edition locations</li>
+                <li>Full offline raid system reworked</li>
+                <li>All mythical sets & perks available</li>
+                <li>Raid spheres, potions & horns usable as perks</li>
+                <li>High-level optimization & zone switcher enabled</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mod-fade-overlay" id="modFadeOverlay"></div>
+
+          <button class="mod-toggle-btn" id="modToggleBtn" aria-label="Toggle Mod Information" aria-expanded="false">
+            <svg class="mod-toggle-icon" viewBox="0 0 24 24">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -1009,8 +1191,8 @@
 
       <!-- Material UI Group: Special Thanks + Inspirations -->
       <div class="material-group reveal">
-        <div class="card material-item group-top">
-          <h3 class="highlight-title">Special Thanks To</h3>
+        <div class="card material-item group-top glow-green-br">
+          <h3>Special Thanks To</h3>
           <ul class="custom-point custom-point1">
             <li>David Monge</li>
             <li>Kazi sunny ul islam</li>
@@ -1019,7 +1201,7 @@
           </ul>
         </div>
 
-        <div class="card material-item group-bottom">
+        <div class="card material-item group-bottom glow-blue-br">
           <h3>Inspirations</h3>
           <ul class="custom-point custom-point2">
             <li>Tiago gameplay</li>
@@ -1032,7 +1214,7 @@
 
     </div>
 
-    <!-- Theme Toggle Pill with Real Static Blur -->
+    <!-- Liquid Glass Theme Toggle Pill -->
     <div class="theme-toggle-pill" id="themePill" title="Toggle Light / Dark mode">
       <div class="pill-slider" id="pillSlider"></div>
       <div class="toggle-icon-slot active" id="lightIcon">
@@ -1080,7 +1262,7 @@
   </div>
 
   <script>
-    /* System Theme Adaptation with Live Sync */
+    /* Jitter-Free GPU Hardware Accelerated Theme Transition */
     const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)');
     let isDark = mediaQueryDark.matches;
     let isTransitioning = false;
@@ -1130,19 +1312,22 @@
       isTransitioning = true;
 
       const targetIsDark = !isDark;
-      const targetColor = targetIsDark ? '#000000' : '#ffffff';
+      const overlayColor = targetIsDark ? '#000000' : '#ffffff';
 
-      applyThemeState(targetIsDark, true);
+      // Use a single-surface GPU crossfade layer to prevent DOM re-rasterization lag
+      fadeOverlay.style.backgroundColor = overlayColor;
+      fadeOverlay.classList.add('active');
 
-      setTimeout(() => {
-        fadeOverlay.style.backgroundColor = targetColor;
-        fadeOverlay.classList.add('active');
-
+      // Swap layout classes seamlessly underneath the shield
+      requestAnimationFrame(() => {
         setTimeout(() => {
+          applyThemeState(targetIsDark, true);
           fadeOverlay.classList.remove('active');
-          isTransitioning = false;
-        }, 250);
-      }, 120);
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 320);
+        }, 80);
+      });
     });
 
     /* Fluid 120Hz Hardware Scroll & Static Blur Transitions */
@@ -1167,7 +1352,7 @@
       cachedDocHeight = Math.max(1, totalHeight - cachedWinHeight);
       thumbHeight = Math.max(36, (cachedWinHeight / totalHeight) * cachedWinHeight);
       availableSpace = cachedWinHeight - thumbHeight;
-      scrollThumb.style.height = `${thumbHeight}px`;
+      if (scrollThumb) scrollThumb.style.height = `${thumbHeight}px`;
     }
 
     function updateThumb() {
@@ -1182,25 +1367,27 @@
       const scrollPercent = Math.min(Math.max(currentScrollY / cachedDocHeight, 0), 1);
       const thumbY = scrollPercent * availableSpace;
 
-      scrollThumb.style.transform = `translate3d(0, ${thumbY}px, 0)`;
-      scrollThumb.classList.add('visible');
+      if (scrollThumb) {
+        scrollThumb.style.transform = `translate3d(0, ${thumbY}px, 0)`;
+        scrollThumb.classList.add('visible');
 
-      if (!isDraggingThumb) {
-        clearTimeout(scrollHideTimer);
-        scrollHideTimer = setTimeout(() => {
-          scrollThumb.classList.remove('visible');
-        }, 800);
+        if (!isDraggingThumb) {
+          clearTimeout(scrollHideTimer);
+          scrollHideTimer = setTimeout(() => {
+            scrollThumb.classList.remove('visible');
+          }, 800);
+        }
       }
 
       isTicking = false;
     }
 
     window.addEventListener('scroll', () => {
-      themePill.classList.add('scrolling-hidden');
+      if (themePill) themePill.classList.add('scrolling-hidden');
 
       clearTimeout(scrollStopTimer);
       scrollStopTimer = setTimeout(() => {
-        themePill.classList.remove('scrolling-hidden');
+        if (themePill) themePill.classList.remove('scrolling-hidden');
       }, 150);
 
       if (!isTicking) {
@@ -1214,35 +1401,37 @@
       updateThumb();
     }, { passive: true });
 
-    scrollThumb.addEventListener('pointerdown', (e) => {
-      isDraggingThumb = true;
-      scrollThumb.classList.add('active-drag');
-      scrollThumb.classList.add('visible');
-      startDragY = e.clientY;
-      startScrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      scrollThumb.setPointerCapture(e.pointerId);
-      clearTimeout(scrollHideTimer);
-    });
+    if (window.matchMedia('(pointer: fine)').matches && scrollThumb) {
+      scrollThumb.addEventListener('pointerdown', (e) => {
+        isDraggingThumb = true;
+        scrollThumb.classList.add('active-drag');
+        scrollThumb.classList.add('visible');
+        startDragY = e.clientY;
+        startScrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+        scrollThumb.setPointerCapture(e.pointerId);
+        clearTimeout(scrollHideTimer);
+      });
 
-    scrollThumb.addEventListener('pointermove', (e) => {
-      if (!isDraggingThumb) return;
-      const deltaY = e.clientY - startDragY;
-      const scrollDelta = (deltaY / availableSpace) * cachedDocHeight;
-      window.scrollTo(0, startScrollTop + scrollDelta);
-    });
+      scrollThumb.addEventListener('pointermove', (e) => {
+        if (!isDraggingThumb) return;
+        const deltaY = e.clientY - startDragY;
+        const scrollDelta = (deltaY / availableSpace) * cachedDocHeight;
+        window.scrollTo(0, startScrollTop + scrollDelta);
+      });
 
-    const finishThumbDrag = () => {
-      if (!isDraggingThumb) return;
-      isDraggingThumb = false;
-      scrollThumb.classList.remove('active-drag');
-      clearTimeout(scrollHideTimer);
-      scrollHideTimer = setTimeout(() => {
-        scrollThumb.classList.remove('visible');
-      }, 800);
-    };
+      const finishThumbDrag = () => {
+        if (!isDraggingThumb) return;
+        isDraggingThumb = false;
+        scrollThumb.classList.remove('active-drag');
+        clearTimeout(scrollHideTimer);
+        scrollHideTimer = setTimeout(() => {
+          scrollThumb.classList.remove('visible');
+        }, 800);
+      };
 
-    scrollThumb.addEventListener('pointerup', finishThumbDrag);
-    scrollThumb.addEventListener('pointercancel', finishThumbDrag);
+      scrollThumb.addEventListener('pointerup', finishThumbDrag);
+      scrollThumb.addEventListener('pointercancel', finishThumbDrag);
+    }
 
     // Auto-pause video when scrolled completely out of view
     if (modVideo && 'IntersectionObserver' in window) {
@@ -1256,7 +1445,61 @@
       videoObserver.observe(modVideo);
     }
 
-    /* Preload Assets */
+    /* Mod Info Accordion Expansion Logic */
+    const modToggleBtn = document.getElementById('modToggleBtn');
+    const modExpandableWrap = document.getElementById('modExpandableWrap');
+    const modFadeOverlay = document.getElementById('modFadeOverlay');
+    let isModExpanded = false;
+
+    if (modToggleBtn && modExpandableWrap && modFadeOverlay) {
+      modToggleBtn.addEventListener('click', () => {
+        isModExpanded = !isModExpanded;
+
+        modToggleBtn.classList.toggle('expanded', isModExpanded);
+        modToggleBtn.setAttribute('aria-expanded', isModExpanded ? 'true' : 'false');
+        modExpandableWrap.classList.toggle('expanded', isModExpanded);
+        modFadeOverlay.classList.toggle('hidden', isModExpanded);
+
+        const syncTimer = setInterval(recalculateDimensions, 50);
+        setTimeout(() => {
+          clearInterval(syncTimer);
+          recalculateDimensions();
+          updateThumb();
+        }, 500);
+      });
+    }
+
+    /* Preload Assets with Inbuilt Browser Lock Protection */
+    let hasRevealed = false;
+
+    function revealApp() {
+      if (hasRevealed) return;
+      hasRevealed = true;
+
+      const preloader = document.getElementById('sitePreloader');
+      const app = document.getElementById('appWrapper');
+      const dualGlow = document.getElementById('bgDualGlow');
+
+      if (preloader) {
+        preloader.classList.add('loaded');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 400);
+      }
+      if (app) app.classList.add('ready');
+
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+
+      setTimeout(() => {
+        if (dualGlow) dualGlow.classList.add('start-expansion');
+      }, 300);
+
+      initObserver();
+      recalculateDimensions();
+      updateThumb();
+    }
+
     async function awaitAllAssets() {
       const imgElements = Array.from(document.images);
       const imgPromises = imgElements.map((img) => {
@@ -1268,26 +1511,21 @@
       });
 
       const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
-      await Promise.all([...imgPromises, fontPromise]);
+      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1000));
+
+      await Promise.race([
+        Promise.all([...imgPromises, fontPromise]),
+        timeoutPromise
+      ]);
     }
 
     window.addEventListener('load', async () => {
       await awaitAllAssets();
+      revealApp();
+    });
 
-      const preloader = document.getElementById('sitePreloader');
-      const app = document.getElementById('appWrapper');
-      const dualGlow = document.getElementById('bgDualGlow');
-
-      preloader.classList.add('loaded');
-      app.classList.add('ready');
-
-      setTimeout(() => {
-        dualGlow.classList.add('start-expansion');
-      }, 300);
-
-      initObserver();
-      recalculateDimensions();
-      updateThumb();
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(revealApp, 1200);
     });
 
     function initObserver() {
@@ -1491,4 +1729,3 @@
   </script>
 </body>
 </html>
-
