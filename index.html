@@ -6,18 +6,17 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#ffffff" id="metaThemeColor">
+  <meta name="theme-color" content="#F1F1F3" id="metaThemeColor">
   <title>Navas</title>
 
   <script>
-    // Apply theme state synchronously to avoid DOM paint-invalidation & re-triggering CSS animations
     (function() {
       try {
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (isDark) {
           document.documentElement.classList.add('dark');
           const meta = document.getElementById('metaThemeColor');
-          if (meta) meta.setAttribute('content', '#000000');
+          if (meta) meta.setAttribute('content', '#010101');
         }
       } catch (_) {}
     })();
@@ -40,22 +39,22 @@
 
     :root {
       interpolate-size: allow-keywords;
-      --bg-color: #ffffff;
+      --bg-color: #F1F1F3;
       --text-main: #000000;
       --text-muted: #222222;
-      --card-bg: #ffffff;
-      --card-border: rgba(0, 0, 0, 0.08);
+      --card-bg: #FCFCFE;
+      --card-border: transparent;
       --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       --accent-cornflower: #3b71e8;
       --highlight: #2e7d32;
 
-      /* 95% Solid Alpha for Scrolled State */
-      --pill-bg: rgba(240, 240, 243, 0.95);
+      /* Top Pill & Video Controls - Light Mode: Pure White */
+      --pill-bg: #ffffff;
       --nav-slider-bg: #000000;
       --nav-slider-text: #ffffff;
       --nav-btn-bg: rgba(0, 0, 0, 0.06);
       --nav-btn-color: #000000;
-      --edge-fade: #ffffff;
+      --edge-fade: #F1F1F3;
 
       /* Bullet Colors - Light Mode */
       --bullet-modinfo: #000000;
@@ -63,7 +62,7 @@
       --bullet-insp-red: #e53935;
 
       /* Video Player Light Mode Tokens */
-      --vid-ctrl-bg: rgba(240, 240, 243, 0.94);
+      --vid-ctrl-bg: #ffffff;
       --vid-ctrl-text: #000000;
       --vid-prog-track: rgba(0, 0, 0, 0.14);
       --vid-prog-fill: #000000;
@@ -75,22 +74,22 @@
     }
 
     html.dark, body.dark {
-      --bg-color: #000000;
+      --bg-color: #010101;
       --text-main: #ffffff;
       --text-muted: #e5e5ea;
-      --card-bg: #141416;
-      --card-border: rgba(255, 255, 255, 0.1);
+      --card-bg: #171719;
+      --card-border: transparent;
       --card-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
       --accent-cornflower: #3b71e8;
       --highlight: #4caf50;
 
-      /* 95% Solid Alpha for Scrolled State */
-      --pill-bg: rgba(26, 26, 28, 0.95);
+      /* Top Pill & Video Controls - Dark Mode: #646367 */
+      --pill-bg: #646367;
       --nav-slider-bg: #ffffff;
       --nav-slider-text: #000000;
-      --nav-btn-bg: rgba(255, 255, 255, 0.1);
+      --nav-btn-bg: rgba(255, 255, 255, 0.15);
       --nav-btn-color: #ffffff;
-      --edge-fade: #000000;
+      --edge-fade: #010101;
 
       /* Bullet Colors - Dark Mode */
       --bullet-modinfo: #ffffff;
@@ -98,9 +97,9 @@
       --bullet-insp-red: #ef5350;
 
       /* Video Player Dark Mode Tokens */
-      --vid-ctrl-bg: rgba(26, 26, 28, 0.94);
+      --vid-ctrl-bg: #646367;
       --vid-ctrl-text: #ffffff;
-      --vid-prog-track: rgba(255, 255, 255, 0.2);
+      --vid-prog-track: rgba(255, 255, 255, 0.25);
       --vid-prog-fill: #ffffff;
       --vid-prog-glow: rgba(255, 255, 255, 0.6);
 
@@ -115,14 +114,14 @@
     }
 
     body.is-theme-switching {
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.35s ease, color 0.35s ease;
     }
     body.is-theme-switching .card,
     body.is-theme-switching .unified-capsule-pill,
     body.is-theme-switching .video-morph-capsule,
     body.is-theme-switching .video-progress-fill,
     body.is-theme-switching .video-scrub-time-badge {
-      transition: background-color 0.3s ease, color 0.3s ease !important;
+      transition: background-color 0.35s ease, color 0.35s ease !important;
     }
 
     ::-webkit-scrollbar {
@@ -365,7 +364,7 @@
     .unified-capsule-pill.expanded {
       background-color: var(--pill-bg);
       border: none !important;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
     }
 
     .unified-capsule-pill.expanded {
@@ -401,6 +400,48 @@
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
+    }
+
+    /* Continuous Downward Reel Theme Toggle */
+    .theme-track-viewport {
+      position: relative;
+      width: 22px;
+      height: 22px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .theme-strip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 66px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      will-change: transform;
+      transform: translate3d(0, -22px, 0);
+    }
+
+    .theme-icon-slot {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .theme-icon-slot svg {
+      width: 19px;
+      height: 19px;
+      display: block;
+      color: var(--text-main);
     }
 
     .pill-divider {
@@ -478,13 +519,6 @@
       color: var(--nav-slider-text) !important;
     }
 
-    .oneui-sun-icon {
-      width: 19px;
-      height: 19px;
-      display: block;
-      color: var(--text-main);
-    }
-
     .container {
       max-width: 900px;
       margin: 0 auto calc(env(safe-area-inset-bottom) + 60px);
@@ -494,7 +528,8 @@
 
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      border: none;
+      outline: none;
       border-radius: 22px;
       padding: clamp(14px, 3.2vw, 20px);
       margin: clamp(10px, 2vw, 16px) 0;
@@ -514,7 +549,8 @@
     .material-item {
       margin: 0;
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      border: none;
+      outline: none;
       position: relative;
       scroll-margin-top: 75px;
     }
@@ -528,6 +564,7 @@
       overflow: hidden;
       line-height: 0;
       border: none;
+      outline: none;
     }
 
     .media-segment.group-top img {
@@ -563,6 +600,28 @@
       object-fit: cover;
       background: #000000;
       transform: translateZ(0);
+    }
+
+    /* Dedicated Custom Video Poster Overlay */
+    .video-poster-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 10;
+      pointer-events: auto;
+      cursor: pointer;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+      transform: translateZ(0);
+    }
+
+    .video-poster-overlay.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
     .video-segment-container:fullscreen,
@@ -618,7 +677,7 @@
       border-radius: 9999px;
       background: var(--vid-ctrl-bg);
       color: var(--vid-ctrl-text);
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
       pointer-events: auto;
       border: none !important;
       outline: none !important;
@@ -710,9 +769,13 @@
     .vid-ctrl-sep {
       width: 1px;
       height: 12px;
-      background: var(--card-border);
+      background: rgba(0, 0, 0, 0.1);
       margin: 0 2px;
       opacity: 0.8;
+    }
+
+    body.dark .vid-ctrl-sep {
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .capsule-progress-inner {
@@ -835,9 +898,10 @@
       vertical-align: baseline;
     }
 
+    /* Mod Info Accordion Card */
     .mod-info-card {
       position: relative;
-      padding-bottom: 50px;
+      padding-bottom: 52px;
     }
 
     .mod-expandable-wrap {
@@ -865,25 +929,6 @@
       transition: opacity 0.36s cubic-bezier(0.16, 1, 0.3, 1) 0.04s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .mod-fade-wrapper {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 42px;
-      height: 52px;
-      pointer-events: none;
-      z-index: 2;
-      opacity: 1;
-      background-color: var(--card-bg);
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-      transition: opacity 0.25s ease, background-color 0.3s ease;
-    }
-
-    .mod-fade-wrapper.hidden {
-      opacity: 0 !important;
-    }
-
     .mod-toggle-btn {
       position: absolute;
       bottom: 10px;
@@ -893,13 +938,17 @@
       height: 38px;
       border-radius: 50%;
       background: var(--nav-btn-bg);
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       color: var(--text-main);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 3;
+    }
+
+    body.dark .mod-toggle-btn {
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .mod-toggle-btn:active {
@@ -932,7 +981,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 3px;
       width: 100%;
-      background: var(--card-border);
+      background: transparent;
     }
 
     .grid-img-wrap {
@@ -1101,7 +1150,7 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       background: var(--nav-btn-bg);
       color: var(--text-main);
       display: flex;
@@ -1109,6 +1158,10 @@
       justify-content: center;
       cursor: pointer;
       outline: none;
+    }
+
+    body.dark .viewer-btn {
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .viewer-btn svg {
@@ -1185,7 +1238,7 @@
     <div class="loader-author">~Navas</div>
 
     <div class="loader-icon-wrap">
-      <img id="loaderImg" src="https://github.com/Navas4444/last-try/releases/download/Title/icon.png" alt="Icon" class="loader-custom-img">
+      <img id="loaderImg" src="https://github.com/Navas4444/last-try/releases/download/Title/icon.webp" alt="Icon" class="loader-custom-img">
     </div>
   </div>
 
@@ -1220,14 +1273,31 @@
 
       <div class="pill-divider"></div>
 
+      <!-- Hardcoded Downward-Scrolling Theme Button -->
       <button class="pill-btn-icon interactive-bounce" id="themeSwitchBtn" aria-label="Toggle theme">
-        <svg id="themeIconSun" class="oneui-sun-icon" viewBox="0 0 24 24" style="display: none;">
-          <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
-          <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-        </svg>
-        <svg id="themeIconMoon" viewBox="0 0 24 24">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"></path>
-        </svg>
+        <div class="theme-track-viewport">
+          <div class="theme-strip" id="themeStrip">
+            <!-- Slot 1 (Above): Moon -->
+            <div class="theme-icon-slot" id="slot1">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <!-- Slot 2 (Center): Sun -->
+            <div class="theme-icon-slot" id="slot2">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <!-- Slot 3 (Below): Moon -->
+            <div class="theme-icon-slot" id="slot3">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
       </button>
     </div>
   </div>
@@ -1235,14 +1305,17 @@
   <div class="container">
     <div class="material-group" id="sec-media">
       <div class="card material-item media-segment group-top">
-        <img src="https://github.com/Navas4444/last-try/releases/download/Title/brand_title_card.jpg" alt="Mod Banner" loading="eager">
+        <img src="https://github.com/Navas4444/last-try/releases/download/Title/brand_title_card.webp" alt="Mod Banner" loading="eager">
       </div>
       
       <!-- Video Player with Balanced Morphing Capsule -->
       <div class="card material-item media-segment group-bottom video-segment-container" id="videoContainer">
-        <video id="modVideo" preload="metadata" playsinline webkit-playsinline>
+        <video id="modVideo" preload="metadata" playsinline webkit-playsinline poster="https://github.com/Navas4444/last-try/releases/download/Title/video_preview.webp">
           <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.mp4#t=0.1" type="video/mp4">
         </video>
+
+        <!-- Custom Video Thumbnail Overlay for Start (0:00) & End (1:17) -->
+        <img src="https://github.com/Navas4444/last-try/releases/download/Title/video_preview.webp" alt="Video Preview Thumbnail" class="video-poster-overlay" id="videoPosterOverlay">
 
         <!-- Floating Time Badge Above Scrubber (Top-Right) -->
         <div class="video-scrub-time-badge" id="videoScrubTimeBadge">00:00</div>
@@ -1327,8 +1400,6 @@
           </div>
         </div>
 
-        <div class="mod-fade-wrapper" id="modFadeWrapper"></div>
-
         <button class="mod-toggle-btn" id="modToggleBtn" aria-label="Toggle Mod Information">
           <svg class="mod-toggle-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
@@ -1363,7 +1434,7 @@
 
     <div class="material-group" id="sec-credits">
       <div class="card material-item group-top compact-material-item credits-card-wrapper glow-blue">
-        <img src="https://github.com/Navas4444/last-try/releases/download/Title/lynx.png" alt="Lynx" class="credits-corner-art" loading="lazy">
+        <img src="https://github.com/Navas4444/last-try/releases/download/Title/lynx.webp" alt="Lynx" class="credits-corner-art" loading="lazy">
         <h3 style="position: relative; z-index: 2;">Special Thanks To</h3>
         <ul class="custom-point custom-point-thanks" style="position: relative; z-index: 2;">
           <li>David Monge</li>
@@ -1374,7 +1445,7 @@
       </div>
 
       <div class="card material-item group-bottom compact-material-item credits-card-wrapper glow-red">
-        <img src="https://github.com/Navas4444/last-try/releases/download/Title/samurai.png" alt="Samurai" class="credits-corner-art" loading="lazy">
+        <img src="https://github.com/Navas4444/last-try/releases/download/Title/samurai.webp" alt="Samurai" class="credits-corner-art" loading="lazy">
         <h3 style="position: relative; z-index: 2;">Inspirations</h3>
         <ul class="custom-point custom-point-insp" style="position: relative; z-index: 2;">
           <li>Tiago gameplay</li>
@@ -1412,48 +1483,57 @@
   <script>
     let isDark = document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
     const metaThemeColor = document.getElementById('metaThemeColor');
-    const sunIcon = document.getElementById('themeIconSun');
-    const moonIcon = document.getElementById('themeIconMoon');
+    const themeStrip = document.getElementById('themeStrip');
+    let isAnimatingTheme = false;
 
-    function syncThemeIcons() {
-      if (sunIcon && moonIcon) {
-        sunIcon.style.display = isDark ? 'block' : 'none';
-        moonIcon.style.display = isDark ? 'none' : 'block';
-      }
+    const SUN_SVG = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>`;
+    const MOON_SVG = `<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
+
+    const slot1 = document.getElementById('slot1');
+    const slot2 = document.getElementById('slot2');
+
+    slot2.innerHTML = isDark ? MOON_SVG : SUN_SVG;
+    if (isDark) {
+      document.body.classList.add('dark');
     }
 
-    function applyThemeDOM(dark, withTransition = false) {
-      isDark = dark;
-      if (withTransition) {
-        document.body.classList.add('is-theme-switching');
-      }
+    function rollThemeTo(targetDark) {
+      if (isAnimatingTheme) return;
+      isAnimatingTheme = true;
 
+      slot1.innerHTML = targetDark ? MOON_SVG : SUN_SVG;
+
+      themeStrip.style.transition = 'none';
+      themeStrip.style.transform = 'translate3d(0, -22px, 0)';
+      void themeStrip.offsetHeight;
+
+      themeStrip.style.transition = 'transform 0.38s cubic-bezier(0.25, 1, 0.5, 1)';
+      themeStrip.style.transform = 'translate3d(0, 0px, 0)';
+
+      document.body.classList.add('is-theme-switching');
+      isDark = targetDark;
       document.body.classList.toggle('dark', isDark);
       document.documentElement.classList.toggle('dark', isDark);
-      
-      const currentColor = isDark ? '#000000' : '#ffffff';
-      if (metaThemeColor) metaThemeColor.setAttribute('content', currentColor);
-
-      syncThemeIcons();
-
-      if (withTransition) {
-        setTimeout(() => {
-          document.body.classList.remove('is-theme-switching');
-        }, 320);
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', isDark ? '#010101' : '#F1F1F3');
       }
+
+      setTimeout(() => {
+        themeStrip.style.transition = 'none';
+        slot2.innerHTML = isDark ? MOON_SVG : SUN_SVG;
+        slot1.innerHTML = '';
+        themeStrip.style.transform = 'translate3d(0, -22px, 0)';
+
+        document.body.classList.remove('is-theme-switching');
+        isAnimatingTheme = false;
+      }, 390);
 
       requestAnimationFrame(updateActiveNavChip);
     }
 
-    // Ensure body matches documentElement without triggering re-layout flashes
-    if (isDark) {
-      document.body.classList.add('dark');
-    }
-    syncThemeIcons();
-
     document.getElementById('themeSwitchBtn').addEventListener('click', (e) => {
       e.stopPropagation();
-      applyThemeDOM(!isDark, true);
+      rollThemeTo(!isDark);
     });
 
     const topControls = document.getElementById('topControls');
@@ -1527,6 +1607,7 @@
     // FLUID MORPHING VIDEO PLAYER LOGIC
     // ==========================================
     const video = document.getElementById('modVideo');
+    const videoPosterOverlay = document.getElementById('videoPosterOverlay');
     const videoContainer = document.getElementById('videoContainer');
     const videoBottomDock = document.getElementById('videoBottomDock');
     const videoMorphCapsule = document.getElementById('videoMorphCapsule');
@@ -1562,8 +1643,12 @@
       }
     }
 
+    videoPosterOverlay.addEventListener('click', () => {
+      toggleVideoPlay();
+    });
+
     videoContainer.addEventListener('click', (e) => {
-      if (e.target.closest('.video-bottom-dock')) return;
+      if (e.target.closest('.video-bottom-dock') || e.target === videoPosterOverlay) return;
       if (videoBottomDock.classList.contains('autohide')) {
         resetControlsFadeTimer();
       } else {
@@ -1580,6 +1665,10 @@
 
     function toggleVideoPlay() {
       if (video.paused || video.ended) {
+        // If at the end (1:17), loop back cleanly to 0
+        if (video.ended || (video.duration && video.currentTime >= video.duration - 0.5)) {
+          video.currentTime = 0;
+        }
         video.play().catch(() => {});
       } else {
         video.pause();
@@ -1595,6 +1684,7 @@
     video.addEventListener('play', () => {
       playIcon.style.display = 'none';
       pauseIcon.style.display = 'block';
+      videoPosterOverlay.classList.add('is-hidden');
       resetControlsFadeTimer();
     });
 
@@ -1603,6 +1693,16 @@
       pauseIcon.style.display = 'none';
       videoBottomDock.classList.remove('autohide');
       clearTimeout(autoHideTimer);
+
+      // Show thumbnail if paused exactly at 0:00 or at/beyond 1:17
+      if (video.currentTime <= 0.1 || (video.duration && video.currentTime >= video.duration - 0.2)) {
+        videoPosterOverlay.classList.remove('is-hidden');
+      }
+    });
+
+    video.addEventListener('ended', () => {
+      videoPosterOverlay.classList.remove('is-hidden');
+      videoBottomDock.classList.remove('autohide');
     });
 
     video.addEventListener('timeupdate', () => {
@@ -1612,6 +1712,15 @@
       if (video.duration) {
         const percent = (video.currentTime / video.duration) * 100;
         videoProgressFill.style.width = `${percent}%`;
+
+        // Check if paused at starting or ending bounds
+        if (video.paused) {
+          if (video.currentTime <= 0.1 || video.currentTime >= video.duration - 0.2 || video.currentTime >= 77) {
+            videoPosterOverlay.classList.remove('is-hidden');
+          } else {
+            videoPosterOverlay.classList.add('is-hidden');
+          }
+        }
       }
     });
 
@@ -1729,6 +1838,15 @@
       const formatted = formatTime(video.currentTime);
       vidCurrentTime.textContent = formatted;
       videoScrubTimeBadge.textContent = formatted;
+
+      if (video.paused) {
+        if (video.currentTime <= 0.1 || video.currentTime >= video.duration - 0.2 || video.currentTime >= 77) {
+          videoPosterOverlay.classList.remove('is-hidden');
+        } else {
+          videoPosterOverlay.classList.add('is-hidden');
+        }
+      }
+
       resetRevertTimer();
     }
 
@@ -1824,15 +1942,13 @@
     // Mod Info Accordion
     const modToggleBtn = document.getElementById('modToggleBtn');
     const modExpandableWrap = document.getElementById('modExpandableWrap');
-    const modFadeWrapper = document.getElementById('modFadeWrapper');
     let isModExpanded = false;
 
-    if (modToggleBtn && modExpandableWrap && modFadeWrapper) {
+    if (modToggleBtn && modExpandableWrap) {
       modToggleBtn.addEventListener('click', () => {
         isModExpanded = !isModExpanded;
         modToggleBtn.classList.toggle('expanded', isModExpanded);
         modExpandableWrap.classList.toggle('open', isModExpanded);
-        modFadeWrapper.classList.toggle('hidden', isModExpanded);
       });
     }
 
@@ -1942,6 +2058,7 @@
   </script>
 </body>
 </html>
+
 
 
 
