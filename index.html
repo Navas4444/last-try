@@ -563,7 +563,7 @@
       object-fit: contain !important;
     }
 
-    /* Dock at Edge */
+    /* Dock at Edge - Balanced padding & center-lock on expansion */
     .video-bottom-dock {
       position: absolute;
       bottom: 0;
@@ -574,10 +574,14 @@
       justify-content: flex-end;
       pointer-events: none;
       z-index: 12;
-      height: 38px;
-      padding: 0 6px 6px 6px;
+      height: 40px;
+      padding: 0 10px 8px 10px;
       transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
       box-sizing: border-box;
+    }
+
+    .video-bottom-dock.has-expanded-capsule {
+      justify-content: center !important;
     }
 
     .video-bottom-dock.autohide {
@@ -611,9 +615,11 @@
                   background-color 0.3s ease;
     }
 
-    /* Full Expansion on Scrubber Mode */
+    /* Full Expansion on Scrubber Mode with Equal Margins */
     .video-morph-capsule.expanded-mode {
-      width: calc(100% - 12px) !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
       box-shadow: none !important;
       cursor: pointer;
     }
@@ -733,8 +739,8 @@
     /* Floating Time Display Above Scrubber (Top-Right) */
     .video-scrub-time-badge {
       position: absolute;
-      right: 10px;
-      bottom: 44px;
+      right: 14px;
+      bottom: 46px;
       height: 24px;
       padding: 0 10px;
       border-radius: 9999px;
@@ -1647,6 +1653,7 @@
       suppressScrubUntilRelease = true;
 
       videoMorphCapsule.classList.add('expanded-mode');
+      videoBottomDock.classList.add('has-expanded-capsule');
       videoScrubTimeBadge.classList.add('visible-mode');
       resetRevertTimer();
     }
@@ -1656,6 +1663,7 @@
       suppressScrubUntilRelease = false;
 
       videoMorphCapsule.classList.remove('expanded-mode');
+      videoBottomDock.classList.remove('has-expanded-capsule');
       videoScrubTimeBadge.classList.remove('visible-mode');
 
       clearTimeout(revertTimer);
@@ -1917,4 +1925,5 @@
   </script>
 </body>
 </html>
+
 
