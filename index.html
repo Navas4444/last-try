@@ -9,6 +9,20 @@
   <meta name="theme-color" content="#ffffff" id="metaThemeColor">
   <title>Navas</title>
 
+  <script>
+    // Apply theme state synchronously to avoid DOM paint-invalidation & re-triggering CSS animations
+    (function() {
+      try {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+          const meta = document.getElementById('metaThemeColor');
+          if (meta) meta.setAttribute('content', '#000000');
+        }
+      } catch (_) {}
+    })();
+  </script>
+
   <style>
     @font-face {
       font-family: 'Samsung Sans';
@@ -60,7 +74,7 @@
       --glow-red: rgba(229, 57, 53, 0.26);
     }
 
-    body.dark {
+    html.dark, body.dark {
       --bg-color: #000000;
       --text-main: #ffffff;
       --text-muted: #e5e5ea;
@@ -185,6 +199,10 @@
       transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.55s;
     }
 
+    #sitePreloader * {
+      animation-iteration-count: 1 !important;
+    }
+
     #sitePreloader.loaded {
       opacity: 0;
       visibility: hidden;
@@ -210,8 +228,8 @@
       letter-spacing: -0.6px;
       line-height: 1.18;
       opacity: 0;
-      transform: translateY(24px);
-      animation: revealItem 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+      animation: revealItem 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     .loader-word:nth-child(1) { animation-delay: 0.12s; }
@@ -228,24 +246,26 @@
       color: var(--text-muted);
       letter-spacing: 0.5px;
       opacity: 0;
-      transform: translateY(20px);
-      animation: revealItem 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.58s forwards;
+      will-change: transform, opacity;
+      animation: revealItem 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.58s both;
       margin-top: 4px;
       margin-bottom: 18px;
     }
 
     .loader-icon-wrap {
       opacity: 0;
-      transform: translateY(28px);
-      animation: revealLogoUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;
+      will-change: transform, opacity;
+      animation: revealLogoUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
     }
 
     .loader-custom-img {
       width: 72px;
       height: 72px;
       object-fit: contain;
-      border-radius: 20px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
     }
 
     @keyframes revealItem {
@@ -518,9 +538,7 @@
       border-radius: 22px 22px 6px 6px;
     }
 
-    /* -------------------------------------------------------------------
-       VIDEO PLAYER & BALANCED MORPHING CAPSULE (ISOLATED COMPOSITING)
-    ------------------------------------------------------------------- */
+    /* Video Player & Capsule */
     .video-segment-container {
       position: relative;
       width: 100%;
@@ -533,7 +551,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* GPU layer isolation prevents compositor thread lockups on scroll */
       transform: translateZ(0);
       contain: layout paint;
       will-change: transform;
@@ -563,7 +580,6 @@
       object-fit: contain !important;
     }
 
-    /* Dock at Edge - Balanced padding & center-lock on expansion */
     .video-bottom-dock {
       position: absolute;
       bottom: 0;
@@ -591,7 +607,6 @@
       pointer-events: none !important;
     }
 
-    /* Morphing Capsule with Smooth One UI Spring Curve */
     .video-morph-capsule {
       position: relative;
       display: inline-flex;
@@ -615,7 +630,6 @@
                   background-color 0.3s ease;
     }
 
-    /* Full Expansion on Scrubber Mode with Equal Margins */
     .video-morph-capsule.expanded-mode {
       width: 100% !important;
       max-width: 100% !important;
@@ -624,7 +638,6 @@
       cursor: pointer;
     }
 
-    /* Equidistant Control Row with Optimal Left Spacing */
     .capsule-controls-inner {
       display: inline-flex;
       align-items: center;
@@ -702,7 +715,6 @@
       opacity: 0.8;
     }
 
-    /* Inner Progress Scrubber */
     .capsule-progress-inner {
       position: absolute;
       inset: 0;
@@ -736,7 +748,6 @@
       transition: width 0.08s linear, background-color 0.3s ease;
     }
 
-    /* Floating Time Display Above Scrubber (Top-Right) */
     .video-scrub-time-badge {
       position: absolute;
       right: 14px;
@@ -1240,7 +1251,7 @@
         <div class="video-bottom-dock" id="videoBottomDock">
           <div class="video-morph-capsule" id="videoMorphCapsule">
             
-            <!-- Controls State: Equal gaps & comfortable left spacing -->
+            <!-- Controls State -->
             <div class="capsule-controls-inner" id="capsuleControlsInner">
               <button class="vid-time-btn" id="videoTimerBtn" aria-label="Video Time">
                 <span id="vidCurrentTime">00:00</span>
@@ -1399,10 +1410,17 @@
   </div>
 
   <script>
-    let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let isDark = document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
     const metaThemeColor = document.getElementById('metaThemeColor');
     const sunIcon = document.getElementById('themeIconSun');
     const moonIcon = document.getElementById('themeIconMoon');
+
+    function syncThemeIcons() {
+      if (sunIcon && moonIcon) {
+        sunIcon.style.display = isDark ? 'block' : 'none';
+        moonIcon.style.display = isDark ? 'none' : 'block';
+      }
+    }
 
     function applyThemeDOM(dark, withTransition = false) {
       isDark = dark;
@@ -1414,12 +1432,9 @@
       document.documentElement.classList.toggle('dark', isDark);
       
       const currentColor = isDark ? '#000000' : '#ffffff';
-      metaThemeColor.setAttribute('content', currentColor);
+      if (metaThemeColor) metaThemeColor.setAttribute('content', currentColor);
 
-      if (sunIcon && moonIcon) {
-        sunIcon.style.display = isDark ? 'block' : 'none';
-        moonIcon.style.display = isDark ? 'none' : 'block';
-      }
+      syncThemeIcons();
 
       if (withTransition) {
         setTimeout(() => {
@@ -1430,7 +1445,11 @@
       requestAnimationFrame(updateActiveNavChip);
     }
 
-    applyThemeDOM(isDark, false);
+    // Ensure body matches documentElement without triggering re-layout flashes
+    if (isDark) {
+      document.body.classList.add('dark');
+    }
+    syncThemeIcons();
 
     document.getElementById('themeSwitchBtn').addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1641,7 +1660,6 @@
       handleFullscreenToggle();
     });
 
-    // Morphing transition with pure CSS width transitions
     let longPressTimeout = null;
     let revertTimer = null;
     let isProgressBarMode = false;
@@ -1783,7 +1801,6 @@
     window.addEventListener('scroll', () => {
       const currentY = window.pageYOffset;
 
-      // Hard freeze video instantly on scroll
       freezeVideo();
 
       if (currentY > 2) {
@@ -1925,5 +1942,6 @@
   </script>
 </body>
 </html>
+
 
 
