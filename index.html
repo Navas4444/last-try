@@ -48,27 +48,28 @@
       --accent-cornflower: #3b71e8;
       --highlight: #2e7d32;
 
-      /* Top Pill & Video Controls - Light Mode: Pure White */
-      --pill-bg: #ffffff;
+      --oneui85-grad-1: linear-gradient(135deg, rgba(0, 122, 255, 0.75), rgba(0, 198, 255, 0.75));
+      --oneui85-grad-2: linear-gradient(135deg, rgba(0, 200, 83, 0.75), rgba(105, 240, 174, 0.75));
+      --oneui85-grad-3: linear-gradient(135deg, rgba(2, 136, 209, 0.75), rgba(38, 166, 154, 0.75));
+      --oneui85-grad-4: linear-gradient(135deg, rgba(0, 230, 118, 0.75), rgba(29, 233, 182, 0.75));
+
+      --pill-bg: rgba(255, 255, 255, 0.95);
       --nav-slider-bg: #000000;
       --nav-slider-text: #ffffff;
       --nav-btn-bg: rgba(0, 0, 0, 0.06);
       --nav-btn-color: #000000;
       --edge-fade: #F1F1F3;
 
-      /* Bullet Colors - Light Mode */
       --bullet-modinfo: #000000;
       --bullet-thanks-blue: #3b71e8;
       --bullet-insp-red: #e53935;
 
-      /* Video Player Light Mode Tokens */
-      --vid-ctrl-bg: #ffffff;
+      --vid-ctrl-bg: rgba(255, 255, 255, 0.95);
       --vid-ctrl-text: #000000;
       --vid-prog-track: rgba(0, 0, 0, 0.14);
       --vid-prog-fill: #000000;
       --vid-prog-glow: rgba(0, 0, 0, 0.18);
 
-      /* Credits Ambient Glows */
       --glow-blue: rgba(59, 113, 232, 0.28);
       --glow-red: rgba(229, 57, 53, 0.26);
     }
@@ -83,27 +84,28 @@
       --accent-cornflower: #3b71e8;
       --highlight: #4caf50;
 
-      /* Top Pill & Video Controls - Dark Mode: #646367 */
-      --pill-bg: #646367;
+      --oneui85-grad-1: linear-gradient(135deg, rgba(41, 121, 255, 0.75), rgba(0, 229, 255, 0.75));
+      --oneui85-grad-2: linear-gradient(135deg, rgba(0, 230, 118, 0.75), rgba(185, 246, 202, 0.75));
+      --oneui85-grad-3: linear-gradient(135deg, rgba(0, 176, 255, 0.75), rgba(29, 233, 182, 0.75));
+      --oneui85-grad-4: linear-gradient(135deg, rgba(105, 240, 174, 0.75), rgba(0, 184, 212, 0.75));
+
+      --pill-bg: rgba(37, 37, 39, 0.95);
       --nav-slider-bg: #ffffff;
       --nav-slider-text: #000000;
       --nav-btn-bg: rgba(255, 255, 255, 0.15);
       --nav-btn-color: #ffffff;
       --edge-fade: #010101;
 
-      /* Bullet Colors - Dark Mode */
       --bullet-modinfo: #ffffff;
       --bullet-thanks-blue: #4d8bf9;
       --bullet-insp-red: #ef5350;
 
-      /* Video Player Dark Mode Tokens */
-      --vid-ctrl-bg: #646367;
+      --vid-ctrl-bg: rgba(37, 37, 39, 0.95);
       --vid-ctrl-text: #ffffff;
       --vid-prog-track: rgba(255, 255, 255, 0.25);
       --vid-prog-fill: #ffffff;
       --vid-prog-glow: rgba(255, 255, 255, 0.6);
 
-      /* Credits Ambient Glows */
       --glow-blue: rgba(59, 113, 232, 0.45);
       --glow-red: rgba(239, 68, 68, 0.42);
     }
@@ -158,6 +160,212 @@
       touch-action: none !important;
     }
 
+    /* ====================================================
+       ONE UI 8.5 LOADER (SLOW CONVERGENCE & DIVERGENCE)
+       ==================================================== */
+    .oneui-media-host {
+      position: relative;
+      overflow: hidden;
+      background: transparent !important;
+    }
+
+    .oneui-media-loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      z-index: 5;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.28s ease, visibility 0.28s ease;
+    }
+
+    .oneui85-stage {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      animation: oneui85-orbit-spin 1.6s linear infinite;
+    }
+
+    .oneui85-dot {
+      position: absolute;
+      width: 8.5px;
+      height: 8.5px;
+      border-radius: 50%;
+      will-change: transform, opacity;
+      opacity: 0.75;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .oneui85-dot:nth-child(1) {
+      background: var(--oneui85-grad-1);
+      animation: oneui85-cycle-top 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    .oneui85-dot:nth-child(2) {
+      background: var(--oneui85-grad-2);
+      animation: oneui85-cycle-right 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    .oneui85-dot:nth-child(3) {
+      background: var(--oneui85-grad-3);
+      animation: oneui85-cycle-bottom 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    .oneui85-dot:nth-child(4) {
+      background: var(--oneui85-grad-4);
+      animation: oneui85-cycle-left 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    @keyframes oneui85-orbit-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(540deg); }
+    }
+
+    @keyframes oneui85-cycle-top {
+      0% {
+        transform: translate3d(0, -14px, 0) scale(1);
+        opacity: 0.75;
+      }
+      50% {
+        transform: translate3d(0, 0px, 0) scale(0.68);
+        opacity: 0.65;
+      }
+      100% {
+        transform: translate3d(0, -14px, 0) scale(1);
+        opacity: 0.75;
+      }
+    }
+
+    @keyframes oneui85-cycle-right {
+      0% {
+        transform: translate3d(14px, 0, 0) scale(1);
+        opacity: 0.75;
+      }
+      50% {
+        transform: translate3d(0px, 0, 0) scale(0.68);
+        opacity: 0.65;
+      }
+      100% {
+        transform: translate3d(14px, 0, 0) scale(1);
+        opacity: 0.75;
+      }
+    }
+
+    @keyframes oneui85-cycle-bottom {
+      0% {
+        transform: translate3d(0, 14px, 0) scale(1);
+        opacity: 0.75;
+      }
+      50% {
+        transform: translate3d(0, 0px, 0) scale(0.68);
+        opacity: 0.65;
+      }
+      100% {
+        transform: translate3d(0, 14px, 0) scale(1);
+        opacity: 0.75;
+      }
+    }
+
+    @keyframes oneui85-cycle-left {
+      0% {
+        transform: translate3d(-14px, 0, 0) scale(1);
+        opacity: 0.75;
+      }
+      50% {
+        transform: translate3d(0px, 0, 0) scale(0.68);
+        opacity: 0.65;
+      }
+      100% {
+        transform: translate3d(-14px, 0, 0) scale(1);
+        opacity: 0.75;
+      }
+    }
+
+    .oneui-spinner-small .oneui85-stage {
+      width: 28px;
+      height: 28px;
+      animation: oneui85-orbit-spin 1.6s linear infinite;
+    }
+    .oneui-spinner-small .oneui85-dot {
+      width: 6px;
+      height: 6px;
+    }
+    .oneui-spinner-small .oneui85-dot:nth-child(1) { animation: oneui85-small-cycle-top 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+    .oneui-spinner-small .oneui85-dot:nth-child(2) { animation: oneui85-small-cycle-right 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+    .oneui-spinner-small .oneui85-dot:nth-child(3) { animation: oneui85-small-cycle-bottom 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+    .oneui-spinner-small .oneui85-dot:nth-child(4) { animation: oneui85-small-cycle-left 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+
+    @keyframes oneui85-small-cycle-top {
+      0% { transform: translate3d(0, -9.5px, 0) scale(1); opacity: 0.75; }
+      50% { transform: translate3d(0, 0, 0) scale(0.68); opacity: 0.65; }
+      100% { transform: translate3d(0, -9.5px, 0) scale(1); opacity: 0.75; }
+    }
+    @keyframes oneui85-small-cycle-right {
+      0% { transform: translate3d(9.5px, 0, 0) scale(1); opacity: 0.75; }
+      50% { transform: translate3d(0, 0, 0) scale(0.68); opacity: 0.65; }
+      100% { transform: translate3d(9.5px, 0, 0) scale(1); opacity: 0.75; }
+    }
+    @keyframes oneui85-small-cycle-bottom {
+      0% { transform: translate3d(0, 9.5px, 0) scale(1); opacity: 0.75; }
+      50% { transform: translate3d(0, 0, 0) scale(0.68); opacity: 0.65; }
+      100% { transform: translate3d(0, 9.5px, 0) scale(1); opacity: 0.75; }
+    }
+    @keyframes oneui85-small-cycle-left {
+      0% { transform: translate3d(-9.5px, 0, 0) scale(1); opacity: 0.75; }
+      50% { transform: translate3d(0, 0, 0) scale(0.68); opacity: 0.65; }
+      100% { transform: translate3d(-9.5px, 0, 0) scale(1); opacity: 0.75; }
+    }
+
+    .oneui-offline-note {
+      display: none;
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      color: var(--text-muted);
+      user-select: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .oneui-media-host.is-loading > .oneui-media-loader,
+    .oneui-media-host.is-failed > .oneui-media-loader {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto;
+    }
+
+    .oneui-media-host.is-failed .oneui-offline-note {
+      display: block;
+    }
+
+    .oneui-media-host.is-loading > img,
+    .oneui-media-host.is-failed > img {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
+    .oneui-media-host > img {
+      transition: opacity 0.32s ease, visibility 0.32s ease;
+    }
+
     .oneui-fade-top,
     .oneui-fade-bottom {
       position: fixed;
@@ -184,7 +392,7 @@
       mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0) 100%);
     }
 
-    /* Preloader Animation */
+    /* Preloader */
     #sitePreloader {
       position: fixed;
       inset: 0;
@@ -200,6 +408,11 @@
 
     #sitePreloader * {
       animation-iteration-count: 1 !important;
+    }
+
+    #sitePreloader .oneui85-stage,
+    #sitePreloader .oneui85-dot {
+      animation-iteration-count: infinite !important;
     }
 
     #sitePreloader.loaded {
@@ -255,6 +468,9 @@
       opacity: 0;
       will-change: transform, opacity;
       animation: revealLogoUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+      width: 72px;
+      height: 72px;
+      position: relative;
     }
 
     .loader-custom-img {
@@ -355,6 +571,8 @@
       width: 96px;
       max-width: min(92vw, 440px);
       box-shadow: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                   background-color 0.22s ease,
                   box-shadow 0.22s ease;
@@ -402,7 +620,6 @@
       fill: none;
     }
 
-    /* Continuous Downward Reel Theme Toggle */
     .theme-track-viewport {
       position: relative;
       width: 22px;
@@ -559,26 +776,41 @@
     .material-item.group-bottom { border-radius: 6px 6px 22px 22px; }
     .compact-material-item { padding: clamp(12px, 2.8vw, 16px) clamp(16px, 3.5vw, 20px); }
 
+    /* ====================================================
+       ADAPTIVE RATIO CONFIGURATIONS (BANNER & VIDEO)
+       ==================================================== */
     .media-segment {
       padding: 0;
       overflow: hidden;
       line-height: 0;
       border: none;
       outline: none;
+      width: 100%;
     }
 
-    .media-segment.group-top img {
+    #bannerContainer {
+      position: relative;
       width: 100%;
-      height: auto;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+      transition: aspect-ratio 0.25s ease-out;
+    }
+
+    #bannerContainer img {
+      width: 100%;
+      height: 100%;
       display: block;
       object-fit: cover;
       border-radius: 22px 22px 6px 6px;
     }
 
-    /* Video Player & Capsule */
     .video-segment-container {
       position: relative;
       width: 100%;
+      aspect-ratio: 16 / 9;
       background: #000000;
       overflow: hidden;
       border-radius: 6px 6px 22px 22px;
@@ -591,6 +823,7 @@
       transform: translateZ(0);
       contain: layout paint;
       will-change: transform;
+      transition: aspect-ratio 0.25s ease-out;
     }
 
     .video-segment-container video {
@@ -602,7 +835,6 @@
       transform: translateZ(0);
     }
 
-    /* Dedicated Custom Video Poster Overlay */
     .video-poster-overlay {
       position: absolute;
       inset: 0;
@@ -628,6 +860,7 @@
     .video-segment-container:-webkit-full-screen {
       width: 100vw !important;
       height: 100vh !important;
+      aspect-ratio: unset !important;
       border-radius: 0 !important;
       background: #000000 !important;
     }
@@ -678,6 +911,8 @@
       background: var(--vid-ctrl-bg);
       color: var(--vid-ctrl-text);
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       pointer-events: auto;
       border: none !important;
       outline: none !important;
@@ -826,6 +1061,8 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       pointer-events: none;
       z-index: 15;
       opacity: 0;
@@ -898,7 +1135,6 @@
       vertical-align: baseline;
     }
 
-    /* Mod Info Accordion Card */
     .mod-info-card {
       position: relative;
       padding-bottom: 52px;
@@ -987,7 +1223,7 @@
     .grid-img-wrap {
       overflow: hidden;
       line-height: 0;
-      background: var(--card-bg);
+      background: transparent !important;
       cursor: pointer;
       position: relative;
     }
@@ -1097,6 +1333,18 @@
       will-change: transform;
     }
 
+    .viewer-card .oneui-media-host {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      max-width: 96vw;
+      max-height: 65vh;
+      border-radius: 16px;
+      position: relative;
+    }
+
     .viewer-img {
       max-width: 96vw;
       max-height: 65vh;
@@ -1126,6 +1374,7 @@
       opacity: 0.45;
       border: 2px solid transparent;
       transition: opacity 0.2s ease, transform 0.25s ease, border-color 0.2s ease;
+      position: relative;
     }
 
     .filmstrip-thumb.active {
@@ -1138,6 +1387,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .viewer-controls-bar {
@@ -1174,9 +1424,11 @@
       fill: none;
     }
 
+    /* Adaptive Right Corner Credits Artwork */
     .credits-card-wrapper {
       position: relative;
       overflow: hidden;
+      min-height: 130px;
     }
 
     .credits-card-wrapper::before {
@@ -1185,7 +1437,7 @@
       right: -20px;
       top: -20px;
       bottom: -20px;
-      width: 52%;
+      width: 58%;
       pointer-events: none;
       z-index: 0;
       filter: blur(28px);
@@ -1194,30 +1446,42 @@
     }
 
     .glow-blue::before {
-      background: radial-gradient(ellipse at 85% 50%, var(--glow-blue) 0%, rgba(59, 113, 232, 0) 72%);
+      background: radial-gradient(ellipse at 85% 50%, var(--glow-blue) 0%, rgba(59, 113, 232, 0) 75%);
     }
 
     .glow-red::before {
-      background: radial-gradient(ellipse at 85% 50%, var(--glow-red) 0%, rgba(229, 57, 53, 0) 72%);
+      background: radial-gradient(ellipse at 85% 50%, var(--glow-red) 0%, rgba(229, 57, 53, 0) 75%);
     }
 
-    .credits-corner-art {
+    .credits-corner-host {
       position: absolute;
       right: 0;
       top: 0;
       bottom: 0;
       height: 100%;
-      max-height: 100%;
-      width: auto;
-      max-width: 48%;
-      object-fit: contain;
-      object-position: right center;
-      opacity: 1;
+      width: clamp(140px, 42vw, 260px);
       pointer-events: none;
       user-select: none;
       z-index: 1;
+      overflow: hidden;
+    }
+
+    .material-item.group-top .credits-corner-host {
+      border-radius: 0 22px 6px 0;
+    }
+
+    .material-item.group-bottom .credits-corner-host {
+      border-radius: 0 6px 22px 0;
+    }
+
+    .credits-corner-art {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right center;
+      display: block;
       transform: translateZ(0);
-      filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.18));
+      filter: drop-shadow(-4px 0 12px rgba(0, 0, 0, 0.16));
     }
   </style>
 </head>
@@ -1237,7 +1501,15 @@
     
     <div class="loader-author">~Navas</div>
 
-    <div class="loader-icon-wrap">
+    <div class="loader-icon-wrap oneui-media-host" id="loaderIconHost">
+      <div class="oneui-media-loader oneui-spinner-small">
+        <div class="oneui85-stage">
+          <div class="oneui85-dot"></div>
+          <div class="oneui85-dot"></div>
+          <div class="oneui85-dot"></div>
+          <div class="oneui85-dot"></div>
+        </div>
+      </div>
       <img id="loaderImg" src="https://github.com/Navas4444/last-try/releases/download/Title/icon.webp" alt="Icon" class="loader-custom-img">
     </div>
   </div>
@@ -1273,24 +1545,20 @@
 
       <div class="pill-divider"></div>
 
-      <!-- Hardcoded Downward-Scrolling Theme Button -->
       <button class="pill-btn-icon interactive-bounce" id="themeSwitchBtn" aria-label="Toggle theme">
         <div class="theme-track-viewport">
           <div class="theme-strip" id="themeStrip">
-            <!-- Slot 1 (Above): Moon -->
             <div class="theme-icon-slot" id="slot1">
               <svg viewBox="0 0 24 24">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </div>
-            <!-- Slot 2 (Center): Sun -->
             <div class="theme-icon-slot" id="slot2">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
                 <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
               </svg>
             </div>
-            <!-- Slot 3 (Below): Moon -->
             <div class="theme-icon-slot" id="slot3">
               <svg viewBox="0 0 24 24">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1304,27 +1572,46 @@
 
   <div class="container">
     <div class="material-group" id="sec-media">
-      <div class="card material-item media-segment group-top">
-        <img src="https://github.com/Navas4444/last-try/releases/download/Title/brand_title_card.webp" alt="Mod Banner" loading="eager">
+      <!-- Mod Banner with Dynamic Image Ratio Binding -->
+      <div class="card material-item media-segment group-top oneui-media-host" id="bannerContainer">
+        <div class="oneui-media-loader">
+          <div class="oneui85-stage">
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+          </div>
+          <span class="oneui-offline-note">Network unavailable</span>
+        </div>
+        <img id="bannerImg" src="https://github.com/Navas4444/last-try/releases/download/Title/brand_title_card.webp" alt="Mod Banner" loading="eager">
       </div>
       
-      <!-- Video Player with Balanced Morphing Capsule -->
+      <!-- Video Player with Dynamic Video Ratio Binding -->
       <div class="card material-item media-segment group-bottom video-segment-container" id="videoContainer">
         <video id="modVideo" preload="metadata" playsinline webkit-playsinline poster="https://github.com/Navas4444/last-try/releases/download/Title/video_preview.webp">
           <source src="https://github.com/Navas4444/SF2-VIDEO/releases/download/Video/private_mod_intro_v3.webm" type="video/mp4">
         </video>
 
-        <!-- Custom Video Thumbnail Overlay for Start (0:00) & End (1:17) -->
-        <img src="https://github.com/Navas4444/last-try/releases/download/Title/video_preview.webp" alt="Video Preview Thumbnail" class="video-poster-overlay" id="videoPosterOverlay">
+        <!-- Custom Video Thumbnail Overlay -->
+        <div class="oneui-media-host video-poster-overlay" id="videoPosterHost">
+          <div class="oneui-media-loader">
+            <div class="oneui85-stage">
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+            </div>
+            <span class="oneui-offline-note">Waiting for network</span>
+          </div>
+          <img src="https://github.com/Navas4444/last-try/releases/download/Title/video_preview.webp" alt="Video Preview Thumbnail" id="videoPosterOverlay" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
 
-        <!-- Floating Time Badge Above Scrubber (Top-Right) -->
         <div class="video-scrub-time-badge" id="videoScrubTimeBadge">00:00</div>
 
         <!-- Bottom Controls Dock with Morphing Capsule -->
         <div class="video-bottom-dock" id="videoBottomDock">
           <div class="video-morph-capsule" id="videoMorphCapsule">
             
-            <!-- Controls State -->
             <div class="capsule-controls-inner" id="capsuleControlsInner">
               <button class="vid-time-btn" id="videoTimerBtn" aria-label="Video Time">
                 <span id="vidCurrentTime">00:00</span>
@@ -1364,7 +1651,6 @@
               </button>
             </div>
 
-            <!-- Scrubber State -->
             <div class="capsule-progress-inner" id="capsuleProgressInner">
               <div class="video-progress-fill" id="videoProgressFill"></div>
             </div>
@@ -1408,16 +1694,52 @@
 
     <div class="card image-grid-card" id="sec-previews">
       <div class="image-grid">
-        <div class="grid-img-wrap top-left" data-index="0">
+        <div class="grid-img-wrap top-left oneui-media-host" data-index="0">
+          <div class="oneui-media-loader">
+            <div class="oneui85-stage">
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+            </div>
+            <span class="oneui-offline-note">Failed to load</span>
+          </div>
           <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp" alt="Preview 1">
         </div>
-        <div class="grid-img-wrap top-right" data-index="1">
+        <div class="grid-img-wrap top-right oneui-media-host" data-index="1">
+          <div class="oneui-media-loader">
+            <div class="oneui85-stage">
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+            </div>
+            <span class="oneui-offline-note">Failed to load</span>
+          </div>
           <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp" alt="Preview 2">
         </div>
-        <div class="grid-img-wrap bottom-left" data-index="2">
+        <div class="grid-img-wrap bottom-left oneui-media-host" data-index="2">
+          <div class="oneui-media-loader">
+            <div class="oneui85-stage">
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+            </div>
+            <span class="oneui-offline-note">Failed to load</span>
+          </div>
           <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_3.webp" alt="Preview 3">
         </div>
-        <div class="grid-img-wrap bottom-right" data-index="3">
+        <div class="grid-img-wrap bottom-right oneui-media-host" data-index="3">
+          <div class="oneui-media-loader">
+            <div class="oneui85-stage">
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+            </div>
+            <span class="oneui-offline-note">Failed to load</span>
+          </div>
           <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp" alt="Preview 4">
         </div>
       </div>
@@ -1432,11 +1754,22 @@
       </div>
     </div>
 
+    <!-- Credits Section with Edge-to-Edge Adaptive Right Corner Cover Art -->
     <div class="material-group" id="sec-credits">
       <div class="card material-item group-top compact-material-item credits-card-wrapper glow-blue">
-        <img src="https://github.com/Navas4444/last-try/releases/download/Title/lynx.webp" alt="Lynx" class="credits-corner-art" loading="lazy">
+        <div class="oneui-media-host credits-corner-host">
+          <div class="oneui-media-loader oneui-spinner-small">
+            <div class="oneui85-stage">
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+            </div>
+          </div>
+          <img src="https://github.com/Navas4444/last-try/releases/download/Title/lynx.webp" alt="Lynx" class="credits-corner-art" loading="lazy">
+        </div>
         <h3 style="position: relative; z-index: 2;">Special Thanks To</h3>
-        <ul class="custom-point custom-point-thanks" style="position: relative; z-index: 2;">
+        <ul class="custom-point custom-point-thanks" style="position: relative; z-index: 2; max-width: 58%;">
           <li>David Monge</li>
           <li>Kazi sunny ul islam</li>
           <li>Iván Gregorio Silva Huinca</li>
@@ -1445,9 +1778,19 @@
       </div>
 
       <div class="card material-item group-bottom compact-material-item credits-card-wrapper glow-red">
-        <img src="https://github.com/Navas4444/last-try/releases/download/Title/samurai.webp" alt="Samurai" class="credits-corner-art" loading="lazy">
+        <div class="oneui-media-host credits-corner-host">
+          <div class="oneui-media-loader oneui-spinner-small">
+            <div class="oneui85-stage">
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+              <div class="oneui85-dot"></div>
+            </div>
+          </div>
+          <img src="https://github.com/Navas4444/last-try/releases/download/Title/samurai.webp" alt="Samurai" class="credits-corner-art" loading="lazy">
+        </div>
         <h3 style="position: relative; z-index: 2;">Inspirations</h3>
-        <ul class="custom-point custom-point-insp" style="position: relative; z-index: 2;">
+        <ul class="custom-point custom-point-insp" style="position: relative; z-index: 2; max-width: 58%;">
           <li>Tiago gameplay</li>
           <li>Hassan gameplay</li>
           <li>Super shadow pro gaming</li>
@@ -1457,20 +1800,73 @@
     </div>
   </div>
 
+  <!-- Pop-Out Viewer Overlay -->
   <div class="image-viewer-overlay" id="imageViewer">
     <div class="viewer-viewport" id="viewerViewport">
       <div class="viewer-card-track" id="viewerCardTrack">
         <div class="viewer-card" id="viewerCardMain">
-          <img src="" alt="Main Preview" class="viewer-img" id="viewerImgMain">
+          <div class="oneui-media-host">
+            <div class="oneui-media-loader">
+              <div class="oneui85-stage">
+                <div class="oneui85-dot"></div>
+                <div class="oneui85-dot"></div>
+                <div class="oneui85-dot"></div>
+                <div class="oneui85-dot"></div>
+              </div>
+              <span class="oneui-offline-note">Network unavailable</span>
+            </div>
+            <img src="" alt="Main Preview" class="viewer-img" id="viewerImgMain">
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Filmstrip Thumbnails -->
     <div class="viewer-filmstrip-bar" id="viewerFilmstrip">
-      <div class="filmstrip-thumb" data-idx="0"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp" alt="T1"></div>
-      <div class="filmstrip-thumb" data-idx="1"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp" alt="T2"></div>
-      <div class="filmstrip-thumb" data-idx="2"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_3.webp" alt="T3"></div>
-      <div class="filmstrip-thumb" data-idx="3"><img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp" alt="T4"></div>
+      <div class="filmstrip-thumb oneui-media-host" data-idx="0">
+        <div class="oneui-media-loader oneui-spinner-small">
+          <div class="oneui85-stage">
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+          </div>
+        </div>
+        <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_1.webp" alt="T1">
+      </div>
+      <div class="filmstrip-thumb oneui-media-host" data-idx="1">
+        <div class="oneui-media-loader oneui-spinner-small">
+          <div class="oneui85-stage">
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+          </div>
+        </div>
+        <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_2.webp" alt="T2">
+      </div>
+      <div class="filmstrip-thumb oneui-media-host" data-idx="2">
+        <div class="oneui-media-loader oneui-spinner-small">
+          <div class="oneui85-stage">
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+          </div>
+        </div>
+        <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_3.webp" alt="T3">
+      </div>
+      <div class="filmstrip-thumb oneui-media-host" data-idx="3">
+        <div class="oneui-media-loader oneui-spinner-small">
+          <div class="oneui85-stage">
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+            <div class="oneui85-dot"></div>
+          </div>
+        </div>
+        <img src="https://github.com/Navas4444/last-try/releases/download/Custom_logo/mod_preview_4.webp" alt="T4">
+      </div>
     </div>
 
     <div class="viewer-controls-bar">
@@ -1481,6 +1877,84 @@
   </div>
 
   <script>
+    // ==========================================
+    // ONE UI 8.5 UNIVERSAL MEDIA LOADER SYSTEM
+    // ==========================================
+    const bannerContainer = document.getElementById('bannerContainer');
+    const bannerImg = document.getElementById('bannerImg');
+
+    function syncBannerRatio() {
+      if (bannerImg && bannerImg.naturalWidth && bannerImg.naturalHeight) {
+        bannerContainer.style.aspectRatio = `${bannerImg.naturalWidth} / ${bannerImg.naturalHeight}`;
+      }
+    }
+
+    if (bannerImg) {
+      if (bannerImg.complete && bannerImg.naturalWidth > 0) {
+        syncBannerRatio();
+      } else {
+        bannerImg.addEventListener('load', syncBannerRatio);
+      }
+    }
+
+    function setupMediaLoaders() {
+      const mediaHosts = document.querySelectorAll('.oneui-media-host');
+
+      mediaHosts.forEach(host => {
+        const img = host.querySelector('img');
+        if (!img) return;
+
+        if (!img.complete || img.naturalWidth === 0) {
+          host.classList.add('is-loading');
+        }
+
+        img.addEventListener('load', () => {
+          host.classList.remove('is-loading', 'is-failed');
+          if (img.id === 'bannerImg') syncBannerRatio();
+        });
+
+        img.addEventListener('error', () => {
+          host.classList.remove('is-loading');
+          host.classList.add('is-failed');
+        });
+      });
+    }
+
+    window.addEventListener('online', () => {
+      document.querySelectorAll('.oneui-media-host').forEach(host => {
+        const img = host.querySelector('img');
+        if (img && (!img.complete || img.naturalWidth === 0 || host.classList.contains('is-failed'))) {
+          host.classList.remove('is-failed');
+          host.classList.add('is-loading');
+          const originalSrc = img.src;
+          img.src = '';
+          img.src = originalSrc;
+        }
+      });
+
+      if (imageViewer.classList.contains('active') && viewerImgMain) {
+        viewerHost.classList.remove('is-failed');
+        viewerHost.classList.add('is-loading');
+        const activeSrc = gallery[currentImgIndex];
+        viewerImgMain.src = '';
+        viewerImgMain.src = activeSrc;
+      }
+    });
+
+    window.addEventListener('offline', () => {
+      document.querySelectorAll('.oneui-media-host').forEach(host => {
+        const img = host.querySelector('img');
+        if (img && (!img.complete || img.naturalWidth === 0)) {
+          host.classList.add('is-failed');
+        }
+      });
+    });
+
+    setupMediaLoaders();
+
+    // ==========================================
+    // THEME CONTROLS & DOCK
+    // ==========================================
     let isDark = document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
     const metaThemeColor = document.getElementById('metaThemeColor');
     const themeStrip = document.getElementById('themeStrip');
@@ -1607,6 +2081,7 @@
     // FLUID MORPHING VIDEO PLAYER LOGIC
     // ==========================================
     const video = document.getElementById('modVideo');
+    const videoPosterHost = document.getElementById('videoPosterHost');
     const videoPosterOverlay = document.getElementById('videoPosterOverlay');
     const videoContainer = document.getElementById('videoContainer');
     const videoBottomDock = document.getElementById('videoBottomDock');
@@ -1624,11 +2099,17 @@
     const volumeMutedIcon = document.getElementById('volumeMutedIcon');
     const videoFullscreenBtn = document.getElementById('videoFullscreenBtn');
 
-    video.addEventListener('loadedmetadata', () => {
+    function syncVideoRatio() {
       if (video.videoWidth && video.videoHeight) {
         videoContainer.style.aspectRatio = `${video.videoWidth} / ${video.videoHeight}`;
       }
-    });
+    }
+
+    if (video.readyState >= 1) {
+      syncVideoRatio();
+    } else {
+      video.addEventListener('loadedmetadata', syncVideoRatio);
+    }
 
     let autoHideTimer = null;
     function resetControlsFadeTimer() {
@@ -1643,12 +2124,12 @@
       }
     }
 
-    videoPosterOverlay.addEventListener('click', () => {
+    videoPosterHost.addEventListener('click', () => {
       toggleVideoPlay();
     });
 
     videoContainer.addEventListener('click', (e) => {
-      if (e.target.closest('.video-bottom-dock') || e.target === videoPosterOverlay) return;
+      if (e.target.closest('.video-bottom-dock') || e.target.closest('#videoPosterHost')) return;
       if (videoBottomDock.classList.contains('autohide')) {
         resetControlsFadeTimer();
       } else {
@@ -1665,7 +2146,6 @@
 
     function toggleVideoPlay() {
       if (video.paused || video.ended) {
-        // If at the end (1:17), loop back cleanly to 0
         if (video.ended || (video.duration && video.currentTime >= video.duration - 0.5)) {
           video.currentTime = 0;
         }
@@ -1684,7 +2164,7 @@
     video.addEventListener('play', () => {
       playIcon.style.display = 'none';
       pauseIcon.style.display = 'block';
-      videoPosterOverlay.classList.add('is-hidden');
+      videoPosterHost.classList.add('is-hidden');
       resetControlsFadeTimer();
     });
 
@@ -1694,14 +2174,13 @@
       videoBottomDock.classList.remove('autohide');
       clearTimeout(autoHideTimer);
 
-      // Show thumbnail if paused exactly at 0:00 or at/beyond 1:17
       if (video.currentTime <= 0.1 || (video.duration && video.currentTime >= video.duration - 0.2)) {
-        videoPosterOverlay.classList.remove('is-hidden');
+        videoPosterHost.classList.remove('is-hidden');
       }
     });
 
     video.addEventListener('ended', () => {
-      videoPosterOverlay.classList.remove('is-hidden');
+      videoPosterHost.classList.remove('is-hidden');
       videoBottomDock.classList.remove('autohide');
     });
 
@@ -1713,12 +2192,11 @@
         const percent = (video.currentTime / video.duration) * 100;
         videoProgressFill.style.width = `${percent}%`;
 
-        // Check if paused at starting or ending bounds
         if (video.paused) {
           if (video.currentTime <= 0.1 || video.currentTime >= video.duration - 0.2 || video.currentTime >= 77) {
-            videoPosterOverlay.classList.remove('is-hidden');
+            videoPosterHost.classList.remove('is-hidden');
           } else {
-            videoPosterOverlay.classList.add('is-hidden');
+            videoPosterHost.classList.add('is-hidden');
           }
         }
       }
@@ -1841,9 +2319,9 @@
 
       if (video.paused) {
         if (video.currentTime <= 0.1 || video.currentTime >= video.duration - 0.2 || video.currentTime >= 77) {
-          videoPosterOverlay.classList.remove('is-hidden');
+          videoPosterHost.classList.remove('is-hidden');
         } else {
-          videoPosterOverlay.classList.add('is-hidden');
+          videoPosterHost.classList.add('is-hidden');
         }
       }
 
@@ -1881,9 +2359,6 @@
       }
     });
 
-    // ==========================================
-    // HARD FREEZE ON SCROLL (MANUAL PLAY ONLY)
-    // ==========================================
     let isTouching = false;
     let scrollIdleTimer = null;
 
@@ -1918,7 +2393,6 @@
 
     window.addEventListener('scroll', () => {
       const currentY = window.pageYOffset;
-
       freezeVideo();
 
       if (currentY > 2) {
@@ -1939,7 +2413,6 @@
       }, 120);
     }, { passive: true });
 
-    // Mod Info Accordion
     const modToggleBtn = document.getElementById('modToggleBtn');
     const modExpandableWrap = document.getElementById('modExpandableWrap');
     let isModExpanded = false;
@@ -1962,6 +2435,7 @@
     let currentImgIndex = 0;
     const imageViewer = document.getElementById('imageViewer');
     const viewerImgMain = document.getElementById('viewerImgMain');
+    const viewerHost = viewerImgMain.closest('.oneui-media-host');
     const thumbs = document.querySelectorAll('.filmstrip-thumb');
 
     function syncThumbs() {
@@ -1970,6 +2444,10 @@
 
     function openViewerWithCenterPopOut(idx) {
       currentImgIndex = idx;
+      if (viewerHost) {
+        viewerHost.classList.add('is-loading');
+        viewerHost.classList.remove('is-failed');
+      }
       viewerImgMain.src = gallery[currentImgIndex];
       syncThumbs();
 
@@ -2005,23 +2483,29 @@
 
     document.getElementById('viewerCloseBtn').addEventListener('click', closeViewer);
 
-    document.getElementById('viewerNextBtn').addEventListener('click', () => {
-      currentImgIndex = (currentImgIndex + 1) % gallery.length;
+    function updateViewerImage() {
+      if (viewerHost) {
+        viewerHost.classList.add('is-loading');
+        viewerHost.classList.remove('is-failed');
+      }
       viewerImgMain.src = gallery[currentImgIndex];
       syncThumbs();
+    }
+
+    document.getElementById('viewerNextBtn').addEventListener('click', () => {
+      currentImgIndex = (currentImgIndex + 1) % gallery.length;
+      updateViewerImage();
     });
 
     document.getElementById('viewerPrevBtn').addEventListener('click', () => {
       currentImgIndex = (currentImgIndex - 1 + gallery.length) % gallery.length;
-      viewerImgMain.src = gallery[currentImgIndex];
-      syncThumbs();
+      updateViewerImage();
     });
 
     thumbs.forEach(t => {
       t.addEventListener('click', () => {
         currentImgIndex = parseInt(t.getAttribute('data-idx'), 10);
-        viewerImgMain.src = gallery[currentImgIndex];
-        syncThumbs();
+        updateViewerImage();
       });
     });
 
@@ -2058,6 +2542,7 @@
   </script>
 </body>
 </html>
+
 
 
 
